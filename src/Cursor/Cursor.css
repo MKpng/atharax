@@ -1,0 +1,17 @@
+.cursor {
+  width: 2vw;
+  height: 2vw;
+  background: #7644C3;
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease, border 0.3s ease;
+  z-index: 999;
+}
+
+.cursor--large {
+  background-color: rgb(104, 119, 244);
+  width: 17px;
+  height: 17px;
+}
