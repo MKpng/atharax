@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: black;
+  background: url("../images/purple-shades.jpg");
   height: 100vh;
   overflow: hidden;
 }
@@ -15,15 +15,15 @@
   height: 100vh;
   overflow: hidden;
   background: rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
+  backdrop-filter: blur(100px);
+  -webkit-backdrop-filter: blur(100px);
 }
 
 .loading-content h1 {
-  font-family: "Oswald", serif;
-  font-weight: 500;
-  font-size: 8vw;
-  color: #ffffff;
+  font-family: "Oswald", system-ui;
+  font-weight: 700;
+  font-size: 15vw;
+  color: #e0e0e0;
   white-space: nowrap;
   overflow: hidden;
   letter-spacing: 0.15rem;

@@ -4,7 +4,7 @@ import "./LoadingScreen.scss";
 
 // Preload Home component
 
-const languages = ["Welcome", "Bem-vindo", "ようこそ", "欢迎"];
+const languages = ["Welcome", "ようこそ", "欢迎"];
 
 const LoadingScreen = () => {
   const [loading, setLoading] = useState(true);
