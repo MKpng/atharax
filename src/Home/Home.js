@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { useScroll, useTransform, motion } from "framer-motion";
 import CursorFollower from "../Cursor/Cursor";
 import Spline from "@splinetool/react-spline";
 import Typewriter from "typewriter-effect";
@@ -95,6 +96,14 @@ function Home() {
       window.removeEventListener("resize", handleScroll);
     };
   }, []);
+
+  const container = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: container,
+    offset: ["start start", "end end"],
+  });
+
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.5]);
 
   return (
     <div className="App">
@@ -193,47 +202,52 @@ function Home() {
             </div>
           </div>
 
-          <div id="workflow" className="workflow-section">
+          <div id="workflow" className="workflow-section" ref={container}>
             <div className="workflow-glass">
-              <div className="workflow-content">
-                <div className="glass-two">
-                  <div className="briefing-div">
-                    <h2>BRIEFING</h2>
-                    <p className="briefing-text">
-                      We start by holding meetings with the client to understand
-                      their needs and project goals.
-                    </p>
+              <div className="sticky">
+                {/*<motion.div style={{ scale }}>*/}
+                  <div className="workflow-content">
+                    <div className="glass-two">
+                      <div className="briefing-div">
+                        <h2>BRIEFING</h2>
+                        <p className="briefing-text hover-target">
+                          We start by holding meetings with the client to
+                          understand their needs and project goals.
+                        </p>
+                      </div>
+                      <div className="wireframe-div">
+                        <h2>WIREFRAME</h2>
+                        <p className="wireframe-text">
+                          We create a rough prototype of the website, outlining
+                          its structure and layout in a basic form.
+                        </p>
+                      </div>
+                      <div className="design-div">
+                        <h2>DESIGN</h2>
+                        <p className="designing-text">
+                          We focus on UX and visual design, applying the visual
+                          elements and ensuring a user-friendly experience.
+                        </p>
+                      </div>
+                      <div className="development-div">
+                        <h2>DEVELOPMENT</h2>
+                        <p className="development-text">
+                          We handle all programming tasks, bringing the design
+                          to life and implementing the necessary
+                          functionalities.
+                        </p>
+                      </div>
+                      <div className="testing-div">
+                        <h2>TESTING</h2>
+                        <p className="testing-text">
+                          Before delivery, we conduct thorough testing to ensure
+                          everything is working as expected, including usability
+                          testing.
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                  <div className="wireframe-div">
-                    <h2>WIREFRAME</h2>
-                    <p className="wireframe-text">
-                      We create a rough prototype of the website, outlining its
-                      structure and layout in a basic form.
-                    </p>
-                  </div>
-                  <div className="design-div">
-                    <h2>DESIGN</h2>
-                    <p className="designing-text">
-                      We focus on UX and visual design, applying the visual
-                      elements and ensuring a user-friendly experience.
-                    </p>
-                  </div>
-                  <div className="development-div">
-                    <h2>DEVELOPMENT</h2>
-                    <p className="development-text">
-                      We handle all programming tasks, bringing the design to
-                      life and implementing the necessary functionalities.
-                    </p>
-                  </div>
-                  <div className="testing-div">
-                    <h2>TESTING</h2>
-                    <p className="testing-text">
-                      Before delivery, we conduct thorough testing to ensure
-                      everything is working as expected, including usability
-                      testing.
-                    </p>
-                  </div>
-                </div>
+                {/*</motion.div>*/}
               </div>
             </div>
           </div>

@@ -24,6 +24,7 @@ body {
     width: 100vw;
     background: #e0e0e0;
     z-index: 1;
+    overflow: hidden;
 }
 
 .title {
@@ -465,6 +466,13 @@ body {
     z-index: 15;
 }
 
+.sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+}
+
 .workflow-content {
     position: relative;
     width: 65vw;
@@ -476,6 +484,7 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     box-shadow: 0 0 1vw rgb(251, 245, 255);
+
 }
 
 .glass-two {
@@ -509,9 +518,10 @@ body {
 .glass-two div:hover p {
     display: flex;
     padding: 0 6vw;
-    font-family: "Bdr-mono", sans-serif;
-    font-weight: 300;
-    font-size: 1.1vw;
+    font-family: "Nunito Sans", sans-serif;
+    text-transform: capitalize;
+    font-weight: 400;
+    font-size: 1.3vw;
 }
 
 .glass-two p {
@@ -540,7 +550,7 @@ body {
     position: relative;
     width: 100vw;
     height: 101vh;
-    margin-top: 301.5vh;
+    margin-top: 300vh;
     margin-bottom: 0;
     background: #000000;
     transition: background 0.5s ease-in-out;
@@ -661,50 +671,4 @@ body {
 /* Display social links when contact is on top */
 .contact.top .socials-div a {
     display: flex;
-}
-
-/* Responsive adjustments with media queries */
-@media (max-width: 768px) {
-    .footer-p {
-        font-size: 6vw;
-        letter-spacing: 1.5vw;
-    }
-
-    .atharax-big {
-        font-size: 35vw;
-        /* Adjust large text for mobile */
-        top: -50%;
-        /* Slightly reduce top offset for mobile */
-    }
-
-    .socials-div a {
-        font-size: 2.5vw;
-        /* Larger text for social links */
-    }
-
-    .socials-div img {
-        width: 6vw;
-    }
-}
-
-@media (max-width: 480px) {
-    .footer-p {
-        font-size: 8vw;
-        letter-spacing: 2vw;
-    }
-
-    .atharax-big {
-        font-size: 45vw;
-        /* Adjust large text further for small screens */
-        top: -45%;
-        /* Further reduce top offset */
-    }
-
-    .socials-div a {
-        font-size: 3vw;
-    }
-
-    .socials-div img {
-        width: 8vw;
-    }
 }

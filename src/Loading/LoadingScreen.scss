@@ -1,0 +1,31 @@
+.loading-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.loading-glass {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+}
+
+.loading-content h1 {
+  font-family: "Oswald", serif;
+  font-weight: 500;
+  font-size: 8vw;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  letter-spacing: 0.15rem;
+  animation: blinkCursor 0.7s infinite;
+}

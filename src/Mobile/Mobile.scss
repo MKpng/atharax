@@ -1,0 +1,379 @@
+@font-face {
+  font-family: "Azonix";
+  src: url("../images/Mobile/fonts/Azonix.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+html,
+html {
+  background-color: #e0e0e0; // Adjust if needed
+  font-family: Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+.nav {
+  position: fixed;
+  width: 80vw;
+  left: 10vw;
+  height: 15vh; // Adjust height as needed
+  display: flex;
+  justify-content: space-between; // Ensures space between logo and menu icon
+  align-items: center; // Vertically center items
+  padding: 0 5%; // Add padding on the left and right for spacing
+  background-color: transparent;
+  z-index: 999;
+
+  a {
+    display: flex;
+    align-items: center; // Vertically center the logo image within the link
+
+    img {
+      width: 10vw; // Adjust the size of the spherical image
+      height: auto;
+    }
+  }
+
+  .menu-button {
+    display: flex;
+    align-items: center; // Vertically center the menu icon
+    justify-content: center; // Horizontally center the icon within the button
+    background: none;
+    border: none;
+
+    img {
+      width: 10vw; // Adjust the size of the menu icon
+      height: auto;
+      mix-blend-mode: difference;
+    }
+  }
+}
+
+.side-menu {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0; // Ensure it's at the top of the viewport
+  left: 0;
+  background-color: #e0e0e0;
+  background-size: cover;
+  background-position: 65%;
+  display: none;
+  z-index: 998;
+  transition: all 0.3s ease-in-out;
+
+  .side-menu-list {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+
+    a {
+        text-decoration: none;
+        font-size: 15vw;
+        font-family: "Oswald", sans-serif;
+        font-weight: 700;
+        margin: 1vh 0;
+        background: linear-gradient(270deg, #000 0%, #d3cece 100%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    }
+  }
+
+
+.side-menu.show {
+  display: block;
+}
+
+.home-screen {
+  display: fixed;
+  height: 100vh;
+  width: 100vw;
+  background: #e0e0e0;
+}
+
+.title-mobile {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20vw; // Correctly defining font-size
+  font-family: "Oswald", sans-serif;
+  font-weight: 700;
+  background: linear-gradient(270deg, #000 0%, #d3cece 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; // Correctly defining font-family
+}
+
+.arrow-down {
+  position: absolute;
+  width: 100vw;
+  height: 2.75rem;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  top: 80%;
+}
+
+/*ABOUT --- ABOUT --- ABOUT --- ABOUT --- ABOUT --- ABOUT --- ABOUT --- ABOUT --- ABOUT --- ABOUT*/
+
+.about {
+  position: relative;
+  width: 100vh;
+  height: 100vh;
+  background-image: url("../images/7061c10f-bdab-465e-ac68-48a187961f89\ \(1\).jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 60%;
+  z-index: 10;
+}
+
+.glass-about {
+  position: relative;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+}
+
+.about p {
+  font-family: "Oswald", sans-serif;
+  color: white;
+  font-weight: 600;
+  height: 100vh;
+  width: 100vw;
+  font-size: 15vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.about-type-mobile {
+  background-image: linear-gradient(
+    147deg,
+    #6a0dad,
+    #8a2be2,
+    #9370db,
+    #ba55d3,
+    #dda0dd
+  );
+  background-size: 200% 200%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: rainbow 5s ease infinite;
+  margin-bottom: -9.75vh;
+  line-height: 12vh;
+}
+
+.about-text-mobile {
+  color: #f5f5dc;
+  font-size: 8vw;
+  line-height: 1;
+}
+
+@keyframes rainbow {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* WORKFLOW --- WORKFLOW --- WORKFLOW --- WORKFLOW --- WORKFLOW --- WORKFLOW --- WORKFLOW --- WORKFLOW --- WORKFLOW*/
+
+.workflow-mobile {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  background-image: url("../images/purple-shades.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  .glass-workflow {
+    position: relative;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+
+    .workflow-column {
+      height: 100vh;
+      width: 80vw;
+      margin-left: 10%;
+      padding-top: 10vh;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1vh;
+      align-items: center;
+
+      a {
+        text-decoration: none;
+
+        .div-one-five {
+          background: linear-gradient(90deg, #aca1de 0%, #6a55c3 100%);
+          border-radius: 15vw;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          height: 12vh;
+          width: 80vw;
+
+          .div-numbers {
+            position: relative;
+            width: 40vw;
+            height: 12vh;
+            border-radius: 50%;
+            background-color: #313131;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1;
+
+            p {
+              color: white;
+              font-family: "Azonix", sans-serif;
+              font-size: 17vw;
+            }
+          }
+
+          .div-numbers-text {
+            position: relative;
+            width: 80vw;
+            height: 12vh;
+            display: flex;
+            justify-content: flex-start;
+            padding-left: 5vw;
+            align-items: center;
+            color: white;
+
+            h2 {
+              font-family: "Azonix", sans-serif;
+              font-size: 6vw;
+              font-weight: 400;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.briefing,
+.wireframe,
+.design,
+.develop,
+.testing {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(180deg, #b8b8b8 0%, #1e1e1e 100%);
+  text-align: center;
+}
+
+.briefing-asset,
+.wireframe-asset,
+.design-asset,
+.develop-asset,
+.testing-asset {
+  position: relative;
+  top: 30%;
+}
+
+.briefing-h2,
+.wireframe-h2,
+.design-h2,
+.develop-h2,
+.testing-h2 {
+  position: relative;
+  top: 40%;
+  font-family: "Azonix", sans-serif;
+  font-size: 8vw;
+  font-weight: 400;
+  color: #fff;
+}
+
+.briefing-p,
+.wireframe-p,
+.design-p,
+.develop-p,
+.testing-p {
+  position: relative;
+  top: 42%;
+  color: #fff;
+  font-size: 5vw;
+  font-family: "Nunito Sans", sans-serif;
+  text-transform: none;
+  font-weight: 200;
+  display: flex;
+  flex: 1;
+}
+
+.briefing-p,
+.wireframe-p,
+.design-p,
+.develop-p,
+.testing-p p {
+  padding: 0 15vw;
+}
+
+/*FOOTER --- FOOTER --- FOOTER --- FOOTER --- FOOTER --- FOOTER --- FOOTER --- FOOTER --- FOOTER --- FOOTER*/
+
+.footer {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: #fff;
+  overflow: hidden;
+
+  .footer-p-div {
+    font-family: "Azonix", sans-serif;
+    font-size: 16vw;
+    width: 80vw;
+    background-image: linear-gradient(270deg, #000 0%, #d3cece 100%);
+    -webkit-background-clip: text; /* For WebKit browsers */
+    color: transparent; /* Make text color transparent */
+    background-clip: text;
+  }
+
+  .socials-row {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 70vw;
+    top: 90%;
+
+    a {
+      text-decoration: none;
+
+      img {
+        width: 8vw;
+        mix-blend-mode: difference;
+      }
+    }
+  }
+}
