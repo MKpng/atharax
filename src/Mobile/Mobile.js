@@ -34,29 +34,20 @@ function Mobile() {
   gsap.registerPlugin(
     ScrollTrigger,
     ScrollToPlugin,
-    ScrollSmoother,
     ScrambleTextPlugin,
     DrawSVGPlugin
   );
 
   useEffect(() => {
-    let smoother = ScrollSmoother.create({
-      smooth: 0,
-      effects: false,
-      smoothTouch: 0.2,
-      speed: 0.5,
-    });
-
     gsap.utils.toArray("a").forEach(function (button, i) {
       button.addEventListener("click", (e) => {
-        e.preventDefault(); // Prevent default action immediately
         const anchor = e.target.closest("a"); // Get the closest anchor element
-        const id = anchor.getAttribute("href"); // Get the href value
+        const href = anchor.getAttribute("href"); // Get the href value
 
-        if (id && id.startsWith("#")) {
-          // Only handle internal hash links
-          console.log(id);
-          const targetElement = document.querySelector(id); // Get the target element
+        if (href && href.startsWith("#")) {
+          e.preventDefault(); // Prevent default action only for internal hash links
+          console.log(href);
+          const targetElement = document.querySelector(href); // Get the target element
           if (targetElement) {
             smoother.scrollTo(targetElement, true, "top top");
           }
@@ -451,7 +442,7 @@ function Mobile() {
   }, []);
 
   return (
-    <div id="smooth-wrapper">
+    <>
       <div className="nav">
         <a href="#home">
           <img src={AtharaxLogo} alt="Logo"></img>
@@ -479,157 +470,152 @@ function Mobile() {
           </a>
         </div>
       </div>
-      <div id="smooth-content">
-        <div className="home-screen" id="home">
-          <div className="solid-color-layer-mobile"></div>
-          <div className="asian-cyb-mobile"></div>
-          <div className="title-mobile" id="title-mobile"></div>
-          <div className="arrow-down">
-            <a href="#about">
-              <img src={Arrow} alt="arrow down"></img>
-            </a>
+
+      <div className="home-screen" id="home">
+        <div className="solid-color-layer-mobile"></div>
+        <div className="asian-cyb-mobile"></div>
+        <div className="title-mobile" id="title-mobile"></div>
+        <div className="arrow-down">
+          <a href="#about">
+            <img src={Arrow} alt="arrow down"></img>
+          </a>
+        </div>
+      </div>
+
+      <main>
+        <div id="about" className="about-content-mobile" ref={aboutContainer}>
+          <div className="glassmorphism">
+            <h3 className="about-atharax-mobile">ABOUT US</h3>
+            <div className="about-div-row-mobile"></div>
+            <div className="carousel-mobile">
+              <div className="carousel-content-mobile" ref={carouselRef}></div>
+            </div>
           </div>
         </div>
+      </main>
 
-        <main>
-          <div id="about" className="about-content-mobile" ref={aboutContainer}>
-            <div className="glassmorphism">
-              <h3 className="about-atharax-mobile">ABOUT US</h3>
-              <div className="about-div-row-mobile"></div>
-              <div className="carousel-mobile">
-                <div
-                  className="carousel-content-mobile"
-                  ref={carouselRef}
-                ></div>
-              </div>
+      <div className="workflow-mobile" id="workflow" ref={briefingContainer}>
+        <div className="briefing" id="briefing">
+          <div className="sticky-one-mobile">
+            <div className="briefing-asset">
+              <div className="briefing-asset-glass"></div>
             </div>
-          </div>
-        </main>
-
-        <div className="workflow-mobile" id="workflow" ref={briefingContainer}>
-          <div className="briefing" id="briefing">
-            <div className="sticky-one-mobile" >
-              <div className="briefing-asset">
-                <div className="briefing-asset-glass"></div>
-              </div>
-              <div className="briefing-h2">
-                <h2>BRIEFING</h2>
-              </div>
-              <div className="briefing-p">
-                <p>
-                  First, we kick things off with a meeting to{" "}
-                  <span>get on the same page</span>, &lt;making sure&gt; we
-                  fully get your <strong>needs</strong> and{" "}
-                  <strong>goals</strong>.
-                </p>
-              </div>
+            <div className="briefing-h2">
+              <h2>BRIEFING</h2>
             </div>
-          </div>
-
-          <div className="wireframe" id="wireframe" ref={wireframeContainer}>
-            <div className="sticky-two-mobile" >
-              <div className="wireframe-asset">
-                <div className="wireframe-asset-glass"></div>
-              </div>
-              <div className="wireframe-h2">
-                <h2>WIREFRAME</h2>
-              </div>
-              <div className="wireframe-p">
-                <p>
-                  Next, we whip up a <span>quick prototype</span>, mapping out
-                  the &lt;structure and layout&gt; of your website in its{" "}
-                  <strong>simplest form</strong>.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="design" id="design" ref={designContainer}>
-            <div className="sticky-three-mobile" >
-              <div className="design-asset">
-                <div className="design-asset-glass"></div>
-              </div>
-              <div className="design-h2">
-                <h2>DESIGN</h2>
-              </div>
-              <div className="design-p">
-                <p>
-                  It’s all about visuals! We refine <span>UX</span> and{" "}
-                  <span>design</span> for a smooth,
-                  <strong> user-friendly experience</strong>.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="develop" id="develop" ref={developContainer}>
-            <div className="sticky-four-mobile" >
-              <div className="develop-asset">
-                <div className="develop-asset-glass"></div>
-              </div>
-              <div className="develop-h2">
-                <h2>DEVELOP</h2>
-              </div>
-              <div className="develop-p">
-                <p>
-                  We &lt;bring it all to life&gt; with some{" "}
-                  <span>coding magic</span>, making sure everything{" "}
-                  <strong>functions</strong> just the way it should.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="testing" id="testing" ref={testingContainer}>
-            <div className="sticky-five-mobile" >
-              <div className="testing-asset">
-                <div className="testing-asset-glass"></div>
-              </div>
-              <div className="testing-h2">
-                <h2>TESTING</h2>
-              </div>
-              <div className="testing-p">
-                <p>
-                  Finally, we <span>test everything</span>—thoroughly checking
-                  every detail to ensure it's <strong>fully functional</strong>,
-                  including usability.
-                </p>
-              </div>
+            <div className="briefing-p">
+              <p>
+                First, we kick things off with a meeting to{" "}
+                <span>get on the same page</span>, &lt;making sure&gt; we fully
+                get your <strong>needs</strong> and <strong>goals</strong>.
+              </p>
             </div>
           </div>
         </div>
 
-        <div className="footer" id="contact" ref={footerContainer}>
-          <div className="footer-sticky-mobile">
-            <p className="footer-p-mobile">Ready to Start?</p>
-            <p className="atharax-big-mobile">ATHARAX</p>
-            <div className="socials-row">
-              <a
-                href="https://www.instagram.com/atharax.co/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <img src={Instagram}></img>
-              </a>
-              <a
-                href="mailto:atharax.co@gmail.com"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <img src={Gmail}></img>
-              </a>
-              <a
-                href="https://www.linkedin.com/company/atharax"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <img src={Linkedin}></img>
-              </a>
+        <div className="wireframe" id="wireframe" ref={wireframeContainer}>
+          <div className="sticky-two-mobile">
+            <div className="wireframe-asset">
+              <div className="wireframe-asset-glass"></div>
+            </div>
+            <div className="wireframe-h2">
+              <h2>WIREFRAME</h2>
+            </div>
+            <div className="wireframe-p">
+              <p>
+                Next, we whip up a <span>quick prototype</span>, mapping out the
+                &lt;structure and layout&gt; of your website in its{" "}
+                <strong>simplest form</strong>.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="design" id="design" ref={designContainer}>
+          <div className="sticky-three-mobile">
+            <div className="design-asset">
+              <div className="design-asset-glass"></div>
+            </div>
+            <div className="design-h2">
+              <h2>DESIGN</h2>
+            </div>
+            <div className="design-p">
+              <p>
+                It’s all about visuals! We refine <span>UX</span> and{" "}
+                <span>design</span> for a smooth,
+                <strong> user-friendly experience</strong>.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="develop" id="develop" ref={developContainer}>
+          <div className="sticky-four-mobile">
+            <div className="develop-asset">
+              <div className="develop-asset-glass"></div>
+            </div>
+            <div className="develop-h2">
+              <h2>DEVELOP</h2>
+            </div>
+            <div className="develop-p">
+              <p>
+                We &lt;bring it all to life&gt; with some{" "}
+                <span>coding magic</span>, making sure everything{" "}
+                <strong>functions</strong> just the way it should.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="testing" id="testing" ref={testingContainer}>
+          <div className="sticky-five-mobile">
+            <div className="testing-asset">
+              <div className="testing-asset-glass"></div>
+            </div>
+            <div className="testing-h2">
+              <h2>TESTING</h2>
+            </div>
+            <div className="testing-p">
+              <p>
+                Finally, we <span>test everything</span>—thoroughly checking
+                every detail to ensure it's <strong>fully functional</strong>,
+                including usability.
+              </p>
             </div>
           </div>
         </div>
       </div>
-    </div>
+
+      <div className="footer" id="contact" ref={footerContainer}>
+        <div className="footer-sticky-mobile">
+          <p className="footer-p-mobile">Ready to Start?</p>
+          <p className="atharax-big-mobile">ATHARAX</p>
+          <div className="socials-row">
+            <a
+              href="https://www.instagram.com/atharax.co/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <img src={Instagram}></img>
+            </a>
+            <a
+              href="mailto:atharax.co@gmail.com"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <img src={Gmail}></img>
+            </a>
+            <a
+              href="https://www.linkedin.com/company/atharax"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <img src={Linkedin}></img>
+            </a>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
 
