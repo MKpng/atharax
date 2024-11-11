@@ -34,6 +34,7 @@ function Mobile() {
   gsap.registerPlugin(
     ScrollTrigger,
     ScrollToPlugin,
+    ScrollSmoother,
     ScrambleTextPlugin,
     DrawSVGPlugin
   );
