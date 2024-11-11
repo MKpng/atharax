@@ -184,8 +184,6 @@ function Home() {
   }, []);
 
   useLayoutEffect(() => {
-    const stickyElement = document.querySelector(".sticky");
-    if (stickyElement) {
       const ctx = gsap.context(() => {
         const imgInit = ".img-init";
         const elementsToFade =
@@ -197,7 +195,7 @@ function Home() {
             trigger: ".sticky",
             pin: true,
             scrub: 1,
-            pinSpacing: true,
+            pinSpacing: false,
             start: "top top",
             toggleActions: "play none none reverse",
           },
@@ -230,7 +228,6 @@ function Home() {
       }, briefingContainer);
 
       return () => ctx.revert();
-    }
   }, []);
 
   useLayoutEffect(() => {
@@ -245,7 +242,7 @@ function Home() {
           trigger: ".sticky-two",
           start: "top top",
           pin: true,
-          pinSpacing: true,
+          pinSpacing: false,
           scrub: 1,
           toggleActions: "play none none reverse",
         },
@@ -673,7 +670,7 @@ function Home() {
                     <h3>
                       <a
                         href="#home"
-                        onclick="window.location.reload();"
+                        onClick={() => window.location.reload()}
                         className="hover-target"
                       >
                         Atharax<span>Company</span>
@@ -726,7 +723,7 @@ function Home() {
                     <h3>
                       <a
                         href="#home"
-                        onclick="window.location.reload();"
+                        onClick={() => window.location.reload()}
                         className="hover-target"
                       >
                         Atharax<span>Company</span>
@@ -778,7 +775,7 @@ function Home() {
                     <h3>
                       <a
                         href="#home"
-                        onclick="window.location.reload();"
+                        onClick={() => window.location.reload()}
                         className="hover-target"
                       >
                         Atharax<span>Company</span>
@@ -830,7 +827,7 @@ function Home() {
                     <h3>
                       <a
                         href="#home"
-                        onclick="window.location.reload();"
+                        onClick={() => window.location.reload()}
                         className="hover-target"
                       >
                         Atharax<span>Company</span>
@@ -882,7 +879,7 @@ function Home() {
                     <h3>
                       <a
                         href="#home"
-                        onclick="window.location.reload();"
+                        onClick={() => window.location.reload()}
                         className="hover-target"
                       >
                         Atharax<span>Company</span>
