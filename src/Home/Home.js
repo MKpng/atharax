@@ -244,7 +244,6 @@ function Home() {
         scrollTrigger: {
           trigger: ".sticky-two",
           start: "top top",
-          end: "bottom top",
           pin: true,
           pinSpacing: true,
           scrub: 1,
