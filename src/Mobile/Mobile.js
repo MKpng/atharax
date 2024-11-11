@@ -41,17 +41,17 @@ function Mobile() {
 
   useEffect(() => {
     let smoother = ScrollSmoother.create({
-      smooth: .5,
+      smooth: 1,
       effects: true,
-      smoothTouch: 0.1,
-      speed: 0.25,
+      smoothTouch: 0.2,
+      speed: 0.5,
     });
 
     gsap.utils.toArray("a").forEach(function (button, i) {
       button.addEventListener("click", (e) => {
         const anchor = e.target.closest("a"); // Get the closest anchor element
         const href = anchor.getAttribute("href"); // Get the href value
-    
+
         if (href && href.startsWith("#")) {
           e.preventDefault(); // Prevent default action only for internal hash links
           console.log(href);
@@ -62,7 +62,7 @@ function Mobile() {
         }
       });
     });
-    
+
     window.onload = () => {
       let urlHash = window.location.href.split("#")[1];
       if (urlHash) {
@@ -72,7 +72,7 @@ function Mobile() {
           smoother.scrollTo(scrollElem, true, "top top");
         }
       }
-    };    
+    };
 
     const tl = gsap.timeline({ defaults: { duration: 2, ease: "none" } });
     tl.to("#title-mobile", {
@@ -478,36 +478,34 @@ function Mobile() {
           </a>
         </div>
       </div>
-      <div id="smooth-content">
-        <div className="home-screen" id="home">
-          <div className="solid-color-layer-mobile"></div>
-          <div className="asian-cyb-mobile"></div>
-          <div className="title-mobile" id="title-mobile"></div>
-          <div className="arrow-down">
-            <a href="#about">
-              <img src={Arrow} alt="arrow down"></img>
-            </a>
-          </div>
-        </div>
 
-        <main>
-          <div id="about" className="about-content-mobile" ref={aboutContainer}>
-            <div className="glassmorphism">
-              <h3 className="about-atharax-mobile">ABOUT US</h3>
-              <div className="about-div-row-mobile"></div>
-              <div className="carousel-mobile">
-                <div
-                  className="carousel-content-mobile"
-                  ref={carouselRef}
-                ></div>
-              </div>
+      <div className="home-screen" id="home">
+        <div className="solid-color-layer-mobile"></div>
+        <div className="asian-cyb-mobile"></div>
+        <div className="title-mobile" id="title-mobile"></div>
+        <div className="arrow-down">
+          <a href="#about">
+            <img src={Arrow} alt="arrow down"></img>
+          </a>
+        </div>
+      </div>
+
+      <main>
+        <div id="about" className="about-content-mobile" ref={aboutContainer}>
+          <div className="glassmorphism">
+            <h3 className="about-atharax-mobile">ABOUT US</h3>
+            <div className="about-div-row-mobile"></div>
+            <div className="carousel-mobile">
+              <div className="carousel-content-mobile" ref={carouselRef}></div>
             </div>
           </div>
-        </main>
-
+        </div>
+      </main>
+      
+      <div id="smooth-content">
         <div className="workflow-mobile" id="workflow" ref={briefingContainer}>
           <div className="briefing" id="briefing">
-            <div className="sticky-one-mobile" >
+            <div className="sticky-one-mobile">
               <div className="briefing-asset">
                 <div className="briefing-asset-glass"></div>
               </div>
@@ -526,7 +524,7 @@ function Mobile() {
           </div>
 
           <div className="wireframe" id="wireframe" ref={wireframeContainer}>
-            <div className="sticky-two-mobile" >
+            <div className="sticky-two-mobile">
               <div className="wireframe-asset">
                 <div className="wireframe-asset-glass"></div>
               </div>
@@ -544,7 +542,7 @@ function Mobile() {
           </div>
 
           <div className="design" id="design" ref={designContainer}>
-            <div className="sticky-three-mobile" >
+            <div className="sticky-three-mobile">
               <div className="design-asset">
                 <div className="design-asset-glass"></div>
               </div>
@@ -562,7 +560,7 @@ function Mobile() {
           </div>
 
           <div className="develop" id="develop" ref={developContainer}>
-            <div className="sticky-four-mobile" >
+            <div className="sticky-four-mobile">
               <div className="develop-asset">
                 <div className="develop-asset-glass"></div>
               </div>
@@ -580,7 +578,7 @@ function Mobile() {
           </div>
 
           <div className="testing" id="testing" ref={testingContainer}>
-            <div className="sticky-five-mobile" >
+            <div className="sticky-five-mobile">
               <div className="testing-asset">
                 <div className="testing-asset-glass"></div>
               </div>
