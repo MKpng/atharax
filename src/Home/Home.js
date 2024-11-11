@@ -83,26 +83,25 @@ function Home() {
       smooth: 2,
       effects: true,
       smoothTouch: 0.1,
-      speed: .75,
+      speed: 0.75,
     });
 
     gsap.utils.toArray("a").forEach(function (button, i) {
       button.addEventListener("click", (e) => {
-        e.preventDefault(); // Prevent default action immediately
         const anchor = e.target.closest("a"); // Get the closest anchor element
-        const id = anchor.getAttribute("href"); // Get the href value
-
-        if (id && id.startsWith("#")) {
-          // Only handle internal hash links
-          console.log(id);
-          const targetElement = document.querySelector(id); // Get the target element
+        const href = anchor.getAttribute("href"); // Get the href value
+    
+        if (href && href.startsWith("#")) {
+          e.preventDefault(); // Prevent default action only for internal hash links
+          console.log(href);
+          const targetElement = document.querySelector(href); // Get the target element
           if (targetElement) {
             smoother.scrollTo(targetElement, true, "top top");
           }
         }
       });
     });
-
+    
     window.onload = () => {
       let urlHash = window.location.href.split("#")[1];
       if (urlHash) {
@@ -112,7 +111,7 @@ function Home() {
           smoother.scrollTo(scrollElem, true, "top top");
         }
       }
-    };
+    };    
 
     const elementsToAnimate =
       ".inner, .instagram-icon, .linkedin-icon, .gmail-icon, .atharax-icon";
@@ -180,55 +179,58 @@ function Home() {
     gsap.fromTo(
       svgElement.querySelectorAll("line"), // Select all line elements
       { drawSVG: "0%" }, // Start from 0% drawn
-      { drawSVG: "100%", duration: 1, stagger: .1 } // Draw to 100% over time
+      { drawSVG: "100%", duration: 1, stagger: 0.1 } // Draw to 100% over time
     );
   }, []);
 
   useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      const imgInit = ".img-init";
-      const elementsToFade =
-        ".work-briefing, .work-briefing-text, .briefing-temp, .img-asset-one, .briefing-extra, .mini-nav";
+    const stickyElement = document.querySelector(".sticky");
+    if (stickyElement) {
+      const ctx = gsap.context(() => {
+        const imgInit = ".img-init";
+        const elementsToFade =
+          ".work-briefing, .work-briefing-text, .briefing-temp, .img-asset-one, .briefing-extra, .mini-nav";
 
-      // First timeline with initial animations
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: ".sticky",
-          pin: true,
-          scrub: 1,
-          pinSpacing: true,
-          start: "top top",
-          toggleActions: "play none none reverse",
-        },
-      });
+        // First timeline with initial animations
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: ".sticky",
+            pin: true,
+            scrub: 1,
+            pinSpacing: true,
+            start: "top top",
+            toggleActions: "play none none reverse",
+          },
+        });
 
-      // Combined transforms into a single fromTo call
-      tl.fromTo(
-        imgInit,
-        { scale: 1, xPercent: -50, yPercent: -50 },
-        { scale: 0.75, xPercent: -30, yPercent: -60 }
-      )
-        .fromTo(
-          elementsToFade,
-          { visibility: "hidden", opacity: 0 },
-          { visibility: "visible", opacity: 1 }
-        )
-        .addPause(1.5)
-        .fromTo(elementsToFade, { opacity: 1 }, { opacity: 0 })
-        .fromTo(
+        // Combined transforms into a single fromTo call
+        tl.fromTo(
           imgInit,
-          { scale: 0.75, xPercent: -30, yPercent: -60 },
-          {
-            scale: 1,
-            xPercent: -50,
-            yPercent: -50,
-            immediateRender: false, // Ensures it waits for the animation to start
-          }
+          { scale: 1, xPercent: -50, yPercent: -50 },
+          { scale: 0.75, xPercent: -30, yPercent: -60 }
         )
-        .fromTo(imgInit, { opacity: 1 }, { opacity: 0 });
-    }, briefingContainer);
+          .fromTo(
+            elementsToFade,
+            { visibility: "hidden", opacity: 0 },
+            { visibility: "visible", opacity: 1 }
+          )
+          .addPause(1.5)
+          .fromTo(elementsToFade, { opacity: 1 }, { opacity: 0 })
+          .fromTo(
+            imgInit,
+            { scale: 0.75, xPercent: -30, yPercent: -60 },
+            {
+              scale: 1,
+              xPercent: -50,
+              yPercent: -50,
+              immediateRender: false, // Ensures it waits for the animation to start
+            }
+          )
+          .fromTo(imgInit, { opacity: 1 }, { opacity: 0 });
+      }, briefingContainer);
 
-    return () => ctx.revert();
+      return () => ctx.revert();
+    }
   }, []);
 
   useLayoutEffect(() => {
@@ -586,7 +588,7 @@ function Home() {
           </ul>
         </nav>
         <div className="atharax-icon hover-target">
-          <a href="#home" onclick="window.location.reload();">
+          <a href="#home" onClick={() => window.location.reload()}>
             <img
               src={AtharaxLogo}
               className="spin"
@@ -663,253 +665,263 @@ function Home() {
               </div>
             </div>
             <div id="workflow" className="workflow-section">
-              <div className="sticky" ref={briefingContainer}>
-                <div className="img-init">
-                  <div className="img-init-glass"></div>
-                </div>
-                <div className="mini-nav">
-                  <h3>
-                    <a
-                      href="#home"
-                      onclick="window.location.reload();"
-                      className="hover-target"
-                    >
-                      Atharax<span>Company</span>
-                    </a>
-                  </h3>
-                  <ul>
-                    <a href="#about" className="hover-target">
-                      <li>About</li>
-                    </a>
-                    <a href="#workflow" className="hover-target">
-                      <li>Workflow</li>
-                    </a>
-                    <a href="#contact" className="hover-target">
-                      <li>Contact</li>
-                    </a>
-                  </ul>
-                </div>
-                <div className="work-briefing">
-                  <h2 id="briefing">BRIEFING</h2>
-                </div>
-                <div className="work-briefing-text">
-                  <p>
-                    First, we kick things off with a meeting to{" "}
-                    <span>get on the same page</span>, &lt;making sure&gt; we
-                    fully get your <strong>needs</strong> and{" "}
-                    <strong>goals</strong>.
-                  </p>
-                </div>
-                <div className="briefing-temp">
-                  <WeatherWidget />
-                </div>
-                <div className="img-asset-one"></div>
-                <div className="briefing-extra">
-                  <div className="briefing-home">
-                    <h3 data-text={currentTime}>{currentTime}</h3>
+              <div ref={briefingContainer}>
+                <div className="sticky">
+                  <div className="img-init">
+                    <div className="img-init-glass"></div>
                   </div>
-                  <div className="briefing-next">
-                    <img src={AtharaxLogo}></img>
+                  <div className="mini-nav">
+                    <h3>
+                      <a
+                        href="#home"
+                        onclick="window.location.reload();"
+                        className="hover-target"
+                      >
+                        Atharax<span>Company</span>
+                      </a>
+                    </h3>
+                    <ul>
+                      <a href="#about" className="hover-target">
+                        <li>About</li>
+                      </a>
+                      <a href="#workflow" className="hover-target">
+                        <li>Workflow</li>
+                      </a>
+                      <a href="#contact" className="hover-target">
+                        <li>Contact</li>
+                      </a>
+                    </ul>
                   </div>
-                </div>
-              </div>
-
-              <div className="sticky-two" ref={wireframeContainer}>
-                <div className="img-init-two">
-                  <div className="img-init-glass-two"></div>
-                </div>
-                <div className="mini-nav-two">
-                  <h3>
-                    <a
-                      href="#home"
-                      onclick="window.location.reload();"
-                      className="hover-target"
-                    >
-                      Atharax<span>Company</span>
-                    </a>
-                  </h3>
-                  <ul>
-                    <a href="#about" className="hover-target">
-                      <li>About</li>
-                    </a>
-                    <a href="#workflow" className="hover-target">
-                      <li>Workflow</li>
-                    </a>
-                    <a href="#contact" className="hover-target">
-                      <li>Contact</li>
-                    </a>
-                  </ul>
-                </div>
-                <div className="work-wire">
-                  <h2>Wireframe</h2>
-                </div>
-                <div className="work-wire-text">
-                  <p>
-                    Next, we whip up a <span>quick prototype</span>, mapping out
-                    the &lt;structure and layout&gt; of your website in its{" "}
-                    <strong>simplest form</strong>.
-                  </p>
-                </div>
-                <div className="wire-temp">
-                  <WeatherWidget />
-                </div>
-                <div className="img-asset-two"></div>
-                <div className="wire-extra">
-                  <div className="wire-home">
-                    <h3 data-text={currentTime}>{currentTime}</h3>
+                  <div className="work-briefing">
+                    <h2 id="briefing">BRIEFING</h2>
                   </div>
-                  <div className="wire-next">
-                    <img src={AtharaxLogo}></img>
+                  <div className="work-briefing-text">
+                    <p>
+                      First, we kick things off with a meeting to{" "}
+                      <span>get on the same page</span>, &lt;making sure&gt; we
+                      fully get your <strong>needs</strong> and{" "}
+                      <strong>goals</strong>.
+                    </p>
+                  </div>
+                  <div className="briefing-temp">
+                    <WeatherWidget />
+                  </div>
+                  <div className="img-asset-one"></div>
+                  <div className="briefing-extra">
+                    <div className="briefing-home">
+                      <h3 data-text={currentTime}>{currentTime}</h3>
+                    </div>
+                    <div className="briefing-next">
+                      <img src={AtharaxLogo}></img>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <div className="sticky-three" ref={designContainer}>
-                <div className="img-init-three">
-                  <div className="img-init-glass-three"></div>
-                </div>
-                <div className="mini-nav-three">
-                  <h3>
-                    <a
-                      href="#home"
-                      onclick="window.location.reload();"
-                      className="hover-target"
-                    >
-                      Atharax<span>Company</span>
-                    </a>
-                  </h3>
-                  <ul>
-                    <a href="#about" className="hover-target">
-                      <li>About</li>
-                    </a>
-                    <a href="#workflow" className="hover-target">
-                      <li>Workflow</li>
-                    </a>
-                    <a href="#contact" className="hover-target">
-                      <li>Contact</li>
-                    </a>
-                  </ul>
-                </div>
-                <div className="work-design">
-                  <h2>Design</h2>
-                </div>
-                <div className="work-design-text">
-                  <p>
-                    It’s all about visuals! We refine <span>UX</span> and{" "}
-                    <span>design</span> for a smooth,
-                    <strong> user-friendly experience</strong>.
-                  </p>
-                </div>
-                <div className="design-temp">
-                  <WeatherWidget />
-                </div>
-                <div className="img-asset-three"></div>
-                <div className="design-extra">
-                  <div className="design-home">
-                    <h3 data-text={currentTime}>{currentTime}</h3>
+              <div ref={wireframeContainer}>
+                <div className="sticky-two">
+                  <div className="img-init-two">
+                    <div className="img-init-glass-two"></div>
                   </div>
-                  <div className="design-next">
-                    <img src={AtharaxLogo}></img>
+                  <div className="mini-nav-two">
+                    <h3>
+                      <a
+                        href="#home"
+                        onclick="window.location.reload();"
+                        className="hover-target"
+                      >
+                        Atharax<span>Company</span>
+                      </a>
+                    </h3>
+                    <ul>
+                      <a href="#about" className="hover-target">
+                        <li>About</li>
+                      </a>
+                      <a href="#workflow" className="hover-target">
+                        <li>Workflow</li>
+                      </a>
+                      <a href="#contact" className="hover-target">
+                        <li>Contact</li>
+                      </a>
+                    </ul>
                   </div>
-                </div>
-              </div>
-
-              <div className="sticky-four" ref={developContainer}>
-                <div className="img-init-four">
-                  <div className="img-init-glass-four"></div>
-                </div>
-                <div className="mini-nav-four">
-                  <h3>
-                    <a
-                      href="#home"
-                      onclick="window.location.reload();"
-                      className="hover-target"
-                    >
-                      Atharax<span>Company</span>
-                    </a>
-                  </h3>
-                  <ul>
-                    <a href="#about" className="hover-target">
-                      <li>About</li>
-                    </a>
-                    <a href="#workflow" className="hover-target">
-                      <li>Workflow</li>
-                    </a>
-                    <a href="#contact" className="hover-target">
-                      <li>Contact</li>
-                    </a>
-                  </ul>
-                </div>
-                <div className="work-develop">
-                  <h2>Develop</h2>
-                </div>
-                <div className="work-develop-text">
-                  <p>
-                    We &lt;bring it all to life&gt; with some{" "}
-                    <span>coding magic</span>, making sure everything{" "}
-                    <strong>functions</strong> just the way it should.
-                  </p>
-                </div>
-                <div className="develop-temp">
-                  <WeatherWidget />
-                </div>
-                <div className="img-asset-four"></div>
-                <div className="develop-extra">
-                  <div className="develop-home">
-                    <h3 data-text={currentTime}>{currentTime}</h3>
+                  <div className="work-wire">
+                    <h2>Wireframe</h2>
                   </div>
-                  <div className="develop-next">
-                    <img src={AtharaxLogo}></img>
+                  <div className="work-wire-text">
+                    <p>
+                      Next, we whip up a <span>quick prototype</span>, mapping
+                      out the &lt;structure and layout&gt; of your website in
+                      its <strong>simplest form</strong>.
+                    </p>
+                  </div>
+                  <div className="wire-temp">
+                    <WeatherWidget />
+                  </div>
+                  <div className="img-asset-two"></div>
+                  <div className="wire-extra">
+                    <div className="wire-home">
+                      <h3 data-text={currentTime}>{currentTime}</h3>
+                    </div>
+                    <div className="wire-next">
+                      <img src={AtharaxLogo}></img>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <div className="sticky-five" ref={testContainer}>
-                <div className="img-init-five">
-                  <div className="img-init-glass-five"></div>
-                </div>
-                <div className="mini-nav-five">
-                  <h3>
-                    <a
-                      href="#home"
-                      onclick="window.location.reload();"
-                      className="hover-target"
-                    >
-                      Atharax<span>Company</span>
-                    </a>
-                  </h3>
-                  <ul>
-                    <a href="#about" className="hover-target">
-                      <li>About</li>
-                    </a>
-                    <a href="#workflow" className="hover-target">
-                      <li>Workflow</li>
-                    </a>
-                    <a href="#contact" className="hover-target">
-                      <li>Contact</li>
-                    </a>
-                  </ul>
-                </div>
-                <div className="work-test">
-                  <h2>Testing</h2>
-                </div>
-                <div className="work-test-text">
-                  <p>
-                    Finally, we <span>test everything</span>—thoroughly checking
-                    every detail to ensure it's{" "}
-                    <strong>fully functional</strong>, including usability.
-                  </p>
-                </div>
-                <div className="test-temp">
-                  <WeatherWidget />
-                </div>
-                <div className="img-asset-five"></div>
-                <div className="test-extra">
-                  <div className="test-home">
-                    <h3 data-text={currentTime}>{currentTime}</h3>
+              <div ref={designContainer}>
+                <div className="sticky-three">
+                  <div className="img-init-three">
+                    <div className="img-init-glass-three"></div>
                   </div>
-                  <div className="test-next">
-                    <img src={AtharaxLogo}></img>
+                  <div className="mini-nav-three">
+                    <h3>
+                      <a
+                        href="#home"
+                        onclick="window.location.reload();"
+                        className="hover-target"
+                      >
+                        Atharax<span>Company</span>
+                      </a>
+                    </h3>
+                    <ul>
+                      <a href="#about" className="hover-target">
+                        <li>About</li>
+                      </a>
+                      <a href="#workflow" className="hover-target">
+                        <li>Workflow</li>
+                      </a>
+                      <a href="#contact" className="hover-target">
+                        <li>Contact</li>
+                      </a>
+                    </ul>
+                  </div>
+                  <div className="work-design">
+                    <h2>Design</h2>
+                  </div>
+                  <div className="work-design-text">
+                    <p>
+                      It’s all about visuals! We refine <span>UX</span> and{" "}
+                      <span>design</span> for a smooth,
+                      <strong> user-friendly experience</strong>.
+                    </p>
+                  </div>
+                  <div className="design-temp">
+                    <WeatherWidget />
+                  </div>
+                  <div className="img-asset-three"></div>
+                  <div className="design-extra">
+                    <div className="design-home">
+                      <h3 data-text={currentTime}>{currentTime}</h3>
+                    </div>
+                    <div className="design-next">
+                      <img src={AtharaxLogo}></img>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div ref={developContainer}>
+                <div className="sticky-four">
+                  <div className="img-init-four">
+                    <div className="img-init-glass-four"></div>
+                  </div>
+                  <div className="mini-nav-four">
+                    <h3>
+                      <a
+                        href="#home"
+                        onclick="window.location.reload();"
+                        className="hover-target"
+                      >
+                        Atharax<span>Company</span>
+                      </a>
+                    </h3>
+                    <ul>
+                      <a href="#about" className="hover-target">
+                        <li>About</li>
+                      </a>
+                      <a href="#workflow" className="hover-target">
+                        <li>Workflow</li>
+                      </a>
+                      <a href="#contact" className="hover-target">
+                        <li>Contact</li>
+                      </a>
+                    </ul>
+                  </div>
+                  <div className="work-develop">
+                    <h2>Develop</h2>
+                  </div>
+                  <div className="work-develop-text">
+                    <p>
+                      We &lt;bring it all to life&gt; with some{" "}
+                      <span>coding magic</span>, making sure everything{" "}
+                      <strong>functions</strong> just the way it should.
+                    </p>
+                  </div>
+                  <div className="develop-temp">
+                    <WeatherWidget />
+                  </div>
+                  <div className="img-asset-four"></div>
+                  <div className="develop-extra">
+                    <div className="develop-home">
+                      <h3 data-text={currentTime}>{currentTime}</h3>
+                    </div>
+                    <div className="develop-next">
+                      <img src={AtharaxLogo}></img>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div ref={testContainer}>
+                <div className="sticky-five">
+                  <div className="img-init-five">
+                    <div className="img-init-glass-five"></div>
+                  </div>
+                  <div className="mini-nav-five">
+                    <h3>
+                      <a
+                        href="#home"
+                        onclick="window.location.reload();"
+                        className="hover-target"
+                      >
+                        Atharax<span>Company</span>
+                      </a>
+                    </h3>
+                    <ul>
+                      <a href="#about" className="hover-target">
+                        <li>About</li>
+                      </a>
+                      <a href="#workflow" className="hover-target">
+                        <li>Workflow</li>
+                      </a>
+                      <a href="#contact" className="hover-target">
+                        <li>Contact</li>
+                      </a>
+                    </ul>
+                  </div>
+                  <div className="work-test">
+                    <h2>Testing</h2>
+                  </div>
+                  <div className="work-test-text">
+                    <p>
+                      Finally, we <span>test everything</span>—thoroughly
+                      checking every detail to ensure it's{" "}
+                      <strong>fully functional</strong>, including usability.
+                    </p>
+                  </div>
+                  <div className="test-temp">
+                    <WeatherWidget />
+                  </div>
+                  <div className="img-asset-five"></div>
+                  <div className="test-extra">
+                    <div className="test-home">
+                      <h3 data-text={currentTime}>{currentTime}</h3>
+                    </div>
+                    <div className="test-next">
+                      <img src={AtharaxLogo}></img>
+                    </div>
                   </div>
                 </div>
               </div>

@@ -41,10 +41,10 @@ function Mobile() {
 
   useEffect(() => {
     let smoother = ScrollSmoother.create({
-      smooth: 2,
+      smooth: 1,
       effects: true,
       smoothTouch: 0.2,
-      speed: 0.75,
+      speed: 0.5,
     });
 
     gsap.utils.toArray("a").forEach(function (button, i) {
@@ -506,9 +506,9 @@ function Mobile() {
           </div>
         </main>
 
-        <div className="workflow-mobile" id="workflow">
+        <div className="workflow-mobile" id="workflow" ref={briefingContainer}>
           <div className="briefing" id="briefing">
-            <div className="sticky-one-mobile" ref={briefingContainer}>
+            <div className="sticky-one-mobile" >
               <div className="briefing-asset">
                 <div className="briefing-asset-glass"></div>
               </div>
@@ -526,8 +526,8 @@ function Mobile() {
             </div>
           </div>
 
-          <div className="wireframe" id="wireframe">
-            <div className="sticky-two-mobile" ref={wireframeContainer}>
+          <div className="wireframe" id="wireframe" ref={wireframeContainer}>
+            <div className="sticky-two-mobile" >
               <div className="wireframe-asset">
                 <div className="wireframe-asset-glass"></div>
               </div>
@@ -544,8 +544,8 @@ function Mobile() {
             </div>
           </div>
 
-          <div className="design" id="design">
-            <div className="sticky-three-mobile" ref={designContainer}>
+          <div className="design" id="design" ref={designContainer}>
+            <div className="sticky-three-mobile" >
               <div className="design-asset">
                 <div className="design-asset-glass"></div>
               </div>
@@ -562,8 +562,8 @@ function Mobile() {
             </div>
           </div>
 
-          <div className="develop" id="develop">
-            <div className="sticky-four-mobile" ref={developContainer}>
+          <div className="develop" id="develop" ref={developContainer}>
+            <div className="sticky-four-mobile" >
               <div className="develop-asset">
                 <div className="develop-asset-glass"></div>
               </div>
@@ -580,8 +580,8 @@ function Mobile() {
             </div>
           </div>
 
-          <div className="testing" id="testing">
-            <div className="sticky-five-mobile" ref={testingContainer}>
+          <div className="testing" id="testing" ref={testingContainer}>
+            <div className="sticky-five-mobile" >
               <div className="testing-asset">
                 <div className="testing-asset-glass"></div>
               </div>
