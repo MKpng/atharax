@@ -39,33 +39,6 @@ function Mobile() {
   );
 
   useEffect(() => {
-    gsap.utils.toArray("a").forEach(function (button, i) {
-      button.addEventListener("click", (e) => {
-        const anchor = e.target.closest("a"); // Get the closest anchor element
-        const href = anchor.getAttribute("href"); // Get the href value
-
-        if (href && href.startsWith("#")) {
-          e.preventDefault(); // Prevent default action only for internal hash links
-          console.log(href);
-          const targetElement = document.querySelector(href); // Get the target element
-          if (targetElement) {
-            smoother.scrollTo(targetElement, true, "top top");
-          }
-        }
-      });
-    });
-
-    window.onload = () => {
-      let urlHash = window.location.href.split("#")[1];
-      if (urlHash) {
-        let scrollElem = document.querySelector("#" + urlHash);
-        console.log(scrollElem, urlHash);
-        if (scrollElem) {
-          smoother.scrollTo(scrollElem, true, "top top");
-        }
-      }
-    };
-
     const tl = gsap.timeline({ defaults: { duration: 2, ease: "none" } });
     tl.to("#title-mobile", {
       duration: 2,
