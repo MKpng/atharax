@@ -1,20 +1,19 @@
 .cursor {
-  width: 2vw;
-  height: 2vw;
+  width: 3vw;
+  aspect-ratio: 1;
   background: #ffffff;
   border-radius: 50%;
   position: fixed;
   pointer-events: none;
   transform: translate(-50%, -50%) scale(1);
-  transition: transform 0.1s cubic-bezier(0.25, 1, 0.5, 1), width 0.3s ease, height 0.3s ease, background-color 0.3s ease, border 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), width 0.3s ease, height 0.3s ease, background-color 0.3s ease, border 0.3s ease;
   z-index: 999;
   mix-blend-mode: difference;
   opacity: 1;
 }
 
 .cursor--large {
-  background-color: rgb(218, 56, 7);
-  transform: translate(-50%, -50%) scale(.5);
+  transform: translate(-50%, -50%) scale(2);
 }
 
 .cursor--hover {
@@ -26,5 +25,4 @@
 
 .cursor--hidden {
   opacity: 0;
-  /* Hide cursor */
 }

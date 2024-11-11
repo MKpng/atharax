@@ -1,12 +1,9 @@
 "use client";
-import React, { Suspense, lazy, useEffect, useState, useWindowSize } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import PrivacyPolicy from "./Policy/PrivacyPolicy";
-import LoadingScreen from "./Loading/LoadingScreen";
-import Mobile from "./Mobile/Mobile";
-import "./App.css";
 
-const Home = lazy(() => import("./Home/Home"));
+import React, { useEffect, useState } from "react";
+
+import Home from "./Home/Home";
+import Mobile from "./Mobile/Mobile";
 
 const ResponsiveHome = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -24,15 +21,7 @@ const ResponsiveHome = () => {
 function App() {
 
   return (
-    <Router>
-      <Suspense fallback={<LoadingScreen />}>
-        <Routes>
-          <Route path="/" element={<LoadingScreen />} />
-          <Route path="/home" element={<ResponsiveHome />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-        </Routes>
-      </Suspense>
-    </Router>
+    <ResponsiveHome />
   );
 }
 
