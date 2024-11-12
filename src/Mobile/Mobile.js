@@ -41,9 +41,9 @@ function Mobile() {
 
   useEffect(() => {
     let smoother = ScrollSmoother.create({
-      smooth: 0,
-      effects: true,
-      smoothTouch: 0.1,
+      smooth: 0.5,
+      effects: false,
+      smoothTouch: 0,
     });
 
     gsap.utils.toArray("a").forEach(function (button, i) {
@@ -75,11 +75,11 @@ function Mobile() {
 
     const tl = gsap.timeline({ defaults: { duration: 2, ease: "none" } });
     tl.to("#title-mobile", {
-      duration: 2,
+      duration: 1.5,
       scrambleText: {
         text: "ATHARAX",
         chars: "13579",
-        revealDelay: 0.3,
+        revealDelay: 0.2,
         tweenLength: true,
       },
     });
@@ -95,7 +95,7 @@ function Mobile() {
       .fromTo(
         ".home-screen",
         { scale: 1, filter: "blur(0px)" },
-        { scale: 1.5, filter: "blur(30px)", duration: 3 }
+        { scale: 1.2, filter: "blur(10px)", duration: 2 }
       )
       .fromTo(
         ".solid-color-layer-mobile",
