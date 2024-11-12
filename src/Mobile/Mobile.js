@@ -1,7 +1,6 @@
 import "./Mobile.scss";
 
 import AtharaxLogo from "../images/atharax-final-logo.svg";
-import Arrow from "../images/Mobile/arrow-down-circle.svg";
 import Instagram from "../images/instagram.svg";
 import Gmail from "../images/google.svg";
 import Linkedin from "../images/linkedin.svg";
@@ -41,9 +40,10 @@ function Mobile() {
 
   useEffect(() => {
     let smoother = ScrollSmoother.create({
-      smooth: 0.5,
-      effects: false,
-      smoothTouch: 0,
+      smooth: .5,
+      effects: true,
+      smoothTouch: 0.1,
+      speed: 0.25,
     });
 
     gsap.utils.toArray("a").forEach(function (button, i) {
@@ -95,12 +95,12 @@ function Mobile() {
       .fromTo(
         ".home-screen",
         { scale: 1, filter: "blur(0px)" },
-        { scale: 1.2, filter: "blur(10px)", duration: 2 }
+        { scale: 1.25, filter: "blur(10px)", duration: 2 }
       )
       .fromTo(
         ".solid-color-layer-mobile",
         { opacity: 0 },
-        { opacity: 1, duration: 10 }
+        { opacity: 1, duration: 5 }
       );
 
     return () => {
@@ -482,11 +482,6 @@ function Mobile() {
           <div className="solid-color-layer-mobile"></div>
           <div className="asian-cyb-mobile"></div>
           <div className="title-mobile" id="title-mobile"></div>
-          <div className="arrow-down">
-            <a href="#about">
-              <img src={Arrow} alt="arrow down"></img>
-            </a>
-          </div>
         </div>
 
         <main>

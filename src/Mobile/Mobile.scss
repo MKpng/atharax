@@ -146,18 +146,6 @@ html {
   color: #000; // Correctly defining font-family
 }
 
-.arrow-down {
-  position: absolute;
-  width: 100vw;
-  height: 2.75rem;
-  flex-shrink: 0;
-  display: flex;
-  justify-content: center;
-  top: 90.5%;
-  z-index: 10;
-  animation: appear 2s ease-out;
-}
-
 /*ABOUT --- ABOUT --- ABOUT --- ABOUT --- ABOUT --- ABOUT --- ABOUT --- ABOUT --- ABOUT --- ABOUT*/
 
 .about-content-mobile {
