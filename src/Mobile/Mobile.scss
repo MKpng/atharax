@@ -361,13 +361,13 @@ html {
   justify-content: center;
   align-items: center;
   display: flex;
-  width: 85%;
+  width: 30vw;
   aspect-ratio: 5/1;
   top: 50%;
-  left: 7.5%;
+  left: 50%;
   font-family: "Robmax Stencil", sans-serif;
   font-size: 7vw;
-  transform: translate(0%, -1450%);
+  transform: translate(-50%, -1450%);
 }
 
 .briefing-p,
@@ -384,15 +384,16 @@ html {
   font-size: 8vw;
   font-family: "Gendy", sans-serif;
   aspect-ratio: 2/2.69;
-  width: 65%;
+  width: 60vw;
   text-align: center;
   line-height: 1;
   letter-spacing: -0.05vw;
-  transform: translate(-50%, -255%);
+  transform: translate(-50%, -240%);
 }
 
 .testing-p {
-  width: 70%;
+  width: 65vw;
+  transform: translate(-50%, -230%);
 }
 
 .briefing-p,
@@ -479,4 +480,13 @@ html {
       }
     }
   }
+}
+
+.footer-sticky-mobile,
+.footer-p-mobile,
+.atharax-big-mobile {
+  image-rendering: auto;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform: translateZ(0);
 }
