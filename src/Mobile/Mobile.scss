@@ -367,7 +367,7 @@ html {
   left: 50%;
   font-family: "Robmax Stencil", sans-serif;
   font-size: 7vw;
-  transform: translate(-50%, -1450%);
+  transform: translate(-50%, -1460%);
 }
 
 .briefing-p,
@@ -384,22 +384,17 @@ html {
   font-size: 8vw;
   font-family: "Gendy", sans-serif;
   aspect-ratio: 2/2.69;
-  width: 60vw;
+  width: 70vw;
   text-align: center;
   line-height: 1;
   letter-spacing: -0.05vw;
-  transform: translate(-50%, -240%);
+  transform: translate(-50%, -225%);
 }
 
-.testing-p {
-  width: 65vw;
-  transform: translate(-50%, -230%);
-}
-
-.briefing-p,
-.wireframe-p,
-.design-p,
-.develop-p,
+.briefing-p p,
+.wireframe-p p,
+.design-p p,
+.develop-p p,
 .testing-p p {
   display: inline-block;
   max-width: 80%;
