@@ -40,7 +40,7 @@ function Mobile() {
 
   useEffect(() => {
     let smoother = ScrollSmoother.create({
-      smooth: .5,
+      smooth: 0.5,
       effects: true,
       smoothTouch: 0.1,
       speed: 0.25,
@@ -477,28 +477,26 @@ function Mobile() {
           </a>
         </div>
       </div>
-      <div id="smooth-content">
-        <div className="home-screen" id="home">
-          <div className="solid-color-layer-mobile"></div>
-          <div className="asian-cyb-mobile"></div>
-          <div className="title-mobile" id="title-mobile"></div>
-        </div>
 
-        <main>
-          <div id="about" className="about-content-mobile" ref={aboutContainer}>
-            <div className="glassmorphism">
-              <h3 className="about-atharax-mobile">ABOUT US</h3>
-              <div className="about-div-row-mobile"></div>
-              <div className="carousel-mobile">
-                <div
-                  className="carousel-content-mobile"
-                  ref={carouselRef}
-                ></div>
-              </div>
+      <div className="home-screen" id="home">
+        <div className="solid-color-layer-mobile"></div>
+        <div className="asian-cyb-mobile"></div>
+        <div className="title-mobile" id="title-mobile"></div>
+      </div>
+
+      <main>
+        <div id="about" className="about-content-mobile" ref={aboutContainer}>
+          <div className="glassmorphism">
+            <h3 className="about-atharax-mobile">ABOUT US</h3>
+            <div className="about-div-row-mobile"></div>
+            <div className="carousel-mobile">
+              <div className="carousel-content-mobile" ref={carouselRef}></div>
             </div>
           </div>
-        </main>
-
+        </div>
+        
+      </main>
+      <div id="smooth-content">
         <div className="workflow-mobile" id="workflow">
           <div className="briefing" id="briefing" ref={briefingContainer}>
             <div className="sticky-one-mobile">
