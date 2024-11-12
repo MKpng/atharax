@@ -51,7 +51,7 @@ function Mobile() {
       button.addEventListener("click", (e) => {
         const anchor = e.target.closest("a"); // Get the closest anchor element
         const href = anchor.getAttribute("href"); // Get the href value
-    
+
         if (href && href.startsWith("#")) {
           e.preventDefault(); // Prevent default action only for internal hash links
           console.log(href);
@@ -62,7 +62,7 @@ function Mobile() {
         }
       });
     });
-    
+
     window.onload = () => {
       let urlHash = window.location.href.split("#")[1];
       if (urlHash) {
@@ -72,7 +72,7 @@ function Mobile() {
           smoother.scrollTo(scrollElem, true, "top top");
         }
       }
-    };    
+    };
 
     const tl = gsap.timeline({ defaults: { duration: 2, ease: "none" } });
     tl.to("#title-mobile", {
@@ -505,94 +505,79 @@ function Mobile() {
           </div>
         </main>
 
-        <div className="workflow-mobile" id="workflow" ref={briefingContainer}>
-          <div className="briefing" id="briefing">
-            <div className="sticky-one-mobile" >
+        <div className="workflow-mobile" id="workflow">
+          <div className="briefing" id="briefing" ref={briefingContainer}>
+            <div className="sticky-one-mobile">
               <div className="briefing-asset">
-                <div className="briefing-asset-glass"></div>
-              </div>
-              <div className="briefing-h2">
-                <h2>BRIEFING</h2>
-              </div>
-              <div className="briefing-p">
-                <p>
-                  First, we kick things off with a meeting to{" "}
-                  <span>get on the same page</span>, &lt;making sure&gt; we
-                  fully get your <strong>needs</strong> and{" "}
-                  <strong>goals</strong>.
-                </p>
+                <div className="briefing-asset-glass">
+                  <h2 className="briefing-h2">BRIEFING</h2>
+                  <p className="briefing-p">
+                    First, we kick things off with a meeting to{" "}
+                    <span>get on the same page</span>, &lt;making sure&gt; we
+                    fully get your <strong>needs</strong> and{" "}
+                    <strong>goals</strong>.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
 
           <div className="wireframe" id="wireframe" ref={wireframeContainer}>
-            <div className="sticky-two-mobile" >
+            <div className="sticky-two-mobile">
               <div className="wireframe-asset">
-                <div className="wireframe-asset-glass"></div>
-              </div>
-              <div className="wireframe-h2">
-                <h2>WIREFRAME</h2>
-              </div>
-              <div className="wireframe-p">
-                <p>
-                  Next, we whip up a <span>quick prototype</span>, mapping out
-                  the &lt;structure and layout&gt; of your website in its{" "}
-                  <strong>simplest form</strong>.
-                </p>
+                <div className="wireframe-asset-glass">
+                  <h2 className="wireframe-h2">WIREFRAME</h2>
+                  <p className="wireframe-p">
+                    Next, we whip up a <span>quick prototype</span>, mapping out
+                    the &lt;structure and layout&gt; of your website in its{" "}
+                    <strong>simplest form</strong>.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
 
           <div className="design" id="design" ref={designContainer}>
-            <div className="sticky-three-mobile" >
+            <div className="sticky-three-mobile">
               <div className="design-asset">
-                <div className="design-asset-glass"></div>
-              </div>
-              <div className="design-h2">
-                <h2>DESIGN</h2>
-              </div>
-              <div className="design-p">
-                <p>
-                  It’s all about visuals! We refine <span>UX</span> and{" "}
-                  <span>design</span> for a smooth,
-                  <strong> user-friendly experience</strong>.
-                </p>
+                <div className="design-asset-glass">
+                  <h2 className="design-h2">DESIGN</h2>
+                  <p className="design-p">
+                    It’s all about visuals! We refine <span>UX</span> and{" "}
+                    <span>design</span> for a smooth,
+                    <strong> user-friendly experience</strong>.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
 
           <div className="develop" id="develop" ref={developContainer}>
-            <div className="sticky-four-mobile" >
+            <div className="sticky-four-mobile">
               <div className="develop-asset">
-                <div className="develop-asset-glass"></div>
-              </div>
-              <div className="develop-h2">
-                <h2>DEVELOP</h2>
-              </div>
-              <div className="develop-p">
-                <p>
-                  We &lt;bring it all to life&gt; with some{" "}
-                  <span>coding magic</span>, making sure everything{" "}
-                  <strong>functions</strong> just the way it should.
-                </p>
+                <div className="develop-asset-glass">
+                  <h2 className="develop-h2">DEVELOP</h2>
+                  <p className="develop-p">
+                    We &lt;bring it all to life&gt; with some{" "}
+                    <span>coding magic</span>, making sure everything{" "}
+                    <strong>functions</strong> just the way it should.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
 
           <div className="testing" id="testing" ref={testingContainer}>
-            <div className="sticky-five-mobile" >
+            <div className="sticky-five-mobile">
               <div className="testing-asset">
-                <div className="testing-asset-glass"></div>
-              </div>
-              <div className="testing-h2">
-                <h2>TESTING</h2>
-              </div>
-              <div className="testing-p">
-                <p>
-                  Finally, we <span>test everything</span>—thoroughly checking
-                  every detail to ensure it's <strong>fully functional</strong>,
-                  including usability.
-                </p>
+                <div className="testing-asset-glass">
+                  <h2 className="testing-h2">TESTING</h2>
+                  <p className="testing-p">
+                    Finally, we <span>test everything</span>—thoroughly checking
+                    every detail to ensure it's{" "}
+                    <strong>fully functional</strong>, including usability.
+                  </p>
+                </div>
               </div>
             </div>
           </div>

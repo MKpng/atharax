@@ -116,7 +116,7 @@ html {
     z-index: 5;
     background-color: #000;
     opacity: 0;
-}
+  }
 
   .asian-cyb-mobile {
     position: relative;
@@ -281,6 +281,12 @@ html {
     -webkit-backdrop-filter: blur(15px);
     transition: backdrop-filter 0.5s ease-out,
       -webkit-backdrop-filter 0.5s ease-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    text-align: center;
   }
 }
 
@@ -298,6 +304,12 @@ html {
     -webkit-backdrop-filter: blur(15px);
     transition: backdrop-filter 0.5s ease-out,
       -webkit-backdrop-filter 0.5s ease-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    text-align: center;
   }
 }
 
@@ -315,6 +327,12 @@ html {
     -webkit-backdrop-filter: blur(15px);
     transition: backdrop-filter 0.5s ease-out,
       -webkit-backdrop-filter 0.5s ease-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    text-align: center;
   }
 }
 
@@ -332,6 +350,12 @@ html {
     -webkit-backdrop-filter: blur(15px);
     transition: backdrop-filter 0.5s ease-out,
       -webkit-backdrop-filter 0.5s ease-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    text-align: center;
   }
 }
 
@@ -349,6 +373,12 @@ html {
     -webkit-backdrop-filter: blur(15px);
     transition: backdrop-filter 0.5s ease-out,
       -webkit-backdrop-filter 0.5s ease-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    text-align: center;
   }
 }
 
@@ -357,17 +387,13 @@ html {
 .design-h2,
 .develop-h2,
 .testing-h2 {
-  position: relative;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  width: 30vw;
-  aspect-ratio: 5/1;
-  top: 50%;
-  left: 50%;
+  font-size: 10vw; /* Adjust font-size for responsiveness */
   font-family: "Robmax Stencil", sans-serif;
-  font-size: 7vw;
-  transform: translate(-50%, -1460%);
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+  position: relative;
+  text-align: center;
 }
 
 .briefing-p,
@@ -375,37 +401,23 @@ html {
 .design-p,
 .develop-p,
 .testing-p {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  top: 50%;
-  left: 50%;
   font-size: 8vw;
   font-family: "Gendy", sans-serif;
   aspect-ratio: 2/2.69;
-  width: 70vw;
-  text-align: center;
   line-height: 1;
   letter-spacing: -0.05vw;
-  transform: translate(-50%, -225%);
-}
-
-.briefing-p p,
-.wireframe-p p,
-.design-p p,
-.develop-p p,
-.testing-p p {
+  position: relative;
+  margin-top: 4rem;
   display: inline-block;
-  max-width: 80%;
+  max-width: 85%;
   word-break: break-word;
 }
 
-.briefing-p p span,
-.wireframe-p p span,
-.design-p p span,
-.develop-p p span,
-.testing-p p span {
+.briefing-p span,
+.wireframe-p span,
+.design-p span,
+.develop-p span,
+.testing-p span {
   color: #c164ff;
 }
 
@@ -462,7 +474,7 @@ html {
     justify-content: space-between;
     align-items: center;
     width: 70vw;
-    top: 105%; 
+    top: 105%;
     pointer-events: all;
 
     a {
@@ -481,7 +493,7 @@ html {
 .footer-p-mobile,
 .atharax-big-mobile {
   image-rendering: auto;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
