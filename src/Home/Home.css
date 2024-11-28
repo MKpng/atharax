@@ -40,9 +40,7 @@ body {
     position: relative;
     height: 100vh;
     width: 100vw;
-    background-image: url("../images/generative-fill.png");
-    background-size: 100%;
-    background-repeat: no-repeat;
+    background-color: #f4f3f2;
 }
 
 .asian-cyb {
@@ -359,21 +357,13 @@ body {
 
 .about-content {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 100vw;
     height: 150vh;
     background-color: #000;
     z-index: 1;
-}
-
-.glassmorphism {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(30px);
-    height: 100vh;
 }
 
 .about-atharax {
@@ -400,7 +390,7 @@ body {
     justify-content: space-between;
     align-items: center;
     width: 70%;
-    height: 60%;
+    height: 40%;
     background-image: url("../images/EYES_ATHARAX_TWO.png");
     background-repeat: no-repeat;
     background-size: cover;
@@ -412,7 +402,7 @@ body {
     overflow: hidden;
     white-space: nowrap;
     position: absolute;
-    top: 100%;
+    top: 80%;
 }
 
 .carousel-content {
@@ -472,7 +462,6 @@ body {
     width: 22.5vw;
     aspect-ratio: 3/4;
     background-position: 50%, 50%;
-    background-size: contain;
     background-size: cover;
     opacity: 0;
     visibility: hidden;
@@ -492,31 +481,7 @@ body {
 
 .img-init-five {
     background-image: url("../images/img-init-five.jpg");
-}
-
-.img-init-glass,
-.img-init-glass-two,
-.img-init-glass-three,
-.img-init-glass-four,
-.img-init-glass-five {
-    position: relative;
-    width: 22.5vw;
-    border-radius: .5vw;
-    aspect-ratio: 3/4;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    transition: backdrop-filter 0.5s ease-out, -webkit-backdrop-filter 0.5s ease-out;
-}
-
-.img-init-glass:hover,
-.img-init-glass-two:hover,
-.img-init-glass-three:hover,
-.img-init-glass-four:hover,
-.img-init-glass-five:hover {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(0px);
-    -webkit-backdrop-filter: blur(0px);
+    background-position: top;
 }
 
 .mini-nav,

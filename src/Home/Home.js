@@ -146,7 +146,6 @@ function Home() {
         tweenLength: true,
       },
     });
-
     gsap
       .timeline({
         scrollTrigger: {
@@ -157,15 +156,14 @@ function Home() {
       })
       .fromTo(
         ".header",
-        { scale: 1, filter: "blur(0px)" },
-        { scale: 2, filter: "blur(50px)", duration: 3 }
+        { scale: 1 },
+        { scale: 1.55, duration: 10 }
       )
       .fromTo(
         ".solid-color-layer",
         { opacity: 0 },
         { opacity: 1, duration: 10 }
       );
-
     return () => {
       fadeInAnimation.kill();
       fadeOutAnimation.kill();
@@ -652,20 +650,16 @@ function Home() {
 
           <main>
             <div id="about" className="about-content" ref={aboutContainer}>
-              <div className="glassmorphism">
                 <h3 className="about-atharax">ABOUT US</h3>
                 <div className="about-div-row"></div>
                 <div className="carousel">
                   <div className="carousel-content" ref={carouselRef}></div>
-                </div>
-              </div>
+                </div>             
             </div>
             <div id="workflow" className="workflow-section">
               <div ref={briefingContainer}>
                 <div className="sticky">
-                  <div className="img-init">
-                    <div className="img-init-glass"></div>
-                  </div>
+                  <div className="img-init"></div>
                   <div className="mini-nav">
                     <h3>
                       <a
@@ -708,7 +702,7 @@ function Home() {
                       <h3 data-text={currentTime}>{currentTime}</h3>
                     </div>
                     <div className="briefing-next">
-                      <img src={AtharaxLogo}></img>
+                      <img src={AtharaxLogo} alt="Our company logo"></img>
                     </div>
                   </div>
                 </div>
@@ -716,9 +710,7 @@ function Home() {
 
               <div ref={wireframeContainer}>
                 <div className="sticky-two">
-                  <div className="img-init-two">
-                    <div className="img-init-glass-two"></div>
-                  </div>
+                  <div className="img-init-two"></div>
                   <div className="mini-nav-two">
                     <h3>
                       <a
@@ -760,7 +752,7 @@ function Home() {
                       <h3 data-text={currentTime}>{currentTime}</h3>
                     </div>
                     <div className="wire-next">
-                      <img src={AtharaxLogo}></img>
+                      <img src={AtharaxLogo} alt="Our company logo"></img>
                     </div>
                   </div>
                 </div>
@@ -768,9 +760,7 @@ function Home() {
 
               <div ref={designContainer}>
                 <div className="sticky-three">
-                  <div className="img-init-three">
-                    <div className="img-init-glass-three"></div>
-                  </div>
+                  <div className="img-init-three"></div>
                   <div className="mini-nav-three">
                     <h3>
                       <a
@@ -812,7 +802,7 @@ function Home() {
                       <h3 data-text={currentTime}>{currentTime}</h3>
                     </div>
                     <div className="design-next">
-                      <img src={AtharaxLogo}></img>
+                      <img src={AtharaxLogo} alt="Our company logo"></img>
                     </div>
                   </div>
                 </div>
@@ -820,9 +810,7 @@ function Home() {
 
               <div ref={developContainer}>
                 <div className="sticky-four">
-                  <div className="img-init-four">
-                    <div className="img-init-glass-four"></div>
-                  </div>
+                  <div className="img-init-four"></div>
                   <div className="mini-nav-four">
                     <h3>
                       <a
@@ -864,7 +852,7 @@ function Home() {
                       <h3 data-text={currentTime}>{currentTime}</h3>
                     </div>
                     <div className="develop-next">
-                      <img src={AtharaxLogo}></img>
+                      <img src={AtharaxLogo} alt="Our company logo"></img>
                     </div>
                   </div>
                 </div>
@@ -872,9 +860,7 @@ function Home() {
 
               <div ref={testContainer}>
                 <div className="sticky-five">
-                  <div className="img-init-five">
-                    <div className="img-init-glass-five"></div>
-                  </div>
+                  <div className="img-init-five"></div>
                   <div className="mini-nav-five">
                     <h3>
                       <a
@@ -916,7 +902,7 @@ function Home() {
                       <h3 data-text={currentTime}>{currentTime}</h3>
                     </div>
                     <div className="test-next">
-                      <img src={AtharaxLogo}></img>
+                      <img src={AtharaxLogo} alt="Our company logo"></img>
                     </div>
                   </div>
                 </div>
