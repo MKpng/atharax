@@ -47,7 +47,7 @@ body {
     position: relative;
     height: 100vh;
     width: 100vw;
-    background-image: url("../images/file.png");
+    background-image: url("../images/asian-cyborg.webp");
     background-size: 100%;
     background-repeat: no-repeat;
     z-index: 2;
@@ -391,7 +391,7 @@ body {
     align-items: center;
     width: 70%;
     height: 40%;
-    background-image: url("../images/EYES_ATHARAX_TWO.png");
+    background-image: url("../images/EYES_ATHARAX.webp");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 50% 10%;
@@ -444,7 +444,7 @@ body {
     border-radius: .5vw;
     width: 22.5vw;
     aspect-ratio: 3/4;
-    background-image: url("../images/cyber-astronaut.jpg");
+    background-image: url("../images/img-init-one.webp");
     background-position: 40%, 50%;
     background-size: contain;
     background-size: cover;
@@ -468,19 +468,19 @@ body {
 }
 
 .img-init-two {
-    background-image: url("../images/img-init-two.jpg");
+    background-image: url("../images/img-init-two.webp");
 }
 
 .img-init-three {
-    background-image: url("../images/img-init-three.jpg");
+    background-image: url("../images/img-init-three.webp");
 }
 
 .img-init-four {
-    background-image: url("../images/img-init-four.jpg");
+    background-image: url("../images/img-init-four.webp");
 }
 
 .img-init-five {
-    background-image: url("../images/img-init-five.jpg");
+    background-image: url("../images/img-init-five.webp");
     background-position: top;
 }
 
@@ -715,27 +715,27 @@ body {
 }
 
 .img-asset-one {
-    background-image: url("../images/vibrant-neon-colorful-liquid-background.jpg");
+    background-image: url("../images/img-asset-one.webp");
     transform: translate(-113.25%, -1025.25%);
 }
 
 .img-asset-two {
-    background-image: url("../images/black-white-ink-acrylic-contemporary-art.jpg");
+    background-image: url("../images/img-asset-two.webp");
     transform: translate(5.75%, -1025.25%);
 }
 
 .img-asset-three {
-    background-image: url("../images/halftone-monochrome-collage.jpg");
+    background-image: url("../images/img-asset-three.webp");
     transform: translate(-43.25%, -1025.25%);
 }
 
 .img-asset-four {
-    background-image: url("../images/110503.jpg");
+    background-image: url("../images/img-asset-four.webp");
     transform: translate(5.75%, -1025.25%);
 }
 
 .img-asset-five {
-    background-image: url("../images/black-background-wallpaper-abstract-paint-texture.jpg");
+    background-image: url("../images/img-asset-five.webp");
     transform: translate(-113.25%, -1025.25%);
 }
 
@@ -855,7 +855,7 @@ body {
     font-family: "Robmax Stencil", sans-serif;
     font-size: clamp(12vw, 17vw, 22vw);
     font-weight: 700;
-    background-image: url("../images/vibrant-neon-colorful-liquid-background.jpg");
+    background-image: url("../images/img-asset-one.webp");
     background-size: cover;
     background-position: 50%, 70%;
     -webkit-text-fill-color: transparent;
