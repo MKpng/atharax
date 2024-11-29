@@ -94,13 +94,14 @@ function Mobile() {
       })
       .fromTo(
         ".home-screen",
-        { scale: 1, filter: "blur(0px)" },
-        { scale: 1.25, filter: "blur(10px)", duration: 2 }
+        { scale: 1 },
+        { scale: 1.25 }
       )
       .fromTo(
         ".solid-color-layer-mobile",
         { opacity: 0 },
-        { opacity: 1, duration: 5 }
+        { opacity: 1 },
+        0
       );
 
     return () => {
@@ -585,21 +586,21 @@ function Mobile() {
                 target="_blank"
                 rel="noreferrer"
               >
-                <img src={Instagram}></img>
+                <img src={Instagram} alt="Instagram Icon"></img>
               </a>
               <a
                 href="mailto:atharax.co@gmail.com"
                 target="_blank"
                 rel="noreferrer"
               >
-                <img src={Gmail}></img>
+                <img src={Gmail} alt="Gmail Icon"></img>
               </a>
               <a
                 href="https://www.linkedin.com/company/atharax"
                 target="_blank"
                 rel="noreferrer"
               >
-                <img src={Linkedin}></img>
+                <img src={Linkedin} alt="Linkedin icon"></img>
               </a>
             </div>
           </div>

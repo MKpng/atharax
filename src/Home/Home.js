@@ -5,7 +5,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
 import { ScrambleTextPlugin } from "gsap/ScrambleTextPlugin";
-import { DrawSVGPlugin } from "gsap/all";
 
 import CursorFollower from "../Cursor/Cursor";
 import WeatherWidget from "../Temperature/Temperature";
@@ -70,7 +69,6 @@ function Home() {
     ScrollToPlugin,
     ScrollSmoother,
     ScrambleTextPlugin,
-    DrawSVGPlugin
   );
 
   useEffect(() => {
@@ -155,7 +153,6 @@ function Home() {
         },
       });
 
-      // Combined transforms into a single fromTo call
       tl.fromTo(
         imgInit,
         { scale: 1, xPercent: -50, yPercent: -50 },
