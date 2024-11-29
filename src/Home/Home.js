@@ -11,10 +11,6 @@ import CursorFollower from "../Cursor/Cursor";
 import WeatherWidget from "../Temperature/Temperature";
 
 import AtharaxLogo from "../images/atharax-final-logo.svg";
-import Instagram from "../images/instagram.svg";
-import Gmail from "../images/google.svg";
-import Linkedin from "../images/linkedin.svg";
-import { ReactComponent as AssetsOne } from "../images/Asset 1.svg";
 
 import "./Home.css";
 
@@ -28,7 +24,6 @@ function Home() {
   const testContainer = useRef(null);
   const footerContainer = useRef(null);
   const carouselRef = useRef(null);
-  const svgRef = useRef(null);
   const words = "TURNING YOUR IDEAS INTO REALITY ";
 
   window.onbeforeunload = function () {
@@ -82,15 +77,16 @@ function Home() {
     let smoother = ScrollSmoother.create({
       smooth: 2,
       effects: true,
+      normalizeScroll: true,
       smoothTouch: 0.1,
-      speed: 0.75,
+      speed: 0.5,
     });
 
     gsap.utils.toArray("a").forEach(function (button, i) {
       button.addEventListener("click", (e) => {
         const anchor = e.target.closest("a"); // Get the closest anchor element
         const href = anchor.getAttribute("href"); // Get the href value
-    
+
         if (href && href.startsWith("#")) {
           e.preventDefault(); // Prevent default action only for internal hash links
           console.log(href);
@@ -101,7 +97,7 @@ function Home() {
         }
       });
     });
-    
+
     window.onload = () => {
       let urlHash = window.location.href.split("#")[1];
       if (urlHash) {
@@ -111,34 +107,12 @@ function Home() {
           smoother.scrollTo(scrollElem, true, "top top");
         }
       }
-    };    
+    };
 
-    const elementsToAnimate =
-      ".inner, .instagram-icon, .linkedin-icon, .gmail-icon, .atharax-icon";
-
-    const fadeInAnimation = gsap.to(elementsToAnimate, {
-      scrollTrigger: {
-        trigger: ".about-content",
-        start: "top top",
-        toggleActions: "play none none reverse",
-      },
-      autoAlpha: 1,
-      duration: 1,
+    const mainTimeline = gsap.timeline({
+      defaults: { duration: 2, ease: "none" },
     });
-
-    const fadeOutAnimation = gsap.to(elementsToAnimate, {
-      scrollTrigger: {
-        trigger: ".carousel",
-        start: "bottom+=90% bottom",
-        toggleActions: "play none none reverse", // Add toggle actions for smooth reversing
-      },
-      autoAlpha: 0,
-      duration: 1,
-    });
-
-    const tl = gsap.timeline({ defaults: { duration: 2, ease: "none" } });
-    tl.to("#title", {
-      duration: 2,
+    mainTimeline.to("#title", {
       scrambleText: {
         text: "ATHARAX",
         chars: "13579",
@@ -146,6 +120,7 @@ function Home() {
         tweenLength: true,
       },
     });
+
     gsap
       .timeline({
         scrollTrigger: {
@@ -154,78 +129,59 @@ function Home() {
           scrub: 1,
         },
       })
-      .fromTo(
-        ".header",
-        { scale: 1 },
-        { scale: 1.55, duration: 10 }
-      )
-      .fromTo(
-        ".solid-color-layer",
-        { opacity: 0 },
-        { opacity: 1, duration: 10 }
-      );
+      .fromTo(".header", { scale: 1 }, { scale: 1.55 })
+      .fromTo(".solid-color-layer", { opacity: 0 }, { opacity: 1 }, 0); 
+
     return () => {
-      fadeInAnimation.kill();
-      fadeOutAnimation.kill();
-      tl.kill();
+      mainTimeline.kill();
     };
   }, []);
 
   useLayoutEffect(() => {
-    const svgElement = svgRef.current;
+    const ctx = gsap.context(() => {
+      const imgInit = ".img-init";
+      const elementsToFade =
+        ".work-briefing, .work-briefing-text, .briefing-temp, .img-asset-one, .briefing-extra, .mini-nav";
 
-    gsap.fromTo(
-      svgElement.querySelectorAll("line"), // Select all line elements
-      { drawSVG: "0%" }, // Start from 0% drawn
-      { drawSVG: "100%", duration: 1, stagger: 0.1 } // Draw to 100% over time
-    );
-  }, []);
+      // First timeline with initial animations
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".sticky",
+          pin: true,
+          scrub: 1,
+          pinSpacing: false,
+          start: "top top",
+          toggleActions: "play none none reverse",
+        },
+      });
 
-  useLayoutEffect(() => {
-      const ctx = gsap.context(() => {
-        const imgInit = ".img-init";
-        const elementsToFade =
-          ".work-briefing, .work-briefing-text, .briefing-temp, .img-asset-one, .briefing-extra, .mini-nav";
-
-        // First timeline with initial animations
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: ".sticky",
-            pin: true,
-            scrub: 1,
-            pinSpacing: false,
-            start: "top top",
-            toggleActions: "play none none reverse",
-          },
-        });
-
-        // Combined transforms into a single fromTo call
-        tl.fromTo(
-          imgInit,
-          { scale: 1, xPercent: -50, yPercent: -50 },
-          { scale: 0.75, xPercent: -30, yPercent: -60 }
+      // Combined transforms into a single fromTo call
+      tl.fromTo(
+        imgInit,
+        { scale: 1, xPercent: -50, yPercent: -50 },
+        { scale: 0.75, xPercent: -30, yPercent: -60 }
+      )
+        .fromTo(
+          elementsToFade,
+          { visibility: "hidden", opacity: 0 },
+          { visibility: "visible", opacity: 1 }
         )
-          .fromTo(
-            elementsToFade,
-            { visibility: "hidden", opacity: 0 },
-            { visibility: "visible", opacity: 1 }
-          )
-          .addPause(1.5)
-          .fromTo(elementsToFade, { opacity: 1 }, { opacity: 0 })
-          .fromTo(
-            imgInit,
-            { scale: 0.75, xPercent: -30, yPercent: -60 },
-            {
-              scale: 1,
-              xPercent: -50,
-              yPercent: -50,
-              immediateRender: false, // Ensures it waits for the animation to start
-            }
-          )
-          .fromTo(imgInit, { opacity: 1 }, { opacity: 0 });
-      }, briefingContainer);
+        .addPause(1.5)
+        .fromTo(elementsToFade, { opacity: 1 }, { opacity: 0 })
+        .fromTo(
+          imgInit,
+          { scale: 0.75, xPercent: -30, yPercent: -60 },
+          {
+            scale: 1,
+            xPercent: -50,
+            yPercent: -50,
+            immediateRender: false, // Ensures it waits for the animation to start
+          }
+        )
+        .fromTo(imgInit, { opacity: 1 }, { opacity: 0 });
+    }, briefingContainer);
 
-      return () => ctx.revert();
+    return () => ctx.revert();
   }, []);
 
   useLayoutEffect(() => {
@@ -456,84 +412,24 @@ function Home() {
   }, []);
 
   useEffect(() => {
-    gsap.to(".sticky-two, .img-init-two", {
-      scrollTrigger: {
-        trigger: ".sticky-two", // Element to trigger on scroll
-        start: "top top", // When the bottom of the landing page reaches the bottom of the viewport
-        toggleActions: "play none none reverse", // Play animation when scrolling down, reverse when scrolling up
-      },
-      autoAlpha: 1, // Fade in the element
-      duration: 1, // Animation duration
-    });
+    const elements = [
+      { trigger: ".sticky-two", targets: ".sticky-two, .img-init-two" },
+      { trigger: ".sticky-three", targets: ".sticky-three, .img-init-three" },
+      { trigger: ".sticky-four", targets: ".sticky-four, .img-init-four" },
+      { trigger: ".sticky-five", targets: ".sticky-five, .img-init-five" },
+      { trigger: ".sticky-footer", targets: ".sticky-footer", duration: 0 },
+    ];
 
-    gsap.to(".sticky-three, .img-init-three", {
-      scrollTrigger: {
-        trigger: ".sticky-three", // Element to trigger on scroll
-        start: "top top", // When the bottom of the landing page reaches the bottom of the viewport
-        toggleActions: "play none none reverse", // Play animation when scrolling down, reverse when scrolling up
-      },
-      autoAlpha: 1, // Fade in the element
-      duration: 1, // Animation duration
-    });
-
-    gsap.to(".sticky-four, .img-init-four", {
-      scrollTrigger: {
-        trigger: ".sticky-four", // Element to trigger on scroll
-        start: "top top", // When the bottom of the landing page reaches the bottom of the viewport
-        toggleActions: "play none none reverse", // Play animation when scrolling down, reverse when scrolling up
-      },
-      autoAlpha: 1, // Fade in the element
-      duration: 1, // Animation duration
-    });
-
-    gsap.to(".sticky-five, .img-init-five", {
-      scrollTrigger: {
-        trigger: ".sticky-five", // Element to trigger on scroll
-        start: "top top", // When the bottom of the landing page reaches the bottom of the viewport
-        toggleActions: "play none none reverse", // Play animation when scrolling down, reverse when scrolling up
-      },
-      autoAlpha: 1, // Fade in the element
-      duration: 1, // Animation duration
-    });
-
-    gsap.to(".sticky-footer", {
-      scrollTrigger: {
-        trigger: ".sticky-footer", // Element to trigger on scroll
-        start: "top top",
-        toggleActions: "play none none reverse", // When the bottom of the landing page reaches the bottom of the viewport // Play animation when scrolling down, reverse when scrolling up
-      },
-      autoAlpha: 1, // Fade in the element
-      duration: 0, // Animation duration
-    });
-  }, []);
-
-  useEffect(() => {
-    const icons = document.querySelectorAll(".magnetic-icon");
-
-    icons.forEach((icon) => {
-      const wrapper = icon.closest(".icon-wrapper");
-
-      if (wrapper) {
-        const handleMouseMove = (e) => {
-          const iconRect = wrapper.getBoundingClientRect();
-          const xPos = e.clientX - iconRect.left - iconRect.width / 2;
-          const yPos = e.clientY - iconRect.top - iconRect.height / 2;
-
-          icon.style.transform = `translate(${xPos * 0.4}px, ${yPos * 0.4}px)`;
-        };
-
-        const handleMouseLeave = () => {
-          icon.style.transform = "translate(0, 0)";
-        };
-
-        wrapper.addEventListener("mousemove", handleMouseMove);
-        wrapper.addEventListener("mouseleave", handleMouseLeave);
-
-        return () => {
-          wrapper.removeEventListener("mousemove", handleMouseMove);
-          wrapper.removeEventListener("mouseleave", handleMouseLeave);
-        };
-      }
+    elements.forEach(({ trigger, targets, duration = 1 }) => {
+      gsap.to(targets, {
+        scrollTrigger: {
+          trigger: trigger,
+          start: "top top",
+          toggleActions: "play none none reverse",
+        },
+        autoAlpha: 1,
+        duration: duration,
+      });
     });
   }, []);
 
@@ -567,79 +463,13 @@ function Home() {
   return (
     <>
       <div className="App" id="smooth-wrapper">
-        <nav className="inner">
-          <ul className="verticalMenu">
-            {["About", "Workflow", "Contact"].map((item) => (
-              <li className="glitch" data-text={item} key={item.toLowerCase()}>
-                <a
-                  className="menuAnchors hover-target"
-                  href={`#${item.toLowerCase()}`}
-                >
-                  {item}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-        <div className="atharax-icon hover-target">
-          <a href="#home" onClick={() => window.location.reload()}>
-            <img
-              src={AtharaxLogo}
-              className="spin"
-              alt="Atharax Company Logo"
-            />
-          </a>
-        </div>
-        <div className="icon-wrapper instagram-icon hover-target">
-          <a
-            href="https://www.instagram.com/atharax.co/"
-            className="magnetic-icon"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <img
-              src={Instagram}
-              className="magnetic-icon"
-              alt="Instagram Icon for Atharax"
-            />
-          </a>
-        </div>
-        <div className="icon-wrapper gmail-icon">
-          <a
-            href="mailto:atharax.co@gmail.com"
-            className="hover-target magnetic-icon"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <img
-              src={Gmail}
-              className="magnetic-icon"
-              alt="Gmail Icon for Atharax"
-            />
-          </a>
-        </div>
-        <div className="icon-wrapper linkedin-icon">
-          <a
-            href="https://www.linkedin.com/company/atharax"
-            className="hover-target magnetic-icon"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <img
-              src={Linkedin}
-              className="magnetic-icon"
-              alt="Linkedin Icon for Atharax"
-            />
-          </a>
-        </div>
-
         <div id="smooth-content">
           <header className="header" id="home">
             <div className="solid-color-layer"></div>
             <div className="asian-cyb"></div>
             <p className="title" id="title"></p>
-            <div className="draw-svg">
-              <AssetsOne ref={svgRef} />
+            <div className="header-logo">
+              <img src={AtharaxLogo} alt="Our company logo"></img>
             </div>
             <div className="time-div">
               <h3 className="glitch" data-text={currentTime}>
@@ -650,11 +480,11 @@ function Home() {
 
           <main>
             <div id="about" className="about-content" ref={aboutContainer}>
-                <h3 className="about-atharax">ABOUT US</h3>
-                <div className="about-div-row"></div>
-                <div className="carousel">
-                  <div className="carousel-content" ref={carouselRef}></div>
-                </div>             
+              <h3 className="about-atharax">ABOUT US</h3>
+              <div className="about-div-row"></div>
+              <div className="carousel">
+                <div className="carousel-content" ref={carouselRef}></div>
+              </div>
             </div>
             <div id="workflow" className="workflow-section">
               <div ref={briefingContainer}>
