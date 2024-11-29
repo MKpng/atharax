@@ -3,6 +3,7 @@
     src: url("../images/Fonts/Robmax36\ Stencil.otf") format("opentype");
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -10,6 +11,7 @@
     src: url("../images/Fonts/Gendy.otf") format("opentype");
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 }
 
 html,
@@ -70,6 +72,7 @@ body {
 .header-logo {
     position: absolute;
     width: 6rem;
+    aspect-ratio: 1;
     top: 80%;
     left: 5%;
     animation: spin 6s linear infinite, appear 2s ease-out;
@@ -739,7 +742,7 @@ body {
     width: 100vw;
     font-size: clamp(5vw, 6vw, 7vw);
     font-family: "Gendy", sans-serif;
-    color: #E6E6FA;
+    color: #f4f3f2;
     visibility: 1;
     opacity: 1;
 }

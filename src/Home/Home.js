@@ -388,13 +388,13 @@ function Home() {
       tl.fromTo(
         ".sticky-footer",
         { background: "#000" },
-        { background: "#E6E6FA", duration: 3, ease: "power2.inOut" } // Use easing
+        { background: "#f4f3f2", duration: 3, ease: "power2.inOut" } // Use easing
       )
         .fromTo(
           ".footer-p",
           { background: "#000", scale: 1 },
           {
-            background: "#E6E6FA",
+            background: "#f4f3f2",
             scale: 20,
             duration: 3,
             ease: "power2.inOut",
