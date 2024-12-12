@@ -12,10 +12,17 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
 import { ScrambleTextPlugin } from "gsap/ScrambleTextPlugin";
-import { DrawSVGPlugin } from "gsap/all";
 
 function Mobile() {
-  const [isToggled, setIsToggled] = useState(false);
+
+  return (
+    <>
+      <div className="release-box">
+        <p className="release"><span className="span-one">To be released</span> <br/><br/> <span className="span-two">desktop</span> version <br/><strong>already available</strong></p>
+      </div>
+    </>
+  )
+  /*const [isToggled, setIsToggled] = useState(false);
   const carouselRef = useRef(null);
   const aboutContainer = useRef(null);
   const briefingContainer = useRef(null);
@@ -34,16 +41,14 @@ function Mobile() {
     ScrollTrigger,
     ScrollToPlugin,
     ScrollSmoother,
-    ScrambleTextPlugin,
-    DrawSVGPlugin
+    ScrambleTextPlugin
   );
 
   useEffect(() => {
-    let smoother = ScrollSmoother.create({
+    let smootherMobile = ScrollSmoother.create({
       smooth: 0.5,
-      effects: true,
-      smoothTouch: 0.1,
       speed: 0.25,
+      normalizeScroll: true,
     });
 
     gsap.utils.toArray("a").forEach(function (button, i) {
@@ -56,7 +61,7 @@ function Mobile() {
           console.log(href);
           const targetElement = document.querySelector(href); // Get the target element
           if (targetElement) {
-            smoother.scrollTo(targetElement, true, "top top");
+            smootherMobile.scrollTo(targetElement, true, "top top");
           }
         }
       });
@@ -68,7 +73,7 @@ function Mobile() {
         let scrollElem = document.querySelector("#" + urlHash);
         console.log(scrollElem, urlHash);
         if (scrollElem) {
-          smoother.scrollTo(scrollElem, true, "top top");
+          smootherMobile.scrollTo(scrollElem, true, "top top");
         }
       }
     };
@@ -92,17 +97,7 @@ function Mobile() {
           scrub: 1,
         },
       })
-      .fromTo(
-        ".home-screen",
-        { scale: 1 },
-        { scale: 1.25 }
-      )
-      .fromTo(
-        ".solid-color-layer-mobile",
-        { opacity: 0 },
-        { opacity: 1 },
-        0
-      );
+      .fromTo(".solid-color-layer-mobile", { opacity: 0 }, { opacity: 1 });
 
     return () => {
       tl.kill();
@@ -402,50 +397,40 @@ function Mobile() {
   }, []);
 
   useEffect(() => {
-    gsap.to(".sticky-two-mobile, .wireframe-asset", {
-      scrollTrigger: {
-        trigger: ".sticky-two-mobile", // Element to trigger on scroll
-        start: "top top", // When the bottom of the landing page reaches the bottom of the viewport
-        toggleActions: "play none none reverse", // Play animation when scrolling down, reverse when scrolling up
+    const elements = [
+      {
+        trigger: ".sticky-two-mobile",
+        targets: [".sticky-two-mobile", ".wireframe-asset"],
       },
-      autoAlpha: 1, // Fade in the element
-      duration: 1, // Animation duration
-    });
-    gsap.to(".sticky-three-mobile, .design-asset", {
-      scrollTrigger: {
-        trigger: ".sticky-three-mobile", // Element to trigger on scroll
-        start: "top top", // When the bottom of the landing page reaches the bottom of the viewport
-        toggleActions: "play none none reverse", // Play animation when scrolling down, reverse when scrolling up
+      {
+        trigger: ".sticky-three-mobile",
+        targets: [".sticky-three-mobile", ".design-asset"],
       },
-      autoAlpha: 1, // Fade in the element
-      duration: 1, // Animation duration
-    });
-    gsap.to(".sticky-four-mobile, .develop-asset", {
-      scrollTrigger: {
-        trigger: ".sticky-four-mobile", // Element to trigger on scroll
-        start: "top top", // When the bottom of the landing page reaches the bottom of the viewport
-        toggleActions: "play none none reverse", // Play animation when scrolling down, reverse when scrolling up
+      {
+        trigger: ".sticky-four-mobile",
+        targets: [".sticky-four-mobile", ".develop-asset"],
       },
-      autoAlpha: 1, // Fade in the element
-      duration: 1, // Animation duration
-    });
-    gsap.to(".sticky-five-mobile, .testing-asset", {
-      scrollTrigger: {
-        trigger: ".sticky-five-mobile", // Element to trigger on scroll
-        start: "top top", // When the bottom of the landing page reaches the bottom of the viewport
-        toggleActions: "play none none reverse", // Play animation when scrolling down, reverse when scrolling up
+      {
+        trigger: ".sticky-five-mobile",
+        targets: [".sticky-five-mobile", ".testing-asset"],
       },
-      autoAlpha: 1, // Fade in the element
-      duration: 1, // Animation duration
-    });
-    gsap.to(".footer-sticky-mobile", {
-      scrollTrigger: {
-        trigger: ".footer-sticky-mobile", // Element to trigger on scroll
-        start: "top top",
-        toggleActions: "play none none reverse", // When the bottom of the landing page reaches the bottom of the viewport // Play animation when scrolling down, reverse when scrolling up
+      {
+        trigger: ".footer-sticky-mobile",
+        targets: [".footer-sticky-mobile"],
+        duration: 0,
       },
-      autoAlpha: 1, // Fade in the element
-      duration: 0, // Animation duration
+    ];
+
+    elements.forEach(({ trigger, targets, duration = 1 }) => {
+      gsap.to(targets.join(", "), {
+        scrollTrigger: {
+          trigger,
+          start: "top top",
+          toggleActions: "play none none reverse",
+        },
+        autoAlpha: 1,
+        duration,
+      });
     });
   }, []);
 
@@ -495,7 +480,6 @@ function Mobile() {
             </div>
           </div>
         </div>
-        
       </main>
       <div id="smooth-content">
         <div className="workflow-mobile" id="workflow">
@@ -607,7 +591,7 @@ function Mobile() {
         </div>
       </div>
     </div>
-  );
+  );*/
 }
 
 export default Mobile;

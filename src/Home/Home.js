@@ -7,8 +7,6 @@ import { ScrollSmoother } from "gsap/ScrollSmoother";
 import { ScrambleTextPlugin } from "gsap/ScrambleTextPlugin";
 
 import CursorFollower from "../Cursor/Cursor";
-import WeatherWidget from "../Temperature/Temperature";
-
 import AtharaxLogo from "../images/atharax-final-logo.svg";
 
 import "./Home.css";
@@ -28,7 +26,7 @@ function Home() {
   window.onbeforeunload = function () {
     window.scrollTo(0, 0);
   };
-
+  
   useEffect(() => {
     const updateTime = () => {
       const now = new Date();
@@ -68,7 +66,7 @@ function Home() {
     ScrollTrigger,
     ScrollToPlugin,
     ScrollSmoother,
-    ScrambleTextPlugin,
+    ScrambleTextPlugin
   );
 
   useEffect(() => {
@@ -128,7 +126,7 @@ function Home() {
         },
       })
       .fromTo(".header", { scale: 1 }, { scale: 1.55 })
-      .fromTo(".solid-color-layer", { opacity: 0 }, { opacity: 1 }, 0); 
+      .fromTo(".solid-color-layer", { opacity: 0 }, { opacity: 1 }, 0);
 
     return () => {
       mainTimeline.kill();
@@ -461,6 +459,7 @@ function Home() {
     <>
       <div className="App" id="smooth-wrapper">
         <div id="smooth-content">
+          
           <header className="header" id="home">
             <div className="solid-color-layer"></div>
             <div className="asian-cyb"></div>
@@ -473,6 +472,7 @@ function Home() {
                 {currentTime}
               </h3>
             </div>
+            <div id="scroll-message">Scroll Down</div>
           </header>
 
           <main>
@@ -521,7 +521,10 @@ function Home() {
                     </p>
                   </div>
                   <div className="briefing-temp">
-                    <WeatherWidget />
+                    <p>
+                      <strong>SCROLL <br />
+                      DOWN</strong>
+                    </p>
                   </div>
                   <div className="img-asset-one"></div>
                   <div className="briefing-extra">
@@ -571,7 +574,8 @@ function Home() {
                     </p>
                   </div>
                   <div className="wire-temp">
-                    <WeatherWidget />
+                    <p><strong>SCROLL <br />
+                    DOWN</strong></p>
                   </div>
                   <div className="img-asset-two"></div>
                   <div className="wire-extra">
@@ -621,7 +625,8 @@ function Home() {
                     </p>
                   </div>
                   <div className="design-temp">
-                    <WeatherWidget />
+                    <p><strong>SCROLL <br />
+                    DOWN</strong></p>
                   </div>
                   <div className="img-asset-three"></div>
                   <div className="design-extra">
@@ -671,7 +676,8 @@ function Home() {
                     </p>
                   </div>
                   <div className="develop-temp">
-                    <WeatherWidget />
+                    <p><strong>SCROLL <br />
+                    DOWN</strong></p>
                   </div>
                   <div className="img-asset-four"></div>
                   <div className="develop-extra">
@@ -721,7 +727,8 @@ function Home() {
                     </p>
                   </div>
                   <div className="test-temp">
-                    <WeatherWidget />
+                    <p><strong>SCROLL <br />
+                    DOWN</strong></p>
                   </div>
                   <div className="img-asset-five"></div>
                   <div className="test-extra">

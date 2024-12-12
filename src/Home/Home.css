@@ -19,7 +19,7 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    /*scrollbar-width: none;*/
+    scrollbar-width: none;
     cursor: url("../images/arrowhead-rounded-outline.svg") 10 10, auto;
 }
 
@@ -75,19 +75,31 @@ body {
     aspect-ratio: 1;
     top: 80%;
     left: 5%;
-    animation: spin 6s linear infinite, appear 2s ease-out;
+    animation: spin 6s linear infinite, appear 3s ease-out;
 }
 
 .time-div {
     position: absolute;
     top: 85%;
     left: 85%;
-    animation: appear 2s ease-out;
+    animation: appear 2.5s ease-out;
 }
 
 .time-div h3 {
     font-family: "Robmax Stencil", sans-serif;
     font-size: 2.5vw;
+}
+
+#scroll-message {
+    position: absolute;
+    color: plum;
+    font-size: 1.5vw;
+    font-family: "Gendy", sans-serif;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 1100%);
+    z-index: 100;
+    animation: appear 4s ease-out;
 }
 
 .solid-color-layer {
@@ -261,7 +273,7 @@ body {
     font-family: "Robmax Stencil", sans-serif;
     font-weight: 400;
     text-align: center;
-    text-shadow: 
+    text-shadow:
         /*0px 1.5vh 0vw rgb(153, 0, 255),
         0px 2.5vh 0vw rgb(153, 0, 255),
         0px 3.5vh 0vw rgb(153, 0, 255),
@@ -565,12 +577,47 @@ body {
 .test-temp {
     position: relative;
     display: flex;
-    background-color: #E0B0FF;
+    justify-content: center;
+    align-items: center;
+    background-image: url("../images/scroll-down-back.webp");
+    background-position: center;
+    background-size: cover;
     border-radius: .5vw;
     width: 17vw;
     aspect-ratio: 2/1.14;
     top: 50%;
     left: 50%;
+    text-align: center;
+}
+
+.briefing-temp p,
+.wire-temp p,
+.design-temp p,
+.develop-temp p,
+.test-temp p {
+    font-family: "Gendy", sans-serif;
+    font-size: 2.5dvw;
+    line-height: .9;
+    background: linear-gradient(90deg, #552586, #6A359C, #804FB3, #9969C7, #B589D6);
+    background-size: 300%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: gradientMove 3s infinite;
+}
+
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 .briefing-temp {
@@ -758,6 +805,7 @@ body {
     background-image: url("../images/img-asset-one.webp");
     background-size: cover;
     background-position: 50%, 70%;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
     transition: color 0.5s ease-in-out, text-shadow 0.5s ease-in-out;
