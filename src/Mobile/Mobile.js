@@ -46,6 +46,7 @@ function Mobile() {
       smooth: 0.5,
       effects: true,
       smoothTouch: 0.1,
+      speed: 0.5,
     });
 
     gsap.utils.toArray("a").forEach(function (button, i) {
