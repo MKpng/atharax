@@ -43,9 +43,10 @@ function Mobile() {
 
   useEffect(() => {
     let smootherMobile = ScrollSmoother.create({
-      smooth: .5,
-      normalizeScroll: true,
-      ignoreMobileResize: true,
+      smooth: 0.5,
+      effects: true,
+      smoothTouch: 0.1,
+      speed: 0.25,
     });
 
     gsap.utils.toArray("a").forEach(function (button, i) {
