@@ -76,16 +76,6 @@ function Mobile() {
       }
     };
 
-    const tl = gsap.timeline({ defaults: { duration: 2, ease: "none" } });
-    tl.to("#title-mobile", {
-      scrambleText: {
-        text: "ATHARAX",
-        chars: "13579",
-        revealDelay: 0.2,
-        tweenLength: true,
-      },
-    });
-
     gsap
       .timeline({
         scrollTrigger: {
@@ -97,7 +87,6 @@ function Mobile() {
       .fromTo(".solid-color-layer-mobile", { opacity: 0 }, { opacity: 1 }, 0);
 
     return () => {
-      tl.kill();
     };
   }, []);
 
@@ -499,7 +488,7 @@ function Mobile() {
         <div className="home-screen" id="home">
           <div className="solid-color-layer-mobile"></div>
           <div className="asian-cyb-mobile"></div>
-          <div className="title-mobile" id="title-mobile"></div>
+          <div className="title-mobile" id="title-mobile">ATHARAX</div>
         </div>
 
         <main>
