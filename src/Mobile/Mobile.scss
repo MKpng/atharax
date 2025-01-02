@@ -14,7 +14,7 @@
 
 @media only screen and (max-width: 768px) {
   #smooth-content {
-    height: 1090dvh;
+    height: 990dvh;
   }
 }
 
@@ -155,7 +155,6 @@ html {
   height: 100dvh;
   background-color: #000;
   z-index: 10;
-  margin-bottom: 100vh;
 
   .about-atharax-mobile {
     position: relative;
@@ -189,7 +188,7 @@ html {
     top: 0;
     width: 70%;
     height: 30vh;
-    color: #666666;
+    color: #f4f3f2;
     font-size: 7vw;
     font-family: "Gendy", sans-serif;
     text-align: center;

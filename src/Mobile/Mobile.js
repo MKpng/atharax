@@ -17,7 +17,6 @@ import { SplitText } from "gsap/SplitText";
 function Mobile() {
   const [isToggled, setIsToggled] = useState(false);
   const carouselRef = useRef(null);
-  const aboutContainer = useRef(null);
   const briefingContainer = useRef(null);
   const wireframeContainer = useRef(null);
   const designContainer = useRef(null);
@@ -123,28 +122,6 @@ function Mobile() {
       gsap.killTweensOf(carousel); // Cleanup on unmount
     };
   }, [words]);
-
-  useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      const t1 = gsap.timeline({
-        scrollTrigger: {
-          trigger: ".about-content-mobile",
-          start: "top top +.5vh",
-          scrub: 1,
-          pin: true,
-          pinSpacing: false,
-          toggleActions: "play none none reverse",
-        },
-      });
-      t1.to(new SplitText(".about-description-mobile", { type: "words" }).words, {
-        color: "rgb(222, 176, 252)",
-        duration: 0.1,
-        stagger: 0.1,
-      });
-    }, aboutContainer);
-
-    return () => ctx.revert();
-  }, []);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -525,7 +502,7 @@ function Mobile() {
         </div>
 
         <main>
-          <div id="about" className="about-content-mobile" ref={aboutContainer}>
+          <div id="about" className="about-content-mobile">
             <h3 className="about-atharax-mobile">ABOUT US</h3>
             <div className="about-div-row-mobile"></div>
             <div className="about-description-mobile">
