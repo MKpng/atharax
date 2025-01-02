@@ -12,17 +12,10 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
 import { ScrambleTextPlugin } from "gsap/ScrambleTextPlugin";
+import { SplitText } from "gsap/SplitText";
 
 function Mobile() {
-
-  return (
-    <>
-      <div className="release-box">
-        <p className="release"><span className="span-one">To be released</span> <br/><br/> <span className="span-two">desktop</span> version <br/><strong>already available</strong></p>
-      </div>
-    </>
-  )
-  /*const [isToggled, setIsToggled] = useState(false);
+  const [isToggled, setIsToggled] = useState(false);
   const carouselRef = useRef(null);
   const aboutContainer = useRef(null);
   const briefingContainer = useRef(null);
@@ -33,6 +26,10 @@ function Mobile() {
   const footerContainer = useRef(null);
   const words = "TURNING YOUR IDEAS INTO REALITY ";
 
+  window.onbeforeunload = function () {
+    window.scrollTo(0, 0);
+  };
+
   const handleToggled = () => {
     setIsToggled((prevState) => !prevState); // Toggle the state between true and false
   };
@@ -41,14 +38,15 @@ function Mobile() {
     ScrollTrigger,
     ScrollToPlugin,
     ScrollSmoother,
-    ScrambleTextPlugin
+    ScrambleTextPlugin,
+    SplitText
   );
 
   useEffect(() => {
     let smootherMobile = ScrollSmoother.create({
       smooth: 0.5,
       speed: 0.25,
-      normalizeScroll: true,
+      normalizeScroll: false,
     });
 
     gsap.utils.toArray("a").forEach(function (button, i) {
@@ -80,7 +78,6 @@ function Mobile() {
 
     const tl = gsap.timeline({ defaults: { duration: 2, ease: "none" } });
     tl.to("#title-mobile", {
-      duration: 1.5,
       scrambleText: {
         text: "ATHARAX",
         chars: "13579",
@@ -97,7 +94,7 @@ function Mobile() {
           scrub: 1,
         },
       })
-      .fromTo(".solid-color-layer-mobile", { opacity: 0 }, { opacity: 1 });
+      .fromTo(".solid-color-layer-mobile", { opacity: 0 }, { opacity: 1 }, 0);
 
     return () => {
       tl.kill();
@@ -129,6 +126,28 @@ function Mobile() {
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
+      const t1 = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".about-content-mobile",
+          start: "top top +.5vh",
+          scrub: 1,
+          pin: true,
+          pinSpacing: false,
+          toggleActions: "play none none reverse",
+        },
+      });
+      t1.to(new SplitText(".about-description-mobile", { type: "words" }).words, {
+        color: "rgb(222, 176, 252)",
+        duration: 0.1,
+        stagger: 0.1,
+      });
+    }, aboutContainer);
+
+    return () => ctx.revert();
+  }, []);
+
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
       const imgInit = ".briefing-asset";
       const elementsToFade = ".briefing-h2, .briefing-p";
 
@@ -154,6 +173,12 @@ function Mobile() {
         }
       )
         .fromTo(
+          ".briefing-asset-glass",
+          { visibility: "hidden", opacity: 0 },
+          { visibility: "visible", opacity: 1 },
+          0
+        )
+        .fromTo(
           elementsToFade,
           { visibility: "hidden", opacity: 0 },
           { visibility: "visible", opacity: 1 }
@@ -168,6 +193,7 @@ function Mobile() {
             immediateRender: false, // Ensures it waits for the animation to start
           }
         )
+        .fromTo(".briefing-asset-glass", { opacity: 1 }, { opacity: 0 })
         .fromTo(imgInit, { opacity: 1 }, { opacity: 0 });
     }, briefingContainer);
     return () => ctx.revert();
@@ -200,6 +226,12 @@ function Mobile() {
         }
       )
         .fromTo(
+          ".wireframe-asset-glass",
+          { visibility: "hidden", opacity: 0 },
+          { visibility: "visible", opacity: 1 },
+          0
+        )
+        .fromTo(
           elementsToFade,
           { visibility: "hidden", opacity: 0 },
           { visibility: "visible", opacity: 1 }
@@ -214,6 +246,7 @@ function Mobile() {
             immediateRender: false, // Ensures it waits for the animation to start
           }
         )
+        .fromTo(".wireframe-asset-glass", { opacity: 1 }, { opacity: 0 })
         .fromTo(imgInit, { opacity: 1 }, { opacity: 0 });
     }, wireframeContainer);
     return () => ctx.revert();
@@ -246,6 +279,12 @@ function Mobile() {
         }
       )
         .fromTo(
+          ".design-asset-glass",
+          { visibility: "hidden", opacity: 0 },
+          { visibility: "visible", opacity: 1 },
+          0
+        )
+        .fromTo(
           elementsToFade,
           { visibility: "hidden", opacity: 0 },
           { visibility: "visible", opacity: 1 }
@@ -260,6 +299,7 @@ function Mobile() {
             immediateRender: false, // Ensures it waits for the animation to start
           }
         )
+        .fromTo(".design-asset-glass", { opacity: 1 }, { opacity: 0 })
         .fromTo(imgInit, { opacity: 1 }, { opacity: 0 });
     }, designContainer);
     return () => ctx.revert();
@@ -292,6 +332,12 @@ function Mobile() {
         }
       )
         .fromTo(
+          ".develop-asset-glass",
+          { visibility: "hidden", opacity: 0 },
+          { visibility: "visible", opacity: 1 },
+          0
+        )
+        .fromTo(
           elementsToFade,
           { visibility: "hidden", opacity: 0 },
           { visibility: "visible", opacity: 1 }
@@ -306,6 +352,7 @@ function Mobile() {
             immediateRender: false, // Ensures it waits for the animation to start
           }
         )
+        .fromTo(".develop-asset-glass", { opacity: 1 }, { opacity: 0 })
         .fromTo(imgInit, { opacity: 1 }, { opacity: 0 });
     }, developContainer);
     return () => ctx.revert();
@@ -338,6 +385,12 @@ function Mobile() {
         }
       )
         .fromTo(
+          ".testing-asset-glass",
+          { visibility: "hidden", opacity: 0 },
+          { visibility: "visible", opacity: 1 },
+          0
+        )
+        .fromTo(
           elementsToFade,
           { visibility: "hidden", opacity: 0 },
           { visibility: "visible", opacity: 1 }
@@ -352,6 +405,7 @@ function Mobile() {
             immediateRender: false, // Ensures it waits for the animation to start
           }
         )
+        .fromTo(".testing-asset-glass", { opacity: 1 }, { opacity: 0 })
         .fromTo(imgInit, { opacity: 1 }, { opacity: 0 });
     }, testingContainer);
     return () => ctx.revert();
@@ -373,13 +427,13 @@ function Mobile() {
       tl.fromTo(
         ".footer-sticky-mobile",
         { background: "#000" },
-        { background: "#E6E6FA", duration: 3, ease: "power2.inOut" } // Use easing
+        { background: "#f4f3f2", duration: 3, ease: "power2.inOut" } // Use easing
       )
         .fromTo(
           ".footer-p-mobile",
           { background: "#000", scale: 1 },
           {
-            background: "#E6E6FA",
+            background: "#f4f3f2",
             scale: 20,
             duration: 3,
             ease: "power2.inOut",
@@ -437,7 +491,7 @@ function Mobile() {
   return (
     <div id="smooth-wrapper">
       <div className="nav">
-        <a href="#home">
+        <a href="#home" onClick={() => setIsToggled(false)}>
           <img src={AtharaxLogo} alt="Logo"></img>
         </a>
         <button
@@ -463,25 +517,38 @@ function Mobile() {
           </a>
         </div>
       </div>
+      <div id="smooth-content">
+        <div className="home-screen" id="home">
+          <div className="solid-color-layer-mobile"></div>
+          <div className="asian-cyb-mobile"></div>
+          <div className="title-mobile" id="title-mobile"></div>
+        </div>
 
-      <div className="home-screen" id="home">
-        <div className="solid-color-layer-mobile"></div>
-        <div className="asian-cyb-mobile"></div>
-        <div className="title-mobile" id="title-mobile"></div>
-      </div>
-
-      <main>
-        <div id="about" className="about-content-mobile" ref={aboutContainer}>
-          <div className="glassmorphism">
+        <main>
+          <div id="about" className="about-content-mobile" ref={aboutContainer}>
             <h3 className="about-atharax-mobile">ABOUT US</h3>
             <div className="about-div-row-mobile"></div>
+            <div className="about-description-mobile">
+              <p>
+                We are a company
+                dedicated to
+                transforming
+                imagination into reality.
+                Anything that
+                relates to
+                design and digital,
+                from bold,
+                unconventional ideas
+                to sleek,
+                minimalist visions.
+              </p>
+            </div>
             <div className="carousel-mobile">
               <div className="carousel-content-mobile" ref={carouselRef}></div>
             </div>
           </div>
-        </div>
-      </main>
-      <div id="smooth-content">
+        </main>
+
         <div className="workflow-mobile" id="workflow">
           <div className="briefing" id="briefing" ref={briefingContainer}>
             <div className="sticky-one-mobile">
@@ -591,7 +658,7 @@ function Mobile() {
         </div>
       </div>
     </div>
-  );*/
+  );
 }
 
 export default Mobile;

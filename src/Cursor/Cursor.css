@@ -1,5 +1,5 @@
 .cursor {
-  width: 3vw;
+  width: clamp(3vw, 10vw, 5vw);
   aspect-ratio: 1;
   background: #ffffff;
   border-radius: 50%;

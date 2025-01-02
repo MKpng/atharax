@@ -5,9 +5,11 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
 import { ScrambleTextPlugin } from "gsap/ScrambleTextPlugin";
+import { SplitText } from "gsap/SplitText";
 
 import CursorFollower from "../Cursor/Cursor";
 import AtharaxLogo from "../images/atharax-final-logo.svg";
+import AsianCyborg from "../images/asian-cyborg.webp";
 
 import "./Home.css";
 
@@ -21,12 +23,13 @@ function Home() {
   const testContainer = useRef(null);
   const footerContainer = useRef(null);
   const carouselRef = useRef(null);
+  const introRef = useRef(null);
   const words = "TURNING YOUR IDEAS INTO REALITY ";
 
   window.onbeforeunload = function () {
     window.scrollTo(0, 0);
   };
-  
+
   useEffect(() => {
     const updateTime = () => {
       const now = new Date();
@@ -66,8 +69,68 @@ function Home() {
     ScrollTrigger,
     ScrollToPlugin,
     ScrollSmoother,
-    ScrambleTextPlugin
+    ScrambleTextPlugin,
+    SplitText
   );
+
+  useLayoutEffect(() => {
+    let ctx = gsap.context(() => {
+      const t1 = gsap.timeline();
+      t1.to(
+        ".preloader1, .preloader2, .preloader3, .preloader4, .preloader5, .preloader6, .preloader7, .preloader8, .preloader9, .preloader10",
+        {
+          yPercent: -100,
+          delay: 1,
+          stagger: 0.1,
+        }
+      );
+
+      t1.add(
+        gsap
+          .timeline({
+            defaults: { duration: 2, ease: "none" },
+          })
+          .to(
+            "#title",
+            {
+              scrambleText: {
+                text: "ATHARAX",
+                chars: "13579",
+                revealDelay: 0.3,
+                tweenLength: true,
+              },
+            },
+            "-=.3"
+          )
+        // Smooth height transition
+      )
+        .fromTo(
+          ".header-logo",
+          { left: "-20%" },
+          { left: "5%", duration: 4, ease: "in-out" },
+          0
+        )
+        .fromTo(
+          ".time-div",
+          { opacity: 0, top: "-10%" },
+          { opacity: 1, top: "85%", duration: 4, ease: "in-out" },
+          0
+        );
+
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: ".header",
+            start: "top top",
+            scrub: 1,
+          },
+        })
+        .fromTo(".header", { scale: 1 }, { scale: 1.55 })
+        .fromTo(".solid-color-layer", { opacity: 0 }, { opacity: 1 }, 0);
+    }, introRef);
+
+    return () => ctx.revert();
+  }, []);
 
   useEffect(() => {
     let smoother = ScrollSmoother.create({
@@ -105,32 +168,29 @@ function Home() {
       }
     };
 
-    const mainTimeline = gsap.timeline({
-      defaults: { duration: 2, ease: "none" },
-    });
-    mainTimeline.to("#title", {
-      scrambleText: {
-        text: "ATHARAX",
-        chars: "13579",
-        revealDelay: 0.3,
-        tweenLength: true,
-      },
-    });
+    return () => {};
+  }, []);
 
-    gsap
-      .timeline({
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      const t1 = gsap.timeline({
         scrollTrigger: {
-          trigger: ".header",
+          trigger: ".about-content",
           start: "top top",
           scrub: 1,
+          pin: true,
+          pinSpacing: false,
+          toggleActions: "play none none reverse",
         },
-      })
-      .fromTo(".header", { scale: 1 }, { scale: 1.55 })
-      .fromTo(".solid-color-layer", { opacity: 0 }, { opacity: 1 }, 0);
+      });
+      t1.to(new SplitText(".about-description", { type: "words" }).words, {
+        color: "rgb(222, 176, 252)",
+        duration: 0.1,
+        stagger: 0.01,
+      });
+    }, aboutContainer);
 
-    return () => {
-      mainTimeline.kill();
-    };
+    return () => ctx.revert();
   }, []);
 
   useLayoutEffect(() => {
@@ -154,15 +214,15 @@ function Home() {
       tl.fromTo(
         imgInit,
         { scale: 1, xPercent: -50, yPercent: -50 },
-        { scale: 0.75, xPercent: -30, yPercent: -60 }
+        { scale: 0.75, xPercent: -30, yPercent: -60, duration: 1.25 }
       )
         .fromTo(
           elementsToFade,
           { visibility: "hidden", opacity: 0 },
-          { visibility: "visible", opacity: 1 }
+          { visibility: "visible", opacity: 1, duration: 1.25 }
         )
         .addPause(1.5)
-        .fromTo(elementsToFade, { opacity: 1 }, { opacity: 0 })
+        .fromTo(elementsToFade, { opacity: 1 }, { opacity: 0, duration: 1.25 })
         .fromTo(
           imgInit,
           { scale: 0.75, xPercent: -30, yPercent: -60 },
@@ -170,6 +230,7 @@ function Home() {
             scale: 1,
             xPercent: -50,
             yPercent: -50,
+            duration: 1.25,
             immediateRender: false, // Ensures it waits for the animation to start
           }
         )
@@ -201,15 +262,15 @@ function Home() {
       tl.fromTo(
         imgInitTwo,
         { scale: 1, xPercent: -50, yPercent: -50 },
-        { scale: 0.75, xPercent: -82.25, yPercent: -60 }
+        { scale: 0.75, xPercent: -82.25, yPercent: -60, duration: 1.25 }
       )
         .fromTo(
           elementsToFade,
           { visibility: "hidden", opacity: 0 },
-          { visibility: "visible", opacity: 1 }
+          { visibility: "visible", opacity: 1, duration: 1.25 }
         )
         .addPause(1.5)
-        .fromTo(elementsToFade, { opacity: 1 }, { opacity: 0 })
+        .fromTo(elementsToFade, { opacity: 1 }, { opacity: 0, duration: 1.25 })
         .fromTo(
           imgInitTwo,
           { scale: 0.75, xPercent: -82.25, yPercent: -60 },
@@ -217,6 +278,7 @@ function Home() {
             scale: 1,
             xPercent: -50,
             yPercent: -50,
+            duration: 1.25,
             immediateRender: false,
           }
         )
@@ -248,15 +310,15 @@ function Home() {
       tl.fromTo(
         imgInitThree,
         { scale: 1, xPercent: -50, yPercent: -50 },
-        { scale: 0.75, xPercent: 84, yPercent: -60 }
+        { scale: 0.75, xPercent: 84, yPercent: -60, duration: 1.25 }
       )
         .fromTo(
           elementsToFade,
           { visibility: "hidden", opacity: 0 },
-          { visibility: "visible", opacity: 1 }
+          { visibility: "visible", opacity: 1, duration: 1.25 }
         )
         .addPause(1.5)
-        .fromTo(elementsToFade, { opacity: 1 }, { opacity: 0 })
+        .fromTo(elementsToFade, { opacity: 1 }, { opacity: 0, duration: 1.25 })
         .fromTo(
           imgInitThree,
           { scale: 0.75, xPercent: 84, yPercent: -60 },
@@ -264,6 +326,7 @@ function Home() {
             scale: 1,
             xPercent: -50,
             yPercent: -50,
+            duration: 1.25,
             immediateRender: false, // Ensures it waits for the animation to start
           }
         )
@@ -295,15 +358,15 @@ function Home() {
       tl.fromTo(
         imgInitFour,
         { scale: 1, xPercent: -50, yPercent: -50 },
-        { scale: 0.75, xPercent: -82.25, yPercent: -24.25 }
+        { scale: 0.75, xPercent: -82.25, yPercent: -24.25, duration: 1.25 }
       )
         .fromTo(
           elementsToFade,
           { visibility: "hidden", opacity: 0 },
-          { visibility: "visible", opacity: 1 }
+          { visibility: "visible", opacity: 1, duration: 1.25 }
         )
         .addPause(1.5)
-        .fromTo(elementsToFade, { opacity: 1 }, { opacity: 0 })
+        .fromTo(elementsToFade, { opacity: 1 }, { opacity: 0, duration: 1.25 })
         .fromTo(
           imgInitFour,
           { scale: 0.75, xPercent: -82.25, yPercent: -24.25 },
@@ -311,6 +374,7 @@ function Home() {
             scale: 1,
             xPercent: -50,
             yPercent: -50,
+            duration: 1.25,
             immediateRender: false, // Ensures it waits for the animation to start
           }
         )
@@ -342,15 +406,15 @@ function Home() {
       tl.fromTo(
         imgInitFive,
         { scale: 1, xPercent: -50, yPercent: -50 },
-        { scale: 0.75, xPercent: -30, yPercent: -24.25 }
+        { scale: 0.75, xPercent: -30, yPercent: -24.25, duration: 1.25 }
       )
         .fromTo(
           elementsToFade,
           { visibility: "hidden", opacity: 0 },
-          { visibility: "visible", opacity: 1 }
+          { visibility: "visible", opacity: 1, duration: 1.25 }
         )
         .addPause(1.5)
-        .fromTo(elementsToFade, { opacity: 1 }, { opacity: 0 })
+        .fromTo(elementsToFade, { opacity: 1 }, { opacity: 0, duration: 1.25 })
         .fromTo(
           imgInitFive,
           { scale: 0.75, xPercent: -30, yPercent: -24.25 },
@@ -358,6 +422,7 @@ function Home() {
             scale: 1,
             xPercent: -50,
             yPercent: -50,
+            duration: 1.25,
             immediateRender: false, // Ensures it waits for the animation to start
           }
         )
@@ -428,56 +493,61 @@ function Home() {
     });
   }, []);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const elements = document.querySelectorAll(".glitch");
-      elements.forEach((element) => {
-        const rect = element.getBoundingClientRect();
-        if (
-          rect.top >= 0 &&
-          rect.bottom <=
-            (window.innerHeight || document.documentElement.clientHeight)
-        ) {
-          element.classList.add("in-view");
-        } else {
-          element.classList.remove("in-view");
-        }
-      });
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    window.addEventListener("resize", handleScroll);
-    handleScroll(); // Initial check
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleScroll);
-    };
-  }, []);
-
   return (
     <>
-      <div className="App" id="smooth-wrapper">
+      <div className="App" id="smooth-wrapper" ref={introRef}>
         <div id="smooth-content">
-          
-          <header className="header" id="home">
-            <div className="solid-color-layer"></div>
-            <div className="asian-cyb"></div>
-            <p className="title" id="title"></p>
-            <div className="header-logo">
-              <img src={AtharaxLogo} alt="Our company logo"></img>
-            </div>
-            <div className="time-div">
-              <h3 className="glitch" data-text={currentTime}>
-                {currentTime}
-              </h3>
-            </div>
-            <div id="scroll-message">Scroll Down</div>
-          </header>
+          <div className="preloader-container">
+            <div className="preloader1"></div>
+            <div className="preloader2"></div>
+            <div className="preloader3"></div>
+            <div className="preloader4"></div>
+            <div className="preloader5"></div>
+            <div className="preloader6"></div>
+            <div className="preloader7"></div>
+            <div className="preloader8"></div>
+            <div className="preloader9"></div>
+            <div className="preloader10"></div>
+
+            <header className="header" id="home">
+              <div className="solid-color-layer"></div>
+              <div className="asian-cyb">
+                <img src={AsianCyborg} alt="Asian cyborg"></img>
+              </div>
+              <p className="title" id="title"></p>
+              <div className="header-logo">
+                <img src={AtharaxLogo} alt="Our company logo"></img>
+              </div>
+              <div className="time-div">
+                <h3 className="glitch">{currentTime}</h3>
+              </div>
+              <div id="scroll-message">Scroll</div>
+            </header>
+          </div>
 
           <main>
             <div id="about" className="about-content" ref={aboutContainer}>
-              <h3 className="about-atharax">ABOUT US</h3>
+              <div className="about-atharax">
+                <h3>ABOUT US</h3>
+              </div>
+              <div className="jp-div">
+                <p>ウェブデザインの未来は、無限の創造力が広がる次元の扉だ。</p>
+              </div>
+              <div className="about-description" id="about-description">
+                <p>
+                  We are a company
+                  <br /> dedicated to
+                  <br /> transforming
+                  <br /> imagination into reality.
+                  <br /> Anything that
+                  <br /> relates to
+                  <br /> design and digital,
+                  <br /> from bold,
+                  <br /> unconventional ideas
+                  <br /> to sleek,
+                  <br /> minimalist visions.
+                </p>
+              </div>
               <div className="about-div-row"></div>
               <div className="carousel">
                 <div className="carousel-content" ref={carouselRef}></div>
@@ -522,14 +592,13 @@ function Home() {
                   </div>
                   <div className="briefing-temp">
                     <p>
-                      <strong>SCROLL <br />
-                      DOWN</strong>
+                      <strong>SCROLL</strong>
                     </p>
                   </div>
                   <div className="img-asset-one"></div>
                   <div className="briefing-extra">
                     <div className="briefing-home">
-                      <h3 data-text={currentTime}>{currentTime}</h3>
+                      <h3>{currentTime}</h3>
                     </div>
                     <div className="briefing-next">
                       <img src={AtharaxLogo} alt="Our company logo"></img>
@@ -574,13 +643,14 @@ function Home() {
                     </p>
                   </div>
                   <div className="wire-temp">
-                    <p><strong>SCROLL <br />
-                    DOWN</strong></p>
+                    <p>
+                      <strong>SCROLL</strong>
+                    </p>
                   </div>
                   <div className="img-asset-two"></div>
                   <div className="wire-extra">
                     <div className="wire-home">
-                      <h3 data-text={currentTime}>{currentTime}</h3>
+                      <h3>{currentTime}</h3>
                     </div>
                     <div className="wire-next">
                       <img src={AtharaxLogo} alt="Our company logo"></img>
@@ -625,13 +695,14 @@ function Home() {
                     </p>
                   </div>
                   <div className="design-temp">
-                    <p><strong>SCROLL <br />
-                    DOWN</strong></p>
+                    <p>
+                      <strong>SCROLL</strong>
+                    </p>
                   </div>
                   <div className="img-asset-three"></div>
                   <div className="design-extra">
                     <div className="design-home">
-                      <h3 data-text={currentTime}>{currentTime}</h3>
+                      <h3>{currentTime}</h3>
                     </div>
                     <div className="design-next">
                       <img src={AtharaxLogo} alt="Our company logo"></img>
@@ -676,13 +747,14 @@ function Home() {
                     </p>
                   </div>
                   <div className="develop-temp">
-                    <p><strong>SCROLL <br />
-                    DOWN</strong></p>
+                    <p>
+                      <strong>SCROLL</strong>
+                    </p>
                   </div>
                   <div className="img-asset-four"></div>
                   <div className="develop-extra">
                     <div className="develop-home">
-                      <h3 data-text={currentTime}>{currentTime}</h3>
+                      <h3>{currentTime}</h3>
                     </div>
                     <div className="develop-next">
                       <img src={AtharaxLogo} alt="Our company logo"></img>
@@ -727,13 +799,14 @@ function Home() {
                     </p>
                   </div>
                   <div className="test-temp">
-                    <p><strong>SCROLL <br />
-                    DOWN</strong></p>
+                    <p>
+                      <strong>SCROLL</strong>
+                    </p>
                   </div>
                   <div className="img-asset-five"></div>
                   <div className="test-extra">
                     <div className="test-home">
-                      <h3 data-text={currentTime}>{currentTime}</h3>
+                      <h3>{currentTime}</h3>
                     </div>
                     <div className="test-next">
                       <img src={AtharaxLogo} alt="Our company logo"></img>

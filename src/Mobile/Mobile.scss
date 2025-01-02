@@ -12,41 +12,16 @@
   font-style: normal;
 }
 
-/*@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 768px) {
   #smooth-content {
-    height: 990dvh;
+    height: 1090dvh;
   }
-}*/
+}
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-.release-box {
-  width: 100vw;
-  height: 100dvh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-image: url("../images/img-asset-one.webp");
-  background-size: cover;
-  text-align: center;
-}
-
-.release {
-  font-family: "Gendy";
-  font-size: 8vw;
-  color: #f4f3f2;
-}
-
-.span-one {
-  font-size: 12vw;
-}
-
-.span-two {
-  color: #B589D6;
 }
 
 body,
@@ -56,7 +31,7 @@ html {
   font-family: Arial, sans-serif;
 }
 
-/*.nav {
+.nav {
   position: fixed;
   width: 80vw;
   left: 10vw;
@@ -73,7 +48,7 @@ html {
     align-items: center; // Vertically center the logo image within the link
 
     img {
-      width: 3rem; // Adjust the size of the spherical image
+      width: clamp(4rem, 10vw, 6rem); // Adjust the size of the spherical image
       aspect-ratio: 1/1;
     }
   }
@@ -86,9 +61,9 @@ html {
     border: none;
 
     img {
-      width: 2.25rem; // Adjust the size of the menu icon
+      width: clamp(3rem, 10vw, 6rem);// Adjust the size of the menu icon
       aspect-ratio: 1/1;
-      mix-blend-mode: difference;
+      color: #b589d6;
     }
   }
 }
@@ -171,27 +146,20 @@ html {
 
 /*ABOUT --- ABOUT --- ABOUT --- ABOUT --- ABOUT --- ABOUT --- ABOUT --- ABOUT --- ABOUT --- ABOUT*/
 
-/*.about-content-mobile {
+.about-content-mobile {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100vw;
   height: 100dvh;
   background-color: #000;
   z-index: 10;
-
-  .glassmorphism {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(30px);
-    height: 100dvh;
-  }
+  margin-bottom: 100vh;
 
   .about-atharax-mobile {
     position: relative;
-    top: 20%;
+    top: 15%;
     width: 80%;
     height: 10%;
     color: #e6e6fa;
@@ -205,15 +173,28 @@ html {
 
   .about-div-row-mobile {
     position: relative;
-    top: 25%;
+    top: 12.5%;
     display: flex;
     align-items: center;
     width: 100%;
-    height: 70%;
-    background-image: url("../images/EYES_ATHARAX.webp");
+    height: 40%;
+    background-image: url("../images/EYES_ATHARAX 1.webp");
     background-repeat: no-repeat;
     background-size: contain;
     background-position: 50% 10%;
+  }
+
+  .about-description-mobile {
+    position: relative;
+    top: 0;
+    width: 70%;
+    height: 30vh;
+    color: #666666;
+    font-size: 7vw;
+    font-family: "Gendy", sans-serif;
+    text-align: center;
+    line-height: 1;
+    letter-spacing: 0.1vw;
   }
 
   .carousel-mobile {
@@ -221,20 +202,20 @@ html {
     overflow: hidden;
     white-space: nowrap;
     position: absolute;
-    top: 70%;
+    top: clamp(85%, 90vw, 100%);
   }
 
   .carousel-content-mobile {
     display: inline-block;
     font-family: "Robmax Stencil", sans-serif;
-    font-size: 20vw;
+    font-size: clamp(3rem, 20vw, 6rem);
     color: #e6e6fa;
   }
 }
 
 /* WORKFLOW --- WORKFLOW --- WORKFLOW --- WORKFLOW --- WORKFLOW --- WORKFLOW --- WORKFLOW --- WORKFLOW --- WORKFLOW*/
 
-/*.workflow-mobile {
+.workflow-mobile {
   position: relative;
   top: -1dvh;
   width: 100vw;
@@ -266,7 +247,7 @@ html {
   left: 7.5vw;
   height: 75dvh;
   width: 85vw;
-  border-radius: 5dvh;
+  border-radius: 4dvh;
   margin-bottom: 14dvh;
 }
 
@@ -278,118 +259,38 @@ html {
   opacity: 0;
 }
 
-.briefing-asset {
-  background-image: url("../images/img-init-one.webp");
-  background-position: 30%, 70%;
-
-  .briefing-asset-glass {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    border-radius: 5dvh;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    transition: backdrop-filter 0.5s ease-out,
-      -webkit-backdrop-filter 0.5s ease-out;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-    text-align: center;
-  }
+@mixin glass-effect {
+  position: relative;
+  width: 101%;
+  height: 100%;
+  border-radius: 4dvh;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
 }
 
-.wireframe-asset {
-  background-image: url("../images/img-init-two.webp");
-  background-position: center;
+$assets: (
+  "briefing": "../images/img-init-one.webp",
+  "wireframe": "../images/img-init-two.webp",
+  "design": "../images/img-init-three.webp",
+  "develop": "../images/img-init-four.webp",
+  "testing": "../images/img-init-five.webp",
+);
 
-  .wireframe-asset-glass {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    border-radius: 5dvh;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    transition: backdrop-filter 0.5s ease-out,
-      -webkit-backdrop-filter 0.5s ease-out;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-    text-align: center;
-  }
-}
+@each $name, $image in $assets {
+  .#{$name}-asset {
+    background-image: url($image);
+    background-position: center;
 
-.design-asset {
-  background-image: url("../images/img-init-three.webp");
-  background-position: center;
-
-  .design-asset-glass {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    border-radius: 5dvh;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    transition: backdrop-filter 0.5s ease-out,
-      -webkit-backdrop-filter 0.5s ease-out;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-    text-align: center;
-  }
-}
-
-.develop-asset {
-  background-image: url("../images/img-init-four.webp");
-  background-position: center;
-
-  .develop-asset-glass {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    border-radius: 5dvh;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    transition: backdrop-filter 0.5s ease-out,
-      -webkit-backdrop-filter 0.5s ease-out;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-    text-align: center;
-  }
-}
-
-.testing-asset {
-  background-image: url("../images/img-init-five.webp");
-  background-position: center;
-
-  .testing-asset-glass {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    border-radius: 5dvh;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    transition: backdrop-filter 0.5s ease-out,
-      -webkit-backdrop-filter 0.5s ease-out;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-    text-align: center;
+    .#{$name}-asset-glass {
+      @include glass-effect;
+    }
   }
 }
 
@@ -400,11 +301,12 @@ html {
 .testing-h2 {
   font-size: 10vw;
   font-family: "Robmax Stencil", sans-serif;
-  margin-top: 2rem;
+  margin-top: clamp(3rem, 10vw, 5rem);
   margin-bottom: 0.5rem;
   line-height: 1.2;
   position: relative;
   text-align: center;
+  color: #f4f3f2;
 }
 
 .briefing-p,
@@ -412,13 +314,14 @@ html {
 .design-p,
 .develop-p,
 .testing-p {
-  font-size: 8vw;
+  font-size: clamp(2rem, 6vw, 3rem);
   font-family: "Gendy", sans-serif;
+  color: #f4f3f2;
   aspect-ratio: 2/2.69;
   line-height: 1;
   letter-spacing: -0.05vw;
   position: relative;
-  margin-top: 4rem;
+  margin-top: clamp(5rem, 10vw, 6rem);
   display: inline-block;
   max-width: 85%;
   word-break: break-word;
@@ -434,7 +337,7 @@ html {
 
 /*FOOTER --- FOOTER --- FOOTER --- FOOTER --- FOOTER --- FOOTER --- FOOTER --- FOOTER --- FOOTER --- FOOTER*/
 
-/*.footer {
+.footer {
   position: relative;
   width: 100vw;
   height: 150dvh;
@@ -456,8 +359,8 @@ html {
     width: 100vw;
     font-size: clamp(11vw, 12vw, 13vw);
     font-family: "Gendy", sans-serif;
-    color: #e6e6fa;
-    visibility: 1;
+    color: #f4f3f2;
+    visibility: visible;
     opacity: 1;
   }
 
@@ -486,7 +389,7 @@ html {
     justify-content: space-between;
     align-items: center;
     width: 70vw;
-    top: 105%;
+    top: 102.5%;
     pointer-events: all;
 
     a {
@@ -499,15 +402,13 @@ html {
       }
     }
   }
+
+  &-sticky-mobile,
+  &-p-mobile,
+  .atharax-big-mobile {
+    image-rendering: auto;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+  }
 }
-
-.footer-sticky-mobile,
-.footer-p-mobile,
-.atharax-big-mobile {
-  image-rendering: auto;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  transform: translateZ(0);
-}*/
-
-

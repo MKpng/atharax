@@ -15,7 +15,7 @@ const ResponsiveHome = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  return windowWidth < 768 ? <Mobile /> : <Home />;
+  return windowWidth <= 768 ? <Mobile /> : <Home />;
 };
 
 function App() {
