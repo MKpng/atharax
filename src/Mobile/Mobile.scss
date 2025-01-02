@@ -14,7 +14,7 @@
 
 @media only screen and (max-width: 768px) {
   #smooth-content {
-    height: 990dvh;
+    height: 990vh;
   }
 }
 
@@ -35,7 +35,7 @@ html {
   position: fixed;
   width: 80vw;
   left: 10vw;
-  height: 15dvh; // Adjust height as needed
+  height: 15vh; // Adjust height as needed
   display: flex;
   justify-content: space-between; // Ensures space between logo and menu icon
   align-items: center; // Vertically center items
@@ -69,7 +69,7 @@ html {
 }
 
 .side-menu {
-  height: 100dvh;
+  height: 100vh;
   width: 100vw;
   position: fixed;
   top: 0; // Ensure it's at the top of the viewport
@@ -80,7 +80,7 @@ html {
   transition: all 0.3s ease-in-out;
 
   .side-menu-list {
-    height: 100dvh;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -91,7 +91,7 @@ html {
       font-size: 13vw;
       font-family: "Robmax Stencil", sans-serif;
       font-weight: 700;
-      margin: 1dvh 0;
+      margin: 1vh 0;
       color: #000;
     }
   }
@@ -103,7 +103,7 @@ html {
 
 .home-screen {
   position: relative;
-  height: 100dvh;
+  height: 100vh;
   width: 100vw;
   background-color: #f4f3f2;
 
@@ -111,7 +111,7 @@ html {
     position: absolute;
     top: 0;
     width: 100vw;
-    height: 100dvh;
+    height: 100vh;
     z-index: 5;
     background-color: #000;
     opacity: 0;
@@ -120,7 +120,7 @@ html {
   .asian-cyb-mobile {
     position: relative;
     top: 20%;
-    height: 100dvh;
+    height: 100vh;
     width: 100vw;
     background-image: url("../images/asian-cyborg.webp");
     background-size: cover;
@@ -134,7 +134,7 @@ html {
   position: absolute;
   top: -25%;
   width: 100vw;
-  height: 100dvh;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -152,7 +152,7 @@ html {
   flex-direction: column;
   align-items: center;
   width: 100vw;
-  height: 100dvh;
+  height: 100vh;
   background-color: #000;
   z-index: 10;
 
@@ -216,9 +216,9 @@ html {
 
 .workflow-mobile {
   position: relative;
-  top: -1dvh;
+  top: -1vh;
   width: 100vw;
-  height: 575dvh;
+  height: 575vh;
   background: #000000;
   z-index: 5;
 
@@ -229,7 +229,7 @@ html {
   .sticky-five-mobile {
     position: relative;
     width: 100vw;
-    height: 100dvh;
+    height: 100vh;
     background: transparent;
   }
 }
@@ -242,12 +242,12 @@ html {
   position: relative;
   background-size: cover;
   background-repeat: no-repeat;
-  top: 15dvh;
+  top: 15vh;
   left: 7.5vw;
-  height: 75dvh;
+  height: 75vh;
   width: 85vw;
-  border-radius: 4dvh;
-  margin-bottom: 14dvh;
+  border-radius: 4vh;
+  margin-bottom: 14vh;
 }
 
 .wireframe-asset,
@@ -262,7 +262,7 @@ html {
   position: relative;
   width: 101%;
   height: 100%;
-  border-radius: 4dvh;
+  border-radius: 4vh;
   background: rgba(0, 0, 0, 0.6);
   display: flex;
   flex-direction: column;
@@ -339,7 +339,7 @@ $assets: (
 .footer {
   position: relative;
   width: 100vw;
-  height: 150dvh;
+  height: 150vh;
   transition: background 0.5s ease-in-out;
   text-align: center;
 
@@ -349,7 +349,7 @@ $assets: (
     justify-content: center;
     align-items: center;
     width: 100vw;
-    height: 100dvh;
+    height: 100vh;
     background: transparent;
   }
 
