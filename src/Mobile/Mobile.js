@@ -43,9 +43,9 @@ function Mobile() {
 
   useEffect(() => {
     let smootherMobile = ScrollSmoother.create({
-      smooth: 0.5,
-      speed: 0.25,
-      normalizeScroll: false,
+      smooth: 1,
+      normalizeScroll: true,
+      ignoreMobileResize: true,
     });
 
     gsap.utils.toArray("a").forEach(function (button, i) {
@@ -507,17 +507,9 @@ function Mobile() {
             <div className="about-div-row-mobile"></div>
             <div className="about-description-mobile">
               <p>
-                We are a company
-                dedicated to
-                transforming
-                imagination into reality.
-                Anything that
-                relates to
-                design and digital,
-                from bold,
-                unconventional ideas
-                to sleek,
-                minimalist visions.
+                We are a company dedicated to transforming imagination into
+                reality. Anything that relates to design and digital, from bold,
+                unconventional ideas to sleek, minimalist visions.
               </p>
             </div>
             <div className="carousel-mobile">
