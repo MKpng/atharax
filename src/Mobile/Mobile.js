@@ -157,7 +157,7 @@ function Mobile() {
 
   useEffect(() => {
     let smootherMobile = ScrollSmoother.create({
-      smooth: 0.5,
+      smooth: 1,
       effects: true,
       smoothTouch: 0.1,
       speed: 0.5,
@@ -514,7 +514,7 @@ function Mobile() {
           { background: "#000", scale: 1 },
           {
             background: "#f4f3f2",
-            scale: 20,
+            scale: 10,
             duration: 3,
             ease: "power2.inOut",
           },
