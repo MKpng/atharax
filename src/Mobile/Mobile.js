@@ -1,6 +1,6 @@
 import "./Mobile.scss";
 
-import AtharaxLogo from "../images/atharax-final-logo.svg";
+import AtharaxLogo from "../images/Mobile/logo512.png.webp";
 import Instagram from "../images/instagram.svg";
 import Gmail from "../images/google.svg";
 import Linkedin from "../images/linkedin.svg";
@@ -68,6 +68,7 @@ function Mobile() {
           onComplete: () => {
             setIsLoading(false);
           },
+          defaults: { duration: 2, ease: "none" },
         });
 
         t1.to(".preloader1", { yPercent: -100, delay: 1, duration: 1.5 }, 0)
@@ -77,23 +78,23 @@ function Mobile() {
           .to(".preloader5", { yPercent: -100, delay: 1, duration: 1.5 }, 0)
           .to(
             ".preloader1-down",
-            { yPercent: 100, delay: 1.2, duration: 1.5 },
+            { yPercent: 101, delay: 1.2, duration: 1.5 },
             0
           )
           .to(
             ".preloader2-down",
-            { yPercent: 100, delay: 0.7, duration: 1.5 },
+            { yPercent: 101, delay: 0.7, duration: 1.5 },
             0
           )
-          .to(".preloader3-down", { yPercent: 100, delay: 1, duration: 1.5 }, 0)
+          .to(".preloader3-down", { yPercent: 101, delay: 1, duration: 1.5 }, 0)
           .to(
             ".preloader4-down",
-            { yPercent: 100, delay: 0.6, duration: 1.5 },
+            { yPercent: 101, delay: 0.6, duration: 1.5 },
             0
           )
           .to(
             ".preloader5-down",
-            { yPercent: 100, delay: 0.8, duration: 1.5 },
+            { yPercent: 101, delay: 0.8, duration: 1.5 },
             0
           )
           .fromTo("#smooth-content", { height: "100%" }, { height: "1090vh" }, 0)
@@ -189,17 +190,6 @@ function Mobile() {
         }
       }
     };
-
-    gsap
-      .timeline({
-        scrollTrigger: {
-          trigger: ".home-screen",
-          start: "top top",
-          scrub: 1,
-        },
-      })
-      .fromTo(".solid-color-layer-mobile", { opacity: 0 }, { opacity: 1 }, 0);
-
     return () => {};
   }, []);
 
@@ -514,7 +504,7 @@ function Mobile() {
           { background: "#000", scale: 1 },
           {
             background: "#f4f3f2",
-            scale: 10,
+            scale: 20,
             duration: 3,
             ease: "power2.inOut",
           },

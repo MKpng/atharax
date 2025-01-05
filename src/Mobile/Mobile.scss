@@ -13,7 +13,7 @@
 }
 
 #smooth-content {
-    height: 100%;
+  height: 100%;
 }
 
 * {
@@ -47,7 +47,11 @@ html {
     align-items: center; // Vertically center the logo image within the link
 
     img {
-      width: clamp(3.5rem, 10vw, 5.5rem); // Adjust the size of the spherical image
+      width: clamp(
+        3.5rem,
+        10vw,
+        5.5rem
+      ); // Adjust the size of the spherical image
       aspect-ratio: 1/1;
     }
   }
@@ -60,7 +64,7 @@ html {
     border: none;
 
     img {
-      width: clamp(3rem, 10vw, 6rem);// Adjust the size of the menu icon
+      width: clamp(3rem, 10vw, 6rem); // Adjust the size of the menu icon
       aspect-ratio: 1/1;
       color: #b589d6;
     }
@@ -278,9 +282,9 @@ html {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: -1vh;
+  margin-top: -0.1vh;
   width: 100vw;
-  height: 101vh;
+  height: 100.1vh;
   background-color: #000;
   z-index: 1000;
   margin-bottom: 100vh;
@@ -296,7 +300,8 @@ html {
     font-family: "Robmax Stencil", sans-serif;
     font-weight: 400;
     text-align: center;
-    text-shadow: 30vw 0px 0.7vw hsl(273, 100%, 67%), -30vw 0px 0.7vw hsl(273, 100%, 67%);
+    text-shadow: 30vw 0px 0.7vw hsl(273, 100%, 67%),
+      -30vw 0px 0.7vw hsl(273, 100%, 67%);
   }
 
   .about-description-mobile {
@@ -312,7 +317,7 @@ html {
     letter-spacing: 0.1vw;
   }
 
-  .carousel-mobile {   
+  .carousel-mobile {
     width: 100%;
     overflow: hidden;
     white-space: nowrap;
@@ -521,10 +526,13 @@ $assets: (
   &-sticky-mobile,
   &-p-mobile,
   .atharax-big-mobile {
+    font-smoothing: antialiased;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     image-rendering: auto;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    transform: translateZ(0), scale(1);
+    transform: translateZ(0);
     will-change: transform;
   }
 }
