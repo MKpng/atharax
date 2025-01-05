@@ -318,6 +318,7 @@ html {
   }
 
   .carousel-mobile {
+    position: relative;
     width: 100%;
     overflow: hidden;
     white-space: nowrap;
@@ -509,30 +510,17 @@ $assets: (
     justify-content: space-between;
     align-items: center;
     width: 70vw;
-    top: 102.5%;
+    top: 87.5%;
     pointer-events: all;
+    opacity: 0;
 
     a {
       text-decoration: none;
 
       img {
         width: 2.25rem;
-        mix-blend-mode: difference;
         aspect-ratio: 1;
       }
     }
-  }
-
-  &-sticky-mobile,
-  &-p-mobile,
-  .atharax-big-mobile {
-    font-smoothing: antialiased;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    image-rendering: auto;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    transform: translateZ(0);
-    will-change: transform;
   }
 }

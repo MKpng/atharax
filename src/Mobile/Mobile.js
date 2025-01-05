@@ -97,7 +97,7 @@ function Mobile() {
             { yPercent: 101, delay: 0.8, duration: 1.5 },
             0
           )
-          .fromTo("#smooth-content", { height: "100%" }, { height: "1090vh" }, 0)
+          .fromTo("#smooth-content", { height: "100%" }, { height: "1070vh" }, 0)
           .fromTo(".nav", { opacity: 0 }, { opacity: 1 })
           .fromTo(".asian-cyb", { scale: 1.5 }, { scale: 1, duration: 4 }, 0)
           .to(
@@ -501,17 +501,16 @@ function Mobile() {
       )
         .fromTo(
           ".footer-p-mobile",
-          { background: "#000", scale: 1 },
+          { background: "#000" },
           {
             background: "#f4f3f2",
-            scale: 20,
             duration: 3,
             ease: "power2.inOut",
           },
           "<" // Start at the same time
         )
         .fromTo(
-          ".atharax-big-mobile",
+          ".atharax-big-mobile, .socials-row",
           { autoAlpha: 0 },
           { autoAlpha: 1, duration: 2, ease: "power2.inOut" } // Add easing
         );
