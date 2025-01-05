@@ -12,10 +12,8 @@
   font-style: normal;
 }
 
-@media only screen and (max-width: 768px) {
-  #smooth-content {
-    height: 990vh;
-  }
+#smooth-content {
+    height: 100%;
 }
 
 * {
@@ -41,14 +39,15 @@ html {
   align-items: center; // Vertically center items
   padding: 0 5%; // Add padding on the left and right for spacing
   background-color: transparent;
-  z-index: 999;
+  z-index: 200;
+  opacity: 0;
 
   a {
     display: flex;
     align-items: center; // Vertically center the logo image within the link
 
     img {
-      width: clamp(4rem, 10vw, 6rem); // Adjust the size of the spherical image
+      width: clamp(3.5rem, 10vw, 5.5rem); // Adjust the size of the spherical image
       aspect-ratio: 1/1;
     }
   }
@@ -101,6 +100,134 @@ html {
   display: block;
 }
 
+.preloader-container {
+  position: relative;
+}
+
+.counter {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  font-size: 10rem;
+  font-family: "Gendy", sans-serif;
+  color: #fff;
+  z-index: 400;
+  cursor: default;
+  transition: opacity 0.5s ease;
+}
+
+.counter.invisible {
+  opacity: 0;
+  pointer-events: none; /* Prevent interaction */
+}
+
+.preloader1 {
+  position: absolute;
+  top: 0;
+  height: 36vh;
+  width: 21vw;
+  z-index: 300;
+  background-color: rgb(0, 0, 0);
+  /* White */
+}
+
+.preloader2 {
+  position: absolute;
+  left: 20vw;
+  height: 66vh;
+  width: 21vw;
+  z-index: 300;
+  background-color: rgb(0, 0, 0);
+  /* Lavender */
+}
+
+.preloader3 {
+  position: absolute;
+  left: 40vw;
+  height: 36vh;
+  width: 21vw;
+  z-index: 300;
+  background-color: rgb(0, 0, 0);
+  /* Thistle */
+}
+
+.preloader4 {
+  position: absolute;
+  left: 60vw;
+  height: 66vh;
+  width: 21vw;
+  z-index: 300;
+  background-color: rgb(0, 0, 0);
+  /* Medium Orchid */
+}
+
+.preloader5 {
+  position: absolute;
+  left: 80vw;
+  height: 36vh;
+  width: 21vw;
+  z-index: 300;
+  background-color: rgb(0, 0, 0);
+  /* Blue Violet */
+}
+
+.preloader1-down {
+  position: absolute;
+  top: 35vh;
+  height: 66vh;
+  width: 21vw;
+  z-index: 300;
+  background-color: #000;
+  /* White */
+}
+
+.preloader2-down {
+  position: absolute;
+  top: 65vh;
+  left: 20vw;
+  height: 36vh;
+  width: 21vw;
+  z-index: 300;
+  background-color: #000;
+  /* Lavender */
+}
+
+.preloader3-down {
+  position: absolute;
+  top: 35vh;
+  left: 40vw;
+  height: 66vh;
+  width: 21vw;
+  z-index: 300;
+  background-color: #000;
+  /* Thistle */
+}
+
+.preloader4-down {
+  position: absolute;
+  top: 65vh;
+  left: 60vw;
+  height: 36vh;
+  width: 21vw;
+  z-index: 300;
+  background-color: #000;
+  /* Medium Orchid */
+}
+
+.preloader5-down {
+  position: absolute;
+  top: 35vh;
+  left: 80vw;
+  height: 66vh;
+  width: 21vw;
+  z-index: 300;
+  background-color: #000;
+  /* Blue Violet */
+}
+
 .home-screen {
   position: relative;
   height: 100vh;
@@ -151,41 +278,30 @@ html {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: -1vh;
   width: 100vw;
-  height: 100vh;
+  height: 101vh;
   background-color: #000;
-  z-index: 10;
+  z-index: 1000;
+  margin-bottom: 100vh;
 
   .about-atharax-mobile {
     position: relative;
     top: 15%;
     width: 80%;
     height: 10%;
-    color: #e6e6fa;
-    font-size: 5vw;
+    color: hsl(273, 100%, 67%);
+    font-size: 4vw;
     letter-spacing: 0.1vw;
     font-family: "Robmax Stencil", sans-serif;
     font-weight: 400;
     text-align: center;
-    text-shadow: 30vw 0px 0.7vw #ffffff, -30vw 0px 0.7vw #ffffff;
-  }
-
-  .about-div-row-mobile {
-    position: relative;
-    top: 12.5%;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    height: 40%;
-    background-image: url("../images/EYES_ATHARAX 1.webp");
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: 50% 10%;
+    text-shadow: 30vw 0px 0.7vw hsl(273, 100%, 67%), -30vw 0px 0.7vw hsl(273, 100%, 67%);
   }
 
   .about-description-mobile {
     position: relative;
-    top: 0;
+    top: 17.5%;
     width: 70%;
     height: 30vh;
     color: #f4f3f2;
@@ -196,12 +312,12 @@ html {
     letter-spacing: 0.1vw;
   }
 
-  .carousel-mobile {
+  .carousel-mobile {   
     width: 100%;
     overflow: hidden;
     white-space: nowrap;
     position: absolute;
-    top: clamp(85%, 90vw, 100%);
+    top: clamp(67.5%, 90vw, 80%);
   }
 
   .carousel-content-mobile {

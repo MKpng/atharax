@@ -24,11 +24,29 @@ function Home() {
   const footerContainer = useRef(null);
   const carouselRef = useRef(null);
   const introRef = useRef(null);
+  const [isLoading, setIsLoading] = useState(true); // Tracks loading state
+  const [counter, setCounter] = useState(0);
   const words = "TURNING YOUR IDEAS INTO REALITY ";
 
   window.onbeforeunload = function () {
     window.scrollTo(0, 0);
   };
+
+  useLayoutEffect(() => {
+    const target = 100;
+    let countInterval = setInterval(() => {
+      setCounter((prev) => {
+        if (prev < target) {
+          const increment = Math.floor(Math.random() * 10) + 1; // Random increment between 1 and 10
+          return Math.min(prev + increment, target); // Ensure it doesn't exceed 100
+        }
+        clearInterval(countInterval);
+        return target;
+      });
+    }, 120); // Adjust this interval for speed
+
+    return () => clearInterval(countInterval);
+  }, []);
 
   useEffect(() => {
     const updateTime = () => {
@@ -74,63 +92,65 @@ function Home() {
   );
 
   useLayoutEffect(() => {
-    let ctx = gsap.context(() => {
-      const t1 = gsap.timeline();
-      t1.to(
-        ".preloader1, .preloader2, .preloader3, .preloader4, .preloader5, .preloader6, .preloader7, .preloader8, .preloader9, .preloader10",
-        {
-          yPercent: -100,
-          delay: 1,
-          stagger: 0.1,
-        }
-      );
-
-      t1.add(
+    if (counter === 100) { 
+      let ctx = gsap.context(() => {
+        const t1 = gsap.timeline({
+          onComplete: () => {
+            setIsLoading(false);
+          },
+          defaults: { duration: 2, ease: "none" },
+        });
+  
+        t1.to(".preloader1", { yPercent: -100, delay: 1, duration: 1.5 }, 0)
+          .to(".preloader2", { yPercent: -100, delay: 1.2, duration: 1.5 }, 0)
+          .to(".preloader3", { yPercent: -100, delay: 1.1, duration: 1.5 }, 0)
+          .to(".preloader4", { yPercent: -100, delay: 0.6, duration: 1.5 }, 0)
+          .to(".preloader5", { yPercent: -100, delay: 1, duration: 1.5 }, 0)
+          .to(".preloader6", { yPercent: -100, delay: 1.3, duration: 1.5 }, 0)
+          .to(".preloader7", { yPercent: -100, delay: 0.9, duration: 1.5 }, 0)
+          .to(".preloader8", { yPercent: -100, delay: 0.5, duration: 1.5 }, 0)
+          .to(".preloader9", { yPercent: -100, delay: 1.1, duration: 1.5 }, 0)
+          .to(".preloader10", { yPercent: -100, delay: 0.7, duration: 1.5 }, 0)
+          .to(".preloader1-down", { yPercent: 100, delay: 1.2, duration: 1.5 }, 0)
+          .to(".preloader2-down", { yPercent: 100, delay: 0.7, duration: 1.5 }, 0)
+          .to(".preloader3-down", { yPercent: 100, delay: 1, duration: 1.5 }, 0)
+          .to(".preloader4-down", { yPercent: 100, delay: 0.6, duration: 1.5 }, 0)
+          .to(".preloader5-down", { yPercent: 100, delay: 0.8, duration: 1.5 }, 0)
+          .to(".preloader6-down", { yPercent: 100, delay: 1.3, duration: 1.5 }, 0)
+          .to(".preloader7-down", { yPercent: 100, delay: 0.78, duration: 1.5 }, 0)
+          .to(".preloader8-down", { yPercent: 100, delay: 1, duration: 1.5 }, 0)
+          .to(".preloader9-down", { yPercent: 100, delay: 0.67, duration: 1.5 }, 0)
+          .to(".preloader10-down", { yPercent: 100, delay: 0.87, duration: 1.5 }, 0)
+          .fromTo("#smooth-content", { height: "100%" }, { height: "1100vh" }, 0)
+          .fromTo(".asian-cyb", { scale: 1.5 }, { scale: 1, duration: 4 }, 0)
+          .to("#title", {
+            scrambleText: {
+              text: "ATHARAX",
+              chars: "13579",
+              revealDelay: 0.5,
+              tweenLength: true,
+            },
+          }, "-=3")
+          .fromTo(".header-logo", { left: "-20%" }, { left: "5%", duration: 4, ease: "in-out" }, 0)
+          .fromTo(".time-div", { opacity: 0, top: "-10%" }, { opacity: 1, top: "85%", duration: 4, ease: "in-out" }, 0);
+  
         gsap
           .timeline({
-            defaults: { duration: 2, ease: "none" },
-          })
-          .to(
-            "#title",
-            {
-              scrambleText: {
-                text: "ATHARAX",
-                chars: "13579",
-                revealDelay: 0.3,
-                tweenLength: true,
-              },
+            scrollTrigger: {
+              trigger: ".header",
+              start: "top top",
+              scrub: 1,
             },
-            "-=.3"
-          )
-        // Smooth height transition
-      )
-        .fromTo(
-          ".header-logo",
-          { left: "-20%" },
-          { left: "5%", duration: 4, ease: "in-out" },
-          0
-        )
-        .fromTo(
-          ".time-div",
-          { opacity: 0, top: "-10%" },
-          { opacity: 1, top: "85%", duration: 4, ease: "in-out" },
-          0
-        );
-
-      gsap
-        .timeline({
-          scrollTrigger: {
-            trigger: ".header",
-            start: "top top",
-            scrub: 1,
-          },
-        })
-        .fromTo(".header", { scale: 1 }, { scale: 1.55 })
-        .fromTo(".solid-color-layer", { opacity: 0 }, { opacity: 1 }, 0);
-    }, introRef);
-
-    return () => ctx.revert();
-  }, []);
+          })
+          .fromTo(".header", { scale: 1 }, { scale: 1.55 })
+          .fromTo(".solid-color-layer", { opacity: 0 }, { opacity: 1 }, 0);
+      }, introRef);
+  
+      return () => {
+        ctx.revert();
+      };
+    }
+  }, [counter]);  
 
   useEffect(() => {
     let smoother = ScrollSmoother.create({
@@ -214,7 +234,7 @@ function Home() {
       tl.fromTo(
         imgInit,
         { scale: 1, xPercent: -50, yPercent: -50 },
-        { scale: 0.75, xPercent: -30, yPercent: -60, duration: 1.25 }
+        { scale: 0.75, xPercent: -24, yPercent: -60.8, duration: 1.25 }
       )
         .fromTo(
           elementsToFade,
@@ -225,7 +245,7 @@ function Home() {
         .fromTo(elementsToFade, { opacity: 1 }, { opacity: 0, duration: 1.25 })
         .fromTo(
           imgInit,
-          { scale: 0.75, xPercent: -30, yPercent: -60 },
+          { scale: 0.75, xPercent: -24, yPercent: -60.8 },
           {
             scale: 1,
             xPercent: -50,
@@ -262,7 +282,7 @@ function Home() {
       tl.fromTo(
         imgInitTwo,
         { scale: 1, xPercent: -50, yPercent: -50 },
-        { scale: 0.75, xPercent: -82.25, yPercent: -60, duration: 1.25 }
+        { scale: 0.75, xPercent: -76, yPercent: -60.8, duration: 1.25 }
       )
         .fromTo(
           elementsToFade,
@@ -273,7 +293,7 @@ function Home() {
         .fromTo(elementsToFade, { opacity: 1 }, { opacity: 0, duration: 1.25 })
         .fromTo(
           imgInitTwo,
-          { scale: 0.75, xPercent: -82.25, yPercent: -60 },
+          { scale: 0.75, xPercent: -76, yPercent: -60.8 },
           {
             scale: 1,
             xPercent: -50,
@@ -310,7 +330,7 @@ function Home() {
       tl.fromTo(
         imgInitThree,
         { scale: 1, xPercent: -50, yPercent: -50 },
-        { scale: 0.75, xPercent: 84, yPercent: -60, duration: 1.25 }
+        { scale: 0.75, xPercent: 90.25, yPercent: -60.8, duration: 1.25 }
       )
         .fromTo(
           elementsToFade,
@@ -321,7 +341,7 @@ function Home() {
         .fromTo(elementsToFade, { opacity: 1 }, { opacity: 0, duration: 1.25 })
         .fromTo(
           imgInitThree,
-          { scale: 0.75, xPercent: 84, yPercent: -60 },
+          { scale: 0.75, xPercent: 90.25, yPercent: -60.8 },
           {
             scale: 1,
             xPercent: -50,
@@ -358,7 +378,7 @@ function Home() {
       tl.fromTo(
         imgInitFour,
         { scale: 1, xPercent: -50, yPercent: -50 },
-        { scale: 0.75, xPercent: -82.25, yPercent: -24.25, duration: 1.25 }
+        { scale: 0.75, xPercent: -76, yPercent: -24.55, duration: 1.25 }
       )
         .fromTo(
           elementsToFade,
@@ -369,7 +389,7 @@ function Home() {
         .fromTo(elementsToFade, { opacity: 1 }, { opacity: 0, duration: 1.25 })
         .fromTo(
           imgInitFour,
-          { scale: 0.75, xPercent: -82.25, yPercent: -24.25 },
+          { scale: 0.75, xPercent: -76, yPercent: -24.55 },
           {
             scale: 1,
             xPercent: -50,
@@ -406,7 +426,7 @@ function Home() {
       tl.fromTo(
         imgInitFive,
         { scale: 1, xPercent: -50, yPercent: -50 },
-        { scale: 0.75, xPercent: -30, yPercent: -24.25, duration: 1.25 }
+        { scale: 0.75, xPercent: -23.75, yPercent: -24.55, duration: 1.25 }
       )
         .fromTo(
           elementsToFade,
@@ -417,7 +437,7 @@ function Home() {
         .fromTo(elementsToFade, { opacity: 1 }, { opacity: 0, duration: 1.25 })
         .fromTo(
           imgInitFive,
-          { scale: 0.75, xPercent: -30, yPercent: -24.25 },
+          { scale: 0.75, xPercent: -23.75, yPercent: -24.55 },
           {
             scale: 1,
             xPercent: -50,
@@ -498,32 +518,48 @@ function Home() {
       <div className="App" id="smooth-wrapper" ref={introRef}>
         <div id="smooth-content">
           <div className="preloader-container">
-            <div className="preloader1"></div>
-            <div className="preloader2"></div>
-            <div className="preloader3"></div>
-            <div className="preloader4"></div>
-            <div className="preloader5"></div>
-            <div className="preloader6"></div>
-            <div className="preloader7"></div>
-            <div className="preloader8"></div>
-            <div className="preloader9"></div>
-            <div className="preloader10"></div>
-
-            <header className="header" id="home">
-              <div className="solid-color-layer"></div>
-              <div className="asian-cyb">
-                <img src={AsianCyborg} alt="Asian cyborg"></img>
+            <div className="counter">
+              <div className={`counter ${counter === 100 ? "invisible" : ""}`}>
+                {counter}
               </div>
-              <p className="title" id="title"></p>
-              <div className="header-logo">
-                <img src={AtharaxLogo} alt="Our company logo"></img>
-              </div>
-              <div className="time-div">
-                <h3 className="glitch">{currentTime}</h3>
-              </div>
-              <div id="scroll-message">Scroll</div>
-            </header>
+            </div>
+            <div>
+              <div className="preloader1"></div>
+              <div className="preloader2"></div>
+              <div className="preloader3"></div>
+              <div className="preloader4"></div>
+              <div className="preloader5"></div>
+              <div className="preloader6"></div>
+              <div className="preloader7"></div>
+              <div className="preloader8"></div>
+              <div className="preloader9"></div>
+              <div className="preloader10"></div>
+              <div className="preloader1-down"></div>
+              <div className="preloader2-down"></div>
+              <div className="preloader3-down"></div>
+              <div className="preloader4-down"></div>
+              <div className="preloader5-down"></div>
+              <div className="preloader6-down"></div>
+              <div className="preloader7-down"></div>
+              <div className="preloader8-down"></div>
+              <div className="preloader9-down"></div>
+              <div className="preloader10-down"></div>
+            </div>
           </div>
+          <header className="header" id="home">
+            <div className="solid-color-layer"></div>
+            <div className="asian-cyb">
+              <img src={AsianCyborg} alt="Asian cyborg"></img>
+            </div>
+            <p className="title" id="title"></p>
+            <div className="header-logo">
+              <img src={AtharaxLogo} alt="Our company logo"></img>
+            </div>
+            <div className="time-div">
+              <h3 className="glitch">{currentTime}</h3>
+            </div>
+            <div id="scroll-message">Scroll</div>
+          </header>
 
           <main>
             <div id="about" className="about-content" ref={aboutContainer}>

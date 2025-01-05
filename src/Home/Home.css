@@ -14,13 +14,27 @@
     font-display: swap;
 }
 
+@font-face {
+    font-family: "NotoSansJP";
+    src: url("../images/Fonts/NotoSansJP-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 html,
 body {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    scrollbar-width: none;
-    cursor: url("../images/arrowhead-rounded-outline.svg") 10 10, auto;
+    box-sizing: border-box; 
+    scrollbar-width: none; 
+    cursor: url("../images/arrowhead-rounded-outline.svg") 10 10, auto; 
 }
 
 .CursorFollower {
@@ -33,110 +47,239 @@ body {
 }
 
 #smooth-content {
-    height: 1100vh;
+    height: 100%;   
 }
 
-/* PRE-LOADER */
+/*LOADER*/
 
 .preloader-container {
     position: relative;
 }
 
+.counter {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    font-size: 10rem;
+    font-family: "Gendy", sans-serif;
+    color: #fff;
+    z-index: 21;
+    transition: opacity 0.5s ease;
+}
+
+.counter.invisible {
+    opacity: 0;
+    pointer-events: none; /* Prevent interaction */
+}
+
 .preloader1 {
     position: absolute;
-    height: 101vh;
-    width: 11vw;
-    z-index: 10;
-    background-color: #000;
+    top: 0;
+    height: 36vh;
+    width: 10vw;
+    z-index: 20;
+    background-color: rgb(0, 0, 0);
     /* White */
 }
 
 .preloader2 {
     position: absolute;
     left: 10vw;
-    height: 101vh;
+    height: 66vh;
     width: 11vw;
-    z-index: 9;
-    background-color: #000;
+    z-index: 20;
+    background-color: rgb(0, 0, 0);
     /* Lavender */
 }
 
 .preloader3 {
     position: absolute;
     left: 20vw;
-    height: 101vh;
+    height: 36vh;
     width: 11vw;
-    z-index: 8;
-    background-color: #000;
+    z-index: 20;
+    background-color: rgb(0, 0, 0);
     /* Thistle */
 }
 
 .preloader4 {
     position: absolute;
     left: 30vw;
-    height: 101vh;
+    height: 66vh;
     width: 11vw;
-    z-index: 7;
-    background-color: #000;
+    z-index: 20;
+    background-color: rgb(0, 0, 0);
     /* Medium Orchid */
 }
 
 .preloader5 {
     position: absolute;
     left: 40vw;
-    height: 101vh;
+    height: 36vh;
     width: 11vw;
-    z-index: 6;
-    background-color: #000;
+    z-index: 20;
+    background-color: rgb(0, 0, 0);
     /* Blue Violet */
 }
 
 .preloader6 {
     position: absolute;
     left: 50vw;
-    height: 101vh;
+    height: 66vh;
     width: 11vw;
-    z-index: 5;
-    background-color: #000;
+    z-index: 20;
+    background-color: rgb(0, 0, 0);
     /* Royal Purple */
 }
 
 .preloader7 {
     position: absolute;
     left: 60vw;
-    height: 101vh;
+    height: 36vh;
     width: 11vw;
-    z-index: 4;
-    background-color: #000;
+    z-index: 20;
+    background-color: rgb(0, 0, 0);
     /* Indigo */
 }
 
 .preloader8 {
     position: absolute;
     left: 70vw;
-    height: 101vh;
+    height: 66vh;
     width: 11vw;
-    z-index: 3;
-    background-color: #000;
+    z-index: 20;
+    background-color: rgb(0, 0, 0);
     /* Very Dark Purple */
 }
 
 .preloader9 {
     position: absolute;
     left: 80vw;
-    height: 101vh;
+    height: 36vh;
     width: 11vw;
-    z-index: 2;
-    background-color: #000;
+    z-index: 20;
+    background-color: rgb(0, 0, 0);
     /* Black-Purple */
 }
 
 .preloader10 {
     position: absolute;
     left: 90vw;
-    height: 101vh;
+    height: 66vh;
     width: 11vw;
-    z-index: 1;
+    z-index: 20;
+    background-color: rgb(0, 0, 0);
+    /* Black */
+}
+
+.preloader1-down {
+    position: absolute;
+    top: 35vh;
+    height: 66vh;
+    width: 11vw;
+    z-index: 20;
+    background-color: #000;
+    /* White */
+}
+
+.preloader2-down {
+    position: absolute;
+    top: 65vh;
+    left: 10vw;
+    height: 36vh;
+    width: 11vw;
+    z-index: 20;
+    background-color: #000;
+    /* Lavender */
+}
+
+.preloader3-down {
+    position: absolute;
+    top: 35vh;
+    left: 20vw;
+    height: 66vh;
+    width: 11vw;
+    z-index: 20;
+    background-color: #000;
+    /* Thistle */
+}
+
+.preloader4-down {
+    position: absolute;
+    top: 65vh;
+    left: 30vw;
+    height: 36vh;
+    width: 11vw;
+    z-index: 20;
+    background-color: #000;
+    /* Medium Orchid */
+}
+
+.preloader5-down {
+    position: absolute;
+    top: 35vh;
+    left: 40vw;
+    height: 66vh;
+    width: 11vw;
+    z-index: 20;
+    background-color: #000;
+    /* Blue Violet */
+}
+
+.preloader6-down {
+    position: absolute;
+    top: 65vh;
+    left: 50vw;
+    height: 36vh;
+    width: 11vw;
+    z-index: 20;
+    background-color: #000;
+    /* Royal Purple */
+}
+
+.preloader7-down {
+    position: absolute;
+    top: 35vh;
+    left: 60vw;
+    height: 66vh;
+    width: 11vw;
+    z-index: 20;
+    background-color: #000;
+    /* Indigo */
+}
+
+.preloader8-down {
+    position: absolute;
+    top: 65vh;
+    left: 70vw;
+    height: 36vh;
+    width: 11vw;
+    z-index: 20;
+    background-color: #000;
+    /* Very Dark Purple */
+}
+
+.preloader9-down {
+    position: absolute;
+    top: 35vh;
+    left: 80vw;
+    height: 66vh;
+    width: 11vw;
+    z-index: 20;
+    background-color: #000;
+    /* Black-Purple */
+}
+
+.preloader10-down {
+    position: absolute;
+    top: 65vh;
+    left: 90vw;
+    height: 36vh;
+    width: 11vw;
+    z-index: 20;
     background-color: #000;
     /* Black */
 }
@@ -171,6 +314,7 @@ body {
     display: flex;
     justify-content: center;
     width: 100vw;
+    margin: 0;
     top: 0;
     font-family: "Robmax Stencil", sans-serif;
     font-weight: 700;
@@ -208,7 +352,7 @@ body {
     font-family: "Gendy", sans-serif;
     top: 85%;
     left: 48%;
-    z-index: 100;
+    z-index: 2;
     animation: appear 4s ease-out;
 }
 
@@ -263,7 +407,7 @@ body {
     height: 100vh;
     margin-bottom: 100vh;
     background-color: #000;
-    z-index: 1;
+    z-index: 100;
 }
 
 .about-atharax {
@@ -300,7 +444,7 @@ body {
 .jp-div p {
     width: 100%;
     color: #f4f3f2;
-    font-family: "Noto Sans JP", serif;
+    font-family: "NotoSansJP", serif;
     text-align: right;
     flex-grow: 1;
     margin-right: 1vw;
@@ -325,7 +469,7 @@ body {
 
 .about-div-row {
     position: absolute;
-    left: 20vw;
+    left: 20.1vw;
     top: 10.5%;
     width: 80vw;
     height: 59.5vh;
@@ -432,17 +576,17 @@ body {
 .mini-nav-three,
 .mini-nav-four,
 .mini-nav-five {
-    position: relative;
+    position: absolute;
     display: flex;
     align-items: center;
     justify-content: space-between;
     left: 50%;
     top: 50%;
-    transform: translate(-51.75%, -1115%);
+    transform: translate(-50%, -460%);
     background-color: #E6E6FA;
     width: 80vw;
+    aspect-ratio: 19/1;
     border-radius: .5vw;
-    aspect-ratio: 18/1;
     padding: 0 2vw;
 }
 
@@ -507,38 +651,39 @@ body {
 .work-design,
 .work-develop,
 .work-test {
-    position: relative;
+    position: absolute;
     justify-content: center;
     align-items: center;
     display: flex;
-    aspect-ratio: 4/1;
     width: 36.5vw;
+    aspect-ratio: 3/.85;
     top: 50%;
     left: 50%;
     border-radius: .5vw;
     background: #E6E6FA;
     font-family: "Robmax Stencil", sans-serif;
     font-size: 3vw;
+    margin: 0;
 }
 
 .work-briefing {
-    transform: translate(-113.25%, -534%);
+    transform: translate(-109.6%, -140%);
 }
 
 .work-wire {
-    transform: translate(5.75%, -534%);
+    transform: translate(9.5%, -140%);
 }
 
 .work-design {
-    transform: translate(-43%, -534%);
+    transform: translate(-39.25%, -140%);
 }
 
 .work-develop {
-    transform: translate(5.75%, -534%);
+    transform: translate(9.5%, -140%);
 }
 
 .work-test {
-    transform: translate(-113.25%, -534%);
+    transform: translate(-109.6%, -140%);
 }
 
 .work-briefing-text,
@@ -555,8 +700,8 @@ body {
     font-size: 3vw;
     font-family: "Gendy", sans-serif;
     border-radius: .5vw;
-    aspect-ratio: 2/2.69;
     width: 24.75vw;
+    aspect-ratio: 2/2.69;
     background: #E6E6FA;
     text-align: center;
     line-height: 1;
@@ -564,23 +709,23 @@ body {
 }
 
 .work-briefing-text {
-    transform: translate(56%, -173.75%);
+    transform: translate(61.75%, -133.5%);
 }
 
 .work-wire-text {
-    transform: translate(-167%, -173.75%);
+    transform: translate(-161.5%, -133.5%);
 }
 
 .work-design-text {
-    transform: translate(-167%, -173.75%);
+    transform: translate(-161.5%, -133.5%);
 }
 
 .work-develop-text {
-    transform: translate(-167%, -173.75%);
+    transform: translate(-161.5%, -133.5%);
 }
 
 .work-test-text {
-    transform: translate(56%, -173.75%);
+    transform: translate(61.75%, -133.5%);
 }
 
 .work-briefing-text p,
@@ -619,6 +764,7 @@ body {
     top: 50%;
     left: 50%;
     text-align: center;
+    box-shadow: 0px -.8vh 1vh rgb(199, 121, 250);
 }
 
 .briefing-temp p,
@@ -652,23 +798,25 @@ body {
 }
 
 .briefing-temp {
-    transform: translate(-23.5%, -697.25%);
+    transform: translate(-15.5%, -558%);
 }
 
 .wire-temp {
-    transform: translate(-92.5%, -697.25%);
+    transform: translate(-84.5%, -558%);
 }
 
 .design-temp {
-    transform: translate(127.25%, -697.25%);
+    transform: translate(135.5%, -558%);
 }
 
 .develop-temp {
-    transform: translate(-92.5%, -940%);
+    transform: translate(-84.5%, -802.5%);
+    box-shadow: 0px .8vh 1vh rgb(199, 121, 250);
 }
 
 .test-temp {
-    transform: translate(-23.5%, -940%);
+    transform: translate(-15.5%, -802.5%);
+    box-shadow: 0px .8vh 1vh rgb(199, 121, 250);
 }
 
 .home-temp-brief {
@@ -694,27 +842,27 @@ body {
 
 .img-asset-one {
     background-image: url("../images/img-asset-one.webp");
-    transform: translate(-113.25%, -1025.25%);
+    transform: translate(-109.6%, -842%);
 }
 
 .img-asset-two {
     background-image: url("../images/img-asset-two.webp");
-    transform: translate(5.75%, -1025.25%);
+    transform: translate(9.5%, -842%);
 }
 
 .img-asset-three {
     background-image: url("../images/img-asset-three.webp");
-    transform: translate(-43.25%, -1025.25%);
+    transform: translate(-39.25%, -842%);
 }
 
 .img-asset-four {
     background-image: url("../images/img-asset-four.webp");
-    transform: translate(5.75%, -1025.25%);
+    transform: translate(9.5%, -842%);
 }
 
 .img-asset-five {
     background-image: url("../images/img-asset-five.webp");
-    transform: translate(-113.25%, -1025.25%);
+    transform: translate(-109.6%, -842%);
 }
 
 .briefing-extra,
@@ -728,29 +876,29 @@ body {
     background-color: transparent;
     border-radius: .5vw;
     width: 36.5vw;
-    aspect-ratio: 3/1.22;
+    aspect-ratio: 3/1.15;
     top: 50%;
     left: 50%;
 }
 
 .briefing-extra {
-    transform: translate(-113.25%, -660%);
+    transform: translate(-109.6%, -598%);
 }
 
 .wire-extra {
-    transform: translate(5.75%, -660%);
+    transform: translate(9.5%, -598%);
 }
 
 .design-extra {
-    transform: translate(-43.25%, -660%);
+    transform: translate(-39.25%, -598%);
 }
 
 .develop-extra {
-    transform: translate(5.75%, -660%);
+    transform: translate(9.5%, -598%);
 }
 
 .test-extra {
-    transform: translate(-113.25%, -660%);
+    transform: translate(-109.6%, -598%);
 }
 
 .briefing-home,

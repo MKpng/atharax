@@ -23,6 +23,10 @@ function Mobile() {
   const developContainer = useRef(null);
   const testingContainer = useRef(null);
   const footerContainer = useRef(null);
+  const aboutContainer = useRef(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const introRef = useRef(null);
+  const [counter, setCounter] = useState(0);
   const words = "TURNING YOUR IDEAS INTO REALITY ";
 
   window.onbeforeunload = function () {
@@ -33,6 +37,22 @@ function Mobile() {
     setIsToggled((prevState) => !prevState); // Toggle the state between true and false
   };
 
+  useLayoutEffect(() => {
+    const target = 100;
+    let countInterval = setInterval(() => {
+      setCounter((prev) => {
+        if (prev < target) {
+          const increment = Math.floor(Math.random() * 10) + 1; // Random increment between 1 and 10
+          return Math.min(prev + increment, target); // Ensure it doesn't exceed 100
+        }
+        clearInterval(countInterval);
+        return target;
+      });
+    }, 120); // Adjust this interval for speed
+
+    return () => clearInterval(countInterval);
+  }, []);
+
   gsap.registerPlugin(
     ScrollTrigger,
     ScrollToPlugin,
@@ -40,6 +60,100 @@ function Mobile() {
     ScrambleTextPlugin,
     SplitText
   );
+
+  useLayoutEffect(() => {
+    if (counter === 100) {
+      let ctx = gsap.context(() => {
+        const t1 = gsap.timeline({
+          onComplete: () => {
+            setIsLoading(false);
+          },
+        });
+
+        t1.to(".preloader1", { yPercent: -100, delay: 1, duration: 1.5 }, 0)
+          .to(".preloader2", { yPercent: -100, delay: 1.2, duration: 1.5 }, 0)
+          .to(".preloader3", { yPercent: -100, delay: 1.1, duration: 1.5 }, 0)
+          .to(".preloader4", { yPercent: -100, delay: 0.6, duration: 1.5 }, 0)
+          .to(".preloader5", { yPercent: -100, delay: 1, duration: 1.5 }, 0)
+          .to(
+            ".preloader1-down",
+            { yPercent: 100, delay: 1.2, duration: 1.5 },
+            0
+          )
+          .to(
+            ".preloader2-down",
+            { yPercent: 100, delay: 0.7, duration: 1.5 },
+            0
+          )
+          .to(".preloader3-down", { yPercent: 100, delay: 1, duration: 1.5 }, 0)
+          .to(
+            ".preloader4-down",
+            { yPercent: 100, delay: 0.6, duration: 1.5 },
+            0
+          )
+          .to(
+            ".preloader5-down",
+            { yPercent: 100, delay: 0.8, duration: 1.5 },
+            0
+          )
+          .fromTo("#smooth-content", { height: "100%" }, { height: "1090vh" }, 0)
+          .fromTo(".nav", { opacity: 0 }, { opacity: 1 })
+          .fromTo(".asian-cyb", { scale: 1.5 }, { scale: 1, duration: 4 }, 0)
+          .to(
+            "#title-mobile",
+            {
+              scrambleText: {
+                text: "ATHARAX",
+                chars: "13579",
+                revealDelay: 0.5,
+                tweenLength: true,
+              },
+            },
+            "-=3"
+          );
+        gsap
+          .timeline({
+            scrollTrigger: {
+              trigger: ".home-screen",
+              start: "top top",
+              scrub: 1,
+            },
+          })
+          .fromTo(
+            ".solid-color-layer-mobile",
+            { opacity: 0 },
+            { opacity: 1 },
+            0
+          );
+      }, introRef);
+
+      return () => {
+        ctx.revert();
+      };
+    }
+  }, [counter]);
+
+  useLayoutEffect(() => {
+      const ctx = gsap.context(() => {
+        const t1 = gsap.timeline({
+          scrollTrigger: {
+            trigger: ".about-content-mobile",
+            start: "top top",
+            scrub: 1,
+            pin: true,
+            pinSpacing: false,
+            toggleActions: "play none none reverse",
+          },
+        });
+        t1.to(new SplitText(".about-description-mobile", { type: "words" }).words, {
+          color: "rgb(222, 176, 252)",
+          duration: 0.1,
+          stagger: 0.05,
+        });
+      }, aboutContainer);
+  
+      return () => ctx.revert();
+    }, []);
 
   useEffect(() => {
     let smootherMobile = ScrollSmoother.create({
@@ -86,8 +200,7 @@ function Mobile() {
       })
       .fromTo(".solid-color-layer-mobile", { opacity: 0 }, { opacity: 1 }, 0);
 
-    return () => {
-    };
+    return () => {};
   }, []);
 
   useEffect(() => {
@@ -456,7 +569,7 @@ function Mobile() {
   }, []);
 
   return (
-    <div id="smooth-wrapper">
+    <div id="smooth-wrapper" ref={introRef}>
       <div className="nav">
         <a href="#home" onClick={() => setIsToggled(false)}>
           <img src={AtharaxLogo} alt="Logo"></img>
@@ -485,16 +598,34 @@ function Mobile() {
         </div>
       </div>
       <div id="smooth-content">
+        <div className="preloader-container">
+          <div className="counter">
+            <div className={`counter ${counter === 100 ? "invisible" : ""}`}>
+              {counter}
+            </div>
+          </div>
+          <div>
+            <div className="preloader1"></div>
+            <div className="preloader2"></div>
+            <div className="preloader3"></div>
+            <div className="preloader4"></div>
+            <div className="preloader5"></div>
+            <div className="preloader1-down"></div>
+            <div className="preloader2-down"></div>
+            <div className="preloader3-down"></div>
+            <div className="preloader4-down"></div>
+            <div className="preloader5-down"></div>
+          </div>
+        </div>
         <div className="home-screen" id="home">
           <div className="solid-color-layer-mobile"></div>
           <div className="asian-cyb-mobile"></div>
-          <div className="title-mobile" id="title-mobile">ATHARAX</div>
+          <div className="title-mobile" id="title-mobile"></div>
         </div>
 
         <main>
-          <div id="about" className="about-content-mobile">
+          <div id="about" className="about-content-mobile" ref={aboutContainer}>
             <h3 className="about-atharax-mobile">ABOUT US</h3>
-            <div className="about-div-row-mobile"></div>
             <div className="about-description-mobile">
               <p>
                 We are a company dedicated to transforming imagination into
