@@ -578,7 +578,7 @@ function Mobile() {
   }, []);
 
   return (
-    <div id="smooth-wrapper">
+    <div id="smooth-wrapper" className="all">
       <div className="nav">
         <a onClick={() => window.location.reload()} aria-label="Reload Page">
           <img src={AtharaxLogo} alt="Logo"></img>
