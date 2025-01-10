@@ -666,10 +666,9 @@ function Home() {
                   <h3>
                     <a
                       href="#home"
-                      onClick={() => window.location.reload()}
                       className="hover-target"
                     >
-                      Atharax<span>Company</span>
+                      AtharaxCompany
                     </a>
                   </h3>
                   <ul>
@@ -719,10 +718,9 @@ function Home() {
                   <h3>
                     <a
                       href="#home"
-                      onClick={() => window.location.reload()}
                       className="hover-target"
                     >
-                      Atharax<span>Company</span>
+                      AtharaxCompany
                     </a>
                   </h3>
                   <ul>
@@ -771,10 +769,9 @@ function Home() {
                   <h3>
                     <a
                       href="#home"
-                      onClick={() => window.location.reload()}
                       className="hover-target"
                     >
-                      Atharax<span>Company</span>
+                      AtharaxCompany
                     </a>
                   </h3>
                   <ul>
@@ -823,10 +820,9 @@ function Home() {
                   <h3>
                     <a
                       href="#home"
-                      onClick={() => window.location.reload()}
                       className="hover-target"
                     >
-                      Atharax<span>Company</span>
+                      AtharaxCompany
                     </a>
                   </h3>
                   <ul>
@@ -875,10 +871,9 @@ function Home() {
                   <h3>
                     <a
                       href="#home"
-                      onClick={() => window.location.reload()}
                       className="hover-target"
                     >
-                      Atharax<span>Company</span>
+                      AtharaxCompany
                     </a>
                   </h3>
                   <ul>

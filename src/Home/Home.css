@@ -30,6 +30,10 @@
     cursor: url("../images/arrowhead-rounded-outline.svg") 10 10, auto;
 }
 
+#smooth-content {
+    height: 1100vh;
+}
+
 .all {
     background-color: black;
 }
@@ -451,11 +455,15 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     transition: 0.5s ease-in-out;
-    cursor: url("../images/hand-pointer.svg") 10 10, auto;
+    
 }
 
 .about-nav a:hover {
     background-size: 100% 100%;
+}
+
+li, a, h3 {
+    cursor: url("../images/hand-pointer.svg") 10 10, auto !important;
 }
 
 .jp-div {
@@ -1053,6 +1061,7 @@
     aspect-ratio: 1;
     transform: translate3d(0, 0, 0);
     animation: spin 6s linear infinite;
+    cursor: url("../images/hand-pointer.svg") 10 10, auto;
 }
 
 .socials-div a:hover {
