@@ -26,15 +26,12 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    scrollbar-width: none;
+    cursor: url("../images/arrowhead-rounded-outline.svg") 10 10, auto;
 }
 
-html,
-body {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box; 
-    scrollbar-width: none; 
-    cursor: url("../images/arrowhead-rounded-outline.svg") 10 10, auto; 
+.all {
+    background-color: black;
 }
 
 .CursorFollower {
@@ -42,18 +39,10 @@ body {
     z-index: 9999;
 }
 
-.App {
-    background-color: #000;
-}
-
-#smooth-content {
-    height: 100%;   
-}
-
 /*LOADER*/
 
 .preloader-container {
-    position: relative;
+    position: absolute;
 }
 
 .counter {
@@ -72,7 +61,8 @@ body {
 
 .counter.invisible {
     opacity: 0;
-    pointer-events: none; /* Prevent interaction */
+    pointer-events: none;
+    /* Prevent interaction */
 }
 
 .preloader1 {
@@ -428,8 +418,44 @@ body {
     align-items: center;
     border-right: 1px solid white;
     height: 100%;
-    padding-right:13.90vw;
+    padding-right: 13.90vw;
     margin-left: 3vw;
+}
+
+.about-nav {
+    position: absolute;
+    left: 25vw;
+    width: 15vw;
+    height: 10vh;
+    z-index: 10;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.about-nav ul {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: "Gendy", sans-serif;
+    font-size: 1.15vw;
+    width: 15vw;
+}
+
+.about-nav a {
+    list-style-type: none;
+    text-decoration: none;
+    background: linear-gradient(#fff, #f4f3f2) left no-repeat, #636363;
+    background-size: 0% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: 0.5s ease-in-out;
+    cursor: url("../images/hand-pointer.svg") 10 10, auto;
+}
+
+.about-nav a:hover {
+    background-size: 100% 100%;
 }
 
 .jp-div {

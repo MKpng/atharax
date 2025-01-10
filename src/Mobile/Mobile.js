@@ -5,6 +5,7 @@ import Instagram from "../images/instagram.svg";
 import Gmail from "../images/google.svg";
 import Linkedin from "../images/linkedin.svg";
 import Menu from "../images/Mobile/menu_icon.svg";
+import Arrow from "../images/Mobile/down-arrow_3599782.svg";
 
 import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
 import { gsap } from "gsap";
@@ -25,7 +26,6 @@ function Mobile() {
   const footerContainer = useRef(null);
   const aboutContainer = useRef(null);
   const [isLoading, setIsLoading] = useState(true);
-  const introRef = useRef(null);
   const [counter, setCounter] = useState(0);
   const words = "TURNING YOUR IDEAS INTO REALITY ";
 
@@ -33,9 +33,17 @@ function Mobile() {
     window.scrollTo(0, 0);
   };
 
-  const handleToggled = () => {
-    setIsToggled((prevState) => !prevState); // Toggle the state between true and false
+  const toggleMenu = () => {
+    setIsToggled((prevState) => !prevState); // Toggle the state
   };
+
+  gsap.registerPlugin(
+    ScrollTrigger,
+    ScrollToPlugin,
+    ScrollSmoother,
+    ScrambleTextPlugin,
+    SplitText
+  );
 
   useLayoutEffect(() => {
     const target = 100;
@@ -49,24 +57,23 @@ function Mobile() {
         return target;
       });
     }, 120); // Adjust this interval for speed
-
     return () => clearInterval(countInterval);
   }, []);
 
-  gsap.registerPlugin(
-    ScrollTrigger,
-    ScrollToPlugin,
-    ScrollSmoother,
-    ScrambleTextPlugin,
-    SplitText
-  );
-
   useLayoutEffect(() => {
+    const smoother = ScrollSmoother.get();
+    if (smoother) smoother.paused(true);
+    document.body.style.overflow = "hidden";
+    document.body.style.position = "fixed";
+
     if (counter === 100) {
       let ctx = gsap.context(() => {
         const t1 = gsap.timeline({
           onComplete: () => {
             setIsLoading(false);
+            document.body.style.overflow = "";
+            document.body.style.position = "";
+            if (smoother) smoother.paused(false);
           },
           defaults: { duration: 2, ease: "none" },
         });
@@ -97,7 +104,6 @@ function Mobile() {
             { yPercent: 101, delay: 0.8, duration: 1.5 },
             0
           )
-          .fromTo("#smooth-content", { height: "100%" }, { height: "1070vh" }, 0)
           .fromTo(".nav", { opacity: 0 }, { opacity: 1 })
           .fromTo(".asian-cyb", { scale: 1.5 }, { scale: 1, duration: 4 }, 0)
           .to(
@@ -111,50 +117,64 @@ function Mobile() {
               },
             },
             "-=3"
+          )
+          .fromTo(
+            ".arrow-down",
+            { visibility: "hidden", opacity: 0 },
+            { visibility: "visible", opacity: 1, delay: .5 }
           );
         gsap
-          .timeline({
-            scrollTrigger: {
-              trigger: ".home-screen",
-              start: "top top",
-              scrub: 1,
+          .timeline(
+            {
+              scrollTrigger: {
+                trigger: ".home-screen",
+                start: "top top",
+                scrub: 1,
+              },
             },
-          })
+            0
+          )
           .fromTo(
             ".solid-color-layer-mobile",
             { opacity: 0 },
             { opacity: 1 },
             0
           );
-      }, introRef);
+      });
 
       return () => {
         ctx.revert();
+        document.body.style.overflow = ""; // Reset body styles
+        document.body.style.position = "";
+        if (smoother) smoother.paused(false);
       };
     }
   }, [counter]);
 
   useLayoutEffect(() => {
-      const ctx = gsap.context(() => {
-        const t1 = gsap.timeline({
-          scrollTrigger: {
-            trigger: ".about-content-mobile",
-            start: "top top",
-            scrub: 1,
-            pin: true,
-            pinSpacing: false,
-            toggleActions: "play none none reverse",
-          },
-        });
-        t1.to(new SplitText(".about-description-mobile", { type: "words" }).words, {
+    const ctx = gsap.context(() => {
+      const t1 = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".about-content-mobile",
+          start: "top top",
+          scrub: 1,
+          pin: true,
+          pinSpacing: false,
+          toggleActions: "play none none reverse",
+        },
+      });
+      t1.to(
+        new SplitText(".about-description-mobile", { type: "words" }).words,
+        {
           color: "rgb(222, 176, 252)",
           duration: 0.1,
           stagger: 0.05,
-        });
-      }, aboutContainer);
-  
-      return () => ctx.revert();
-    }, []);
+        }
+      );
+    }, aboutContainer);
+
+    return () => ctx.revert();
+  }, []);
 
   useEffect(() => {
     let smootherMobile = ScrollSmoother.create({
@@ -558,16 +578,28 @@ function Mobile() {
   }, []);
 
   return (
-    <div id="smooth-wrapper" ref={introRef}>
+    <div id="smooth-wrapper">
       <div className="nav">
-        <a href="#home" onClick={() => setIsToggled(false)}>
+        <a onClick={() => window.location.reload()} aria-label="Reload Page">
           <img src={AtharaxLogo} alt="Logo"></img>
         </a>
         <button
-          className={`menu-button ${isToggled ? "toggled" : ""}`}
-          onClick={handleToggled}
+          className={`menu ${isToggled ? "opened" : ""}`}
+          onClick={toggleMenu}
+          aria-expanded={isToggled}
+          aria-label="Main Menu"
         >
-          <img src={Menu} alt="Menu" />
+          <svg width="100" height="100" viewBox="0 0 100 100">
+            <path
+              className="line line1"
+              d="M 20,29.000046 H 80.000231 C 80.000231,29.000046 94.498839,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058"
+            />
+            <path className="line line2" d="M 20,50 H 80" />
+            <path
+              className="line line3"
+              d="M 20,70.999954 H 80.000231 C 80.000231,70.999954 94.498839,71.182648 94.532987,33.288669 94.543142,22.019327 90.966081,18.329754 85.259173,18.331003 79.552261,18.332249 75.000211,25.000058 75.000211,25.000058 L 25.000021,74.999942"
+            />
+          </svg>
         </button>
       </div>
       <div className={`side-menu ${isToggled ? "show" : ""}`}>
@@ -610,6 +642,9 @@ function Mobile() {
           <div className="solid-color-layer-mobile"></div>
           <div className="asian-cyb-mobile"></div>
           <div className="title-mobile" id="title-mobile"></div>
+          <div className="arrow-down">
+            <img src={Arrow}></img>
+          </div>
         </div>
 
         <main>

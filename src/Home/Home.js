@@ -23,7 +23,6 @@ function Home() {
   const testContainer = useRef(null);
   const footerContainer = useRef(null);
   const carouselRef = useRef(null);
-  const introRef = useRef(null);
   const [isLoading, setIsLoading] = useState(true); // Tracks loading state
   const [counter, setCounter] = useState(0);
   const words = "TURNING YOUR IDEAS INTO REALITY ";
@@ -91,67 +90,6 @@ function Home() {
     SplitText
   );
 
-  useLayoutEffect(() => {
-    if (counter === 100) { 
-      let ctx = gsap.context(() => {
-        const t1 = gsap.timeline({
-          onComplete: () => {
-            setIsLoading(false);
-          },
-          defaults: { duration: 2, ease: "none" },
-        });
-  
-        t1.to(".preloader1", { yPercent: -100, delay: 1, duration: 1.5 }, 0)
-          .to(".preloader2", { yPercent: -100, delay: 1.2, duration: 1.5 }, 0)
-          .to(".preloader3", { yPercent: -100, delay: 1.1, duration: 1.5 }, 0)
-          .to(".preloader4", { yPercent: -100, delay: 0.6, duration: 1.5 }, 0)
-          .to(".preloader5", { yPercent: -100, delay: 1, duration: 1.5 }, 0)
-          .to(".preloader6", { yPercent: -100, delay: 1.3, duration: 1.5 }, 0)
-          .to(".preloader7", { yPercent: -100, delay: 0.9, duration: 1.5 }, 0)
-          .to(".preloader8", { yPercent: -100, delay: 0.5, duration: 1.5 }, 0)
-          .to(".preloader9", { yPercent: -100, delay: 1.1, duration: 1.5 }, 0)
-          .to(".preloader10", { yPercent: -100, delay: 0.7, duration: 1.5 }, 0)
-          .to(".preloader1-down", { yPercent: 100, delay: 1.2, duration: 1.5 }, 0)
-          .to(".preloader2-down", { yPercent: 100, delay: 0.7, duration: 1.5 }, 0)
-          .to(".preloader3-down", { yPercent: 100, delay: 1, duration: 1.5 }, 0)
-          .to(".preloader4-down", { yPercent: 100, delay: 0.6, duration: 1.5 }, 0)
-          .to(".preloader5-down", { yPercent: 100, delay: 0.8, duration: 1.5 }, 0)
-          .to(".preloader6-down", { yPercent: 100, delay: 1.3, duration: 1.5 }, 0)
-          .to(".preloader7-down", { yPercent: 100, delay: 0.78, duration: 1.5 }, 0)
-          .to(".preloader8-down", { yPercent: 100, delay: 1, duration: 1.5 }, 0)
-          .to(".preloader9-down", { yPercent: 100, delay: 0.67, duration: 1.5 }, 0)
-          .to(".preloader10-down", { yPercent: 100, delay: 0.87, duration: 1.5 }, 0)
-          .fromTo("#smooth-content", { height: "100%" }, { height: "1100vh" }, 0)
-          .fromTo(".asian-cyb", { scale: 1.5 }, { scale: 1, duration: 4 }, 0)
-          .to("#title", {
-            scrambleText: {
-              text: "ATHARAX",
-              chars: "13579",
-              revealDelay: 0.5,
-              tweenLength: true,
-            },
-          }, "-=3")
-          .fromTo(".header-logo", { left: "-20%" }, { left: "5%", duration: 4, ease: "in-out" }, 0)
-          .fromTo(".time-div", { opacity: 0, top: "-10%" }, { opacity: 1, top: "85%", duration: 4, ease: "in-out" }, 0);
-  
-        gsap
-          .timeline({
-            scrollTrigger: {
-              trigger: ".header",
-              start: "top top",
-              scrub: 1,
-            },
-          })
-          .fromTo(".header", { scale: 1 }, { scale: 1.55 })
-          .fromTo(".solid-color-layer", { opacity: 0 }, { opacity: 1 }, 0);
-      }, introRef);
-  
-      return () => {
-        ctx.revert();
-      };
-    }
-  }, [counter]);  
-
   useEffect(() => {
     let smoother = ScrollSmoother.create({
       smooth: 2,
@@ -192,6 +130,125 @@ function Home() {
   }, []);
 
   useLayoutEffect(() => {
+    const smoother = ScrollSmoother.get();
+    if (smoother) smoother.paused(true); // Pause ScrollSmoother
+
+    // Prevent scrolling on body
+    document.body.style.overflow = "hidden";
+    document.body.style.position = "fixed";
+
+    if (counter === 100) {
+      let ctx = gsap.context(() => {
+        const t1 = gsap.timeline({
+          onComplete: () => {
+            setIsLoading(false);
+            document.body.style.overflow = ""; // Restore scrolling
+            document.body.style.position = ""; // Reset position
+            if (smoother) smoother.paused(false);
+          },
+          defaults: { duration: 2, ease: "none" },
+        });
+
+        t1.to(".preloader1", { yPercent: -100, delay: 1, duration: 1.5 }, 0)
+          .to(".preloader2", { yPercent: -100, delay: 1.2, duration: 1.5 }, 0)
+          .to(".preloader3", { yPercent: -100, delay: 1.1, duration: 1.5 }, 0)
+          .to(".preloader4", { yPercent: -100, delay: 0.6, duration: 1.5 }, 0)
+          .to(".preloader5", { yPercent: -100, delay: 1, duration: 1.5 }, 0)
+          .to(".preloader6", { yPercent: -100, delay: 1.3, duration: 1.5 }, 0)
+          .to(".preloader7", { yPercent: -100, delay: 0.9, duration: 1.5 }, 0)
+          .to(".preloader8", { yPercent: -100, delay: 0.5, duration: 1.5 }, 0)
+          .to(".preloader9", { yPercent: -100, delay: 1.1, duration: 1.5 }, 0)
+          .to(".preloader10", { yPercent: -100, delay: 0.7, duration: 1.5 }, 0)
+          .to(
+            ".preloader1-down",
+            { yPercent: 100, delay: 1.2, duration: 1.5 },
+            0
+          )
+          .to(
+            ".preloader2-down",
+            { yPercent: 100, delay: 0.7, duration: 1.5 },
+            0
+          )
+          .to(".preloader3-down", { yPercent: 100, delay: 1, duration: 1.5 }, 0)
+          .to(
+            ".preloader4-down",
+            { yPercent: 100, delay: 0.6, duration: 1.5 },
+            0
+          )
+          .to(
+            ".preloader5-down",
+            { yPercent: 100, delay: 0.8, duration: 1.5 },
+            0
+          )
+          .to(
+            ".preloader6-down",
+            { yPercent: 100, delay: 1.3, duration: 1.5 },
+            0
+          )
+          .to(
+            ".preloader7-down",
+            { yPercent: 100, delay: 0.78, duration: 1.5 },
+            0
+          )
+          .to(".preloader8-down", { yPercent: 100, delay: 1, duration: 1.5 }, 0)
+          .to(
+            ".preloader9-down",
+            { yPercent: 100, delay: 0.67, duration: 1.5 },
+            0
+          )
+          .to(
+            ".preloader10-down",
+            { yPercent: 100, delay: 0.87, duration: 1.5 },
+            0
+          )
+          .fromTo(".asian-cyb", { scale: 1.5 }, { scale: 1, duration: 4 }, 0)
+          .to(
+            "#title",
+            {
+              scrambleText: {
+                text: "ATHARAX",
+                chars: "13579",
+                revealDelay: 0.5,
+                tweenLength: true,
+              },
+            },
+            "-=3"
+          )
+          .fromTo(
+            ".header-logo",
+            { left: "-20%" },
+            { left: "5%", duration: 4, ease: "in-out" },
+            0
+          )
+          .fromTo(
+            ".time-div",
+            { opacity: 0, top: "-10%" },
+            { opacity: 1, top: "85%", duration: 4, ease: "in-out" },
+            0
+          );
+
+        gsap
+          .timeline({
+            scrollTrigger: {
+              trigger: ".header",
+              start: "top top",
+              scrub: 1,
+            },
+          })
+          .fromTo(".header", { scale: 1 }, { scale: 1.55 })
+          .fromTo(".solid-color-layer", { opacity: 0 }, { opacity: 1 }, 0);
+      });
+
+      return () => {
+        ctx.revert();
+        document.body.style.overflow = ""; // Reset body styles
+        document.body.style.position = "";
+        if (smoother) smoother.paused(false);
+      };
+    }
+  }, [counter]);
+
+  useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       const t1 = gsap.timeline({
         scrollTrigger: {
@@ -206,7 +263,7 @@ function Home() {
       t1.to(new SplitText(".about-description", { type: "words" }).words, {
         color: "rgb(222, 176, 252)",
         duration: 0.1,
-        stagger: 0.01,
+        stagger: 0.005,
       });
     }, aboutContainer);
 
@@ -234,15 +291,15 @@ function Home() {
       tl.fromTo(
         imgInit,
         { scale: 1, xPercent: -50, yPercent: -50 },
-        { scale: 0.75, xPercent: -24, yPercent: -60.8, duration: 1.25 }
+        { scale: 0.75, xPercent: -24, yPercent: -60.8, duration: 3 }
       )
         .fromTo(
           elementsToFade,
           { visibility: "hidden", opacity: 0 },
-          { visibility: "visible", opacity: 1, duration: 1.25 }
+          { visibility: "visible", opacity: 1, duration: 3 }
         )
-        .addPause(1.5)
-        .fromTo(elementsToFade, { opacity: 1 }, { opacity: 0, duration: 1.25 })
+        .addPause(10)
+        .fromTo(elementsToFade, { opacity: 1 }, { opacity: 0, duration: 3 })
         .fromTo(
           imgInit,
           { scale: 0.75, xPercent: -24, yPercent: -60.8 },
@@ -250,7 +307,7 @@ function Home() {
             scale: 1,
             xPercent: -50,
             yPercent: -50,
-            duration: 1.25,
+            duration: 3,
             immediateRender: false, // Ensures it waits for the animation to start
           }
         )
@@ -282,15 +339,15 @@ function Home() {
       tl.fromTo(
         imgInitTwo,
         { scale: 1, xPercent: -50, yPercent: -50 },
-        { scale: 0.75, xPercent: -76, yPercent: -60.8, duration: 1.25 }
+        { scale: 0.75, xPercent: -76, yPercent: -60.8, duration: 3 }
       )
         .fromTo(
           elementsToFade,
           { visibility: "hidden", opacity: 0 },
-          { visibility: "visible", opacity: 1, duration: 1.25 }
+          { visibility: "visible", opacity: 1, duration: 3 }
         )
-        .addPause(1.5)
-        .fromTo(elementsToFade, { opacity: 1 }, { opacity: 0, duration: 1.25 })
+        .addPause(10)
+        .fromTo(elementsToFade, { opacity: 1 }, { opacity: 0, duration: 3 })
         .fromTo(
           imgInitTwo,
           { scale: 0.75, xPercent: -76, yPercent: -60.8 },
@@ -298,7 +355,7 @@ function Home() {
             scale: 1,
             xPercent: -50,
             yPercent: -50,
-            duration: 1.25,
+            duration: 3,
             immediateRender: false,
           }
         )
@@ -330,15 +387,15 @@ function Home() {
       tl.fromTo(
         imgInitThree,
         { scale: 1, xPercent: -50, yPercent: -50 },
-        { scale: 0.75, xPercent: 90.25, yPercent: -60.8, duration: 1.25 }
+        { scale: 0.75, xPercent: 90.25, yPercent: -60.8, duration: 3 }
       )
         .fromTo(
           elementsToFade,
           { visibility: "hidden", opacity: 0 },
-          { visibility: "visible", opacity: 1, duration: 1.25 }
+          { visibility: "visible", opacity: 1, duration: 3 }
         )
-        .addPause(1.5)
-        .fromTo(elementsToFade, { opacity: 1 }, { opacity: 0, duration: 1.25 })
+        .addPause(10)
+        .fromTo(elementsToFade, { opacity: 1 }, { opacity: 0, duration: 3 })
         .fromTo(
           imgInitThree,
           { scale: 0.75, xPercent: 90.25, yPercent: -60.8 },
@@ -346,7 +403,7 @@ function Home() {
             scale: 1,
             xPercent: -50,
             yPercent: -50,
-            duration: 1.25,
+            duration: 3,
             immediateRender: false, // Ensures it waits for the animation to start
           }
         )
@@ -378,15 +435,15 @@ function Home() {
       tl.fromTo(
         imgInitFour,
         { scale: 1, xPercent: -50, yPercent: -50 },
-        { scale: 0.75, xPercent: -76, yPercent: -24.55, duration: 1.25 }
+        { scale: 0.75, xPercent: -76, yPercent: -24.55, duration: 3 }
       )
         .fromTo(
           elementsToFade,
           { visibility: "hidden", opacity: 0 },
-          { visibility: "visible", opacity: 1, duration: 1.25 }
+          { visibility: "visible", opacity: 1, duration: 3 }
         )
-        .addPause(1.5)
-        .fromTo(elementsToFade, { opacity: 1 }, { opacity: 0, duration: 1.25 })
+        .addPause(10)
+        .fromTo(elementsToFade, { opacity: 1 }, { opacity: 0, duration: 3 })
         .fromTo(
           imgInitFour,
           { scale: 0.75, xPercent: -76, yPercent: -24.55 },
@@ -394,7 +451,7 @@ function Home() {
             scale: 1,
             xPercent: -50,
             yPercent: -50,
-            duration: 1.25,
+            duration: 3,
             immediateRender: false, // Ensures it waits for the animation to start
           }
         )
@@ -426,15 +483,15 @@ function Home() {
       tl.fromTo(
         imgInitFive,
         { scale: 1, xPercent: -50, yPercent: -50 },
-        { scale: 0.75, xPercent: -23.75, yPercent: -24.55, duration: 1.25 }
+        { scale: 0.75, xPercent: -23.75, yPercent: -24.55, duration: 3 }
       )
         .fromTo(
           elementsToFade,
           { visibility: "hidden", opacity: 0 },
-          { visibility: "visible", opacity: 1, duration: 1.25 }
+          { visibility: "visible", opacity: 1, duration: 3 }
         )
-        .addPause(1.5)
-        .fromTo(elementsToFade, { opacity: 1 }, { opacity: 0, duration: 1.25 })
+        .addPause(10)
+        .fromTo(elementsToFade, { opacity: 1 }, { opacity: 0, duration: 3 })
         .fromTo(
           imgInitFive,
           { scale: 0.75, xPercent: -23.75, yPercent: -24.55 },
@@ -442,7 +499,7 @@ function Home() {
             scale: 1,
             xPercent: -50,
             yPercent: -50,
-            duration: 1.25,
+            duration: 3,
             immediateRender: false, // Ensures it waits for the animation to start
           }
         )
@@ -514,386 +571,397 @@ function Home() {
   }, []);
 
   return (
-    <>
-      <div className="App" id="smooth-wrapper" ref={introRef}>
-        <div id="smooth-content">
-          <div className="preloader-container">
-            <div className="counter">
-              <div className={`counter ${counter === 100 ? "invisible" : ""}`}>
-                {counter}
-              </div>
-            </div>
-            <div>
-              <div className="preloader1"></div>
-              <div className="preloader2"></div>
-              <div className="preloader3"></div>
-              <div className="preloader4"></div>
-              <div className="preloader5"></div>
-              <div className="preloader6"></div>
-              <div className="preloader7"></div>
-              <div className="preloader8"></div>
-              <div className="preloader9"></div>
-              <div className="preloader10"></div>
-              <div className="preloader1-down"></div>
-              <div className="preloader2-down"></div>
-              <div className="preloader3-down"></div>
-              <div className="preloader4-down"></div>
-              <div className="preloader5-down"></div>
-              <div className="preloader6-down"></div>
-              <div className="preloader7-down"></div>
-              <div className="preloader8-down"></div>
-              <div className="preloader9-down"></div>
-              <div className="preloader10-down"></div>
+    <div id="smooth-wrapper" className="all">
+      <div id="smooth-content">
+        <div className="preloader-container">
+          <div className="counter">
+            <div className={`counter ${counter === 100 ? "invisible" : ""}`}>
+              {counter}
             </div>
           </div>
-          <header className="header" id="home">
-            <div className="solid-color-layer"></div>
-            <div className="asian-cyb">
-              <img src={AsianCyborg} alt="Asian cyborg"></img>
-            </div>
-            <p className="title" id="title"></p>
-            <div className="header-logo">
-              <img src={AtharaxLogo} alt="Our company logo"></img>
-            </div>
-            <div className="time-div">
-              <h3 className="glitch">{currentTime}</h3>
-            </div>
-            <div id="scroll-message">Scroll</div>
-          </header>
-
-          <main>
-            <div id="about" className="about-content" ref={aboutContainer}>
-              <div className="about-atharax">
-                <h3>ABOUT US</h3>
-              </div>
-              <div className="jp-div">
-                <p>ウェブデザインの未来は、無限の創造力が広がる次元の扉だ。</p>
-              </div>
-              <div className="about-description" id="about-description">
-                <p>
-                  We are a company
-                  <br /> dedicated to
-                  <br /> transforming
-                  <br /> imagination into reality.
-                  <br /> Anything that
-                  <br /> relates to
-                  <br /> design and digital,
-                  <br /> from bold,
-                  <br /> unconventional ideas
-                  <br /> to sleek,
-                  <br /> minimalist visions.
-                </p>
-              </div>
-              <div className="about-div-row"></div>
-              <div className="carousel">
-                <div className="carousel-content" ref={carouselRef}></div>
-              </div>
-            </div>
-            <div id="workflow" className="workflow-section">
-              <div ref={briefingContainer}>
-                <div className="sticky">
-                  <div className="img-init"></div>
-                  <div className="mini-nav">
-                    <h3>
-                      <a
-                        href="#home"
-                        onClick={() => window.location.reload()}
-                        className="hover-target"
-                      >
-                        Atharax<span>Company</span>
-                      </a>
-                    </h3>
-                    <ul>
-                      <a href="#about" className="hover-target">
-                        <li>About</li>
-                      </a>
-                      <a href="#workflow" className="hover-target">
-                        <li>Workflow</li>
-                      </a>
-                      <a href="#contact" className="hover-target">
-                        <li>Contact</li>
-                      </a>
-                    </ul>
-                  </div>
-                  <div className="work-briefing">
-                    <h2 id="briefing">BRIEFING</h2>
-                  </div>
-                  <div className="work-briefing-text">
-                    <p>
-                      First, we kick things off with a meeting to{" "}
-                      <span>get on the same page</span>, &lt;making sure&gt; we
-                      fully get your <strong>needs</strong> and{" "}
-                      <strong>goals</strong>.
-                    </p>
-                  </div>
-                  <div className="briefing-temp">
-                    <p>
-                      <strong>SCROLL</strong>
-                    </p>
-                  </div>
-                  <div className="img-asset-one"></div>
-                  <div className="briefing-extra">
-                    <div className="briefing-home">
-                      <h3>{currentTime}</h3>
-                    </div>
-                    <div className="briefing-next">
-                      <img src={AtharaxLogo} alt="Our company logo"></img>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div ref={wireframeContainer}>
-                <div className="sticky-two">
-                  <div className="img-init-two"></div>
-                  <div className="mini-nav-two">
-                    <h3>
-                      <a
-                        href="#home"
-                        onClick={() => window.location.reload()}
-                        className="hover-target"
-                      >
-                        Atharax<span>Company</span>
-                      </a>
-                    </h3>
-                    <ul>
-                      <a href="#about" className="hover-target">
-                        <li>About</li>
-                      </a>
-                      <a href="#workflow" className="hover-target">
-                        <li>Workflow</li>
-                      </a>
-                      <a href="#contact" className="hover-target">
-                        <li>Contact</li>
-                      </a>
-                    </ul>
-                  </div>
-                  <div className="work-wire">
-                    <h2>Wireframe</h2>
-                  </div>
-                  <div className="work-wire-text">
-                    <p>
-                      Next, we whip up a <span>quick prototype</span>, mapping
-                      out the &lt;structure and layout&gt; of your website in
-                      its <strong>simplest form</strong>.
-                    </p>
-                  </div>
-                  <div className="wire-temp">
-                    <p>
-                      <strong>SCROLL</strong>
-                    </p>
-                  </div>
-                  <div className="img-asset-two"></div>
-                  <div className="wire-extra">
-                    <div className="wire-home">
-                      <h3>{currentTime}</h3>
-                    </div>
-                    <div className="wire-next">
-                      <img src={AtharaxLogo} alt="Our company logo"></img>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div ref={designContainer}>
-                <div className="sticky-three">
-                  <div className="img-init-three"></div>
-                  <div className="mini-nav-three">
-                    <h3>
-                      <a
-                        href="#home"
-                        onClick={() => window.location.reload()}
-                        className="hover-target"
-                      >
-                        Atharax<span>Company</span>
-                      </a>
-                    </h3>
-                    <ul>
-                      <a href="#about" className="hover-target">
-                        <li>About</li>
-                      </a>
-                      <a href="#workflow" className="hover-target">
-                        <li>Workflow</li>
-                      </a>
-                      <a href="#contact" className="hover-target">
-                        <li>Contact</li>
-                      </a>
-                    </ul>
-                  </div>
-                  <div className="work-design">
-                    <h2>Design</h2>
-                  </div>
-                  <div className="work-design-text">
-                    <p>
-                      It’s all about visuals! We refine <span>UX</span> and{" "}
-                      <span>design</span> for a smooth,
-                      <strong> user-friendly experience</strong>.
-                    </p>
-                  </div>
-                  <div className="design-temp">
-                    <p>
-                      <strong>SCROLL</strong>
-                    </p>
-                  </div>
-                  <div className="img-asset-three"></div>
-                  <div className="design-extra">
-                    <div className="design-home">
-                      <h3>{currentTime}</h3>
-                    </div>
-                    <div className="design-next">
-                      <img src={AtharaxLogo} alt="Our company logo"></img>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div ref={developContainer}>
-                <div className="sticky-four">
-                  <div className="img-init-four"></div>
-                  <div className="mini-nav-four">
-                    <h3>
-                      <a
-                        href="#home"
-                        onClick={() => window.location.reload()}
-                        className="hover-target"
-                      >
-                        Atharax<span>Company</span>
-                      </a>
-                    </h3>
-                    <ul>
-                      <a href="#about" className="hover-target">
-                        <li>About</li>
-                      </a>
-                      <a href="#workflow" className="hover-target">
-                        <li>Workflow</li>
-                      </a>
-                      <a href="#contact" className="hover-target">
-                        <li>Contact</li>
-                      </a>
-                    </ul>
-                  </div>
-                  <div className="work-develop">
-                    <h2>Develop</h2>
-                  </div>
-                  <div className="work-develop-text">
-                    <p>
-                      We &lt;bring it all to life&gt; with some{" "}
-                      <span>coding magic</span>, making sure everything{" "}
-                      <strong>functions</strong> just the way it should.
-                    </p>
-                  </div>
-                  <div className="develop-temp">
-                    <p>
-                      <strong>SCROLL</strong>
-                    </p>
-                  </div>
-                  <div className="img-asset-four"></div>
-                  <div className="develop-extra">
-                    <div className="develop-home">
-                      <h3>{currentTime}</h3>
-                    </div>
-                    <div className="develop-next">
-                      <img src={AtharaxLogo} alt="Our company logo"></img>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div ref={testContainer}>
-                <div className="sticky-five">
-                  <div className="img-init-five"></div>
-                  <div className="mini-nav-five">
-                    <h3>
-                      <a
-                        href="#home"
-                        onClick={() => window.location.reload()}
-                        className="hover-target"
-                      >
-                        Atharax<span>Company</span>
-                      </a>
-                    </h3>
-                    <ul>
-                      <a href="#about" className="hover-target">
-                        <li>About</li>
-                      </a>
-                      <a href="#workflow" className="hover-target">
-                        <li>Workflow</li>
-                      </a>
-                      <a href="#contact" className="hover-target">
-                        <li>Contact</li>
-                      </a>
-                    </ul>
-                  </div>
-                  <div className="work-test">
-                    <h2>Testing</h2>
-                  </div>
-                  <div className="work-test-text">
-                    <p>
-                      Finally, we <span>test everything</span>—thoroughly
-                      checking every detail to ensure it's{" "}
-                      <strong>fully functional</strong>, including usability.
-                    </p>
-                  </div>
-                  <div className="test-temp">
-                    <p>
-                      <strong>SCROLL</strong>
-                    </p>
-                  </div>
-                  <div className="img-asset-five"></div>
-                  <div className="test-extra">
-                    <div className="test-home">
-                      <h3>{currentTime}</h3>
-                    </div>
-                    <div className="test-next">
-                      <img src={AtharaxLogo} alt="Our company logo"></img>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </main>
-
-          <footer>
-            <div className="contact" id="contact" ref={footerContainer}>
-              <div className="sticky-footer">
-                <p className="footer-p">Ready to Start?</p>
-                <p className="atharax-big">ATHARAX</p>
-                <div className="socials-div">
-                  <a
-                    href="https://www.instagram.com/atharax.co/"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="hover-target"
-                  >
-                    Instagram
-                  </a>
-                  <a
-                    href="mailto:atharax.co@gmail.com"
-                    target="_blank"
-                    className="hover-target"
-                    rel="noreferrer"
-                  >
-                    E-mail
-                  </a>
-                  <a
-                    href="https://www.linkedin.com/company/atharax"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="hover-target"
-                  >
-                    Linkedin
-                  </a>
-                  <a href="#home" className="hover-target">
-                    <img src={AtharaxLogo} alt="Atharax Logo"></img>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </footer>
+          <div>
+            <div className="preloader1"></div>
+            <div className="preloader2"></div>
+            <div className="preloader3"></div>
+            <div className="preloader4"></div>
+            <div className="preloader5"></div>
+            <div className="preloader6"></div>
+            <div className="preloader7"></div>
+            <div className="preloader8"></div>
+            <div className="preloader9"></div>
+            <div className="preloader10"></div>
+            <div className="preloader1-down"></div>
+            <div className="preloader2-down"></div>
+            <div className="preloader3-down"></div>
+            <div className="preloader4-down"></div>
+            <div className="preloader5-down"></div>
+            <div className="preloader6-down"></div>
+            <div className="preloader7-down"></div>
+            <div className="preloader8-down"></div>
+            <div className="preloader9-down"></div>
+            <div className="preloader10-down"></div>
+          </div>
         </div>
-        <CursorFollower />
+        <header className="header" id="home">
+          <div className="solid-color-layer"></div>
+          <div className="asian-cyb">
+            <img src={AsianCyborg} alt="Asian cyborg"></img>
+          </div>
+          <p className="title" id="title"></p>
+          <div className="header-logo">
+            <img src={AtharaxLogo} alt="Our company logo"></img>
+          </div>
+          <div className="time-div">
+            <h3 className="glitch">{currentTime}</h3>
+          </div>
+          <div id="scroll-message">Scroll</div>
+        </header>
+
+        <main>
+          <div id="about" className="about-content" ref={aboutContainer}>
+            <div className="about-atharax">
+              <h3>ABOUT US</h3>
+            </div>
+            <div className="about-nav">
+              <ul>
+                <a href="#home" className="hover-target">
+                  <li>Home</li>
+                </a>
+                <a href="#workflow" className="hover-target">
+                  <li>Workflow</li>
+                </a>
+                <a href="#contact" className="hover-target">
+                  <li>Contact</li>
+                </a>
+              </ul>
+            </div>
+            <div className="jp-div">
+              <p>ウェブデザインの未来は、無限の創造力が広がる次元の扉だ。</p>
+            </div>
+            <div className="about-description" id="about-description">
+              <p>
+                We are a company
+                <br /> dedicated to
+                <br /> transforming
+                <br /> imagination into reality.
+                <br /> Anything that
+                <br /> relates to
+                <br /> design and digital,
+                <br /> from bold,
+                <br /> unconventional ideas
+                <br /> to sleek,
+                <br /> minimalist visions.
+              </p>
+            </div>
+            <div className="about-div-row"></div>
+            <div className="carousel">
+              <div className="carousel-content" ref={carouselRef}></div>
+            </div>
+          </div>
+          <div id="workflow" className="workflow-section">
+            <div ref={briefingContainer}>
+              <div className="sticky">
+                <div className="img-init"></div>
+                <div className="mini-nav">
+                  <h3>
+                    <a
+                      href="#home"
+                      onClick={() => window.location.reload()}
+                      className="hover-target"
+                    >
+                      Atharax<span>Company</span>
+                    </a>
+                  </h3>
+                  <ul>
+                    <a href="#about" className="hover-target">
+                      <li>About</li>
+                    </a>
+                    <a href="#workflow" className="hover-target">
+                      <li>Workflow</li>
+                    </a>
+                    <a href="#contact" className="hover-target">
+                      <li>Contact</li>
+                    </a>
+                  </ul>
+                </div>
+                <div className="work-briefing">
+                  <h2 id="briefing">BRIEFING</h2>
+                </div>
+                <div className="work-briefing-text">
+                  <p>
+                    First, we kick things off with a meeting to{" "}
+                    <span>get on the same page</span>, &lt;making sure&gt; we
+                    fully get your <strong>needs</strong> and{" "}
+                    <strong>goals</strong>.
+                  </p>
+                </div>
+                <div className="briefing-temp">
+                  <p>
+                    <strong>SCROLL</strong>
+                  </p>
+                </div>
+                <div className="img-asset-one"></div>
+                <div className="briefing-extra">
+                  <div className="briefing-home">
+                    <h3>{currentTime}</h3>
+                  </div>
+                  <div className="briefing-next">
+                    <img src={AtharaxLogo} alt="Our company logo"></img>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div ref={wireframeContainer}>
+              <div className="sticky-two">
+                <div className="img-init-two"></div>
+                <div className="mini-nav-two">
+                  <h3>
+                    <a
+                      href="#home"
+                      onClick={() => window.location.reload()}
+                      className="hover-target"
+                    >
+                      Atharax<span>Company</span>
+                    </a>
+                  </h3>
+                  <ul>
+                    <a href="#about" className="hover-target">
+                      <li>About</li>
+                    </a>
+                    <a href="#workflow" className="hover-target">
+                      <li>Workflow</li>
+                    </a>
+                    <a href="#contact" className="hover-target">
+                      <li>Contact</li>
+                    </a>
+                  </ul>
+                </div>
+                <div className="work-wire">
+                  <h2>Wireframe</h2>
+                </div>
+                <div className="work-wire-text">
+                  <p>
+                    Next, we whip up a <span>quick prototype</span>, mapping out
+                    the &lt;structure and layout&gt; of your website in its{" "}
+                    <strong>simplest form</strong>.
+                  </p>
+                </div>
+                <div className="wire-temp">
+                  <p>
+                    <strong>SCROLL</strong>
+                  </p>
+                </div>
+                <div className="img-asset-two"></div>
+                <div className="wire-extra">
+                  <div className="wire-home">
+                    <h3>{currentTime}</h3>
+                  </div>
+                  <div className="wire-next">
+                    <img src={AtharaxLogo} alt="Our company logo"></img>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div ref={designContainer}>
+              <div className="sticky-three">
+                <div className="img-init-three"></div>
+                <div className="mini-nav-three">
+                  <h3>
+                    <a
+                      href="#home"
+                      onClick={() => window.location.reload()}
+                      className="hover-target"
+                    >
+                      Atharax<span>Company</span>
+                    </a>
+                  </h3>
+                  <ul>
+                    <a href="#about" className="hover-target">
+                      <li>About</li>
+                    </a>
+                    <a href="#workflow" className="hover-target">
+                      <li>Workflow</li>
+                    </a>
+                    <a href="#contact" className="hover-target">
+                      <li>Contact</li>
+                    </a>
+                  </ul>
+                </div>
+                <div className="work-design">
+                  <h2>Design</h2>
+                </div>
+                <div className="work-design-text">
+                  <p>
+                    It’s all about visuals! We refine <span>UX</span> and{" "}
+                    <span>design</span> for a smooth,
+                    <strong> user-friendly experience</strong>.
+                  </p>
+                </div>
+                <div className="design-temp">
+                  <p>
+                    <strong>SCROLL</strong>
+                  </p>
+                </div>
+                <div className="img-asset-three"></div>
+                <div className="design-extra">
+                  <div className="design-home">
+                    <h3>{currentTime}</h3>
+                  </div>
+                  <div className="design-next">
+                    <img src={AtharaxLogo} alt="Our company logo"></img>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div ref={developContainer}>
+              <div className="sticky-four">
+                <div className="img-init-four"></div>
+                <div className="mini-nav-four">
+                  <h3>
+                    <a
+                      href="#home"
+                      onClick={() => window.location.reload()}
+                      className="hover-target"
+                    >
+                      Atharax<span>Company</span>
+                    </a>
+                  </h3>
+                  <ul>
+                    <a href="#about" className="hover-target">
+                      <li>About</li>
+                    </a>
+                    <a href="#workflow" className="hover-target">
+                      <li>Workflow</li>
+                    </a>
+                    <a href="#contact" className="hover-target">
+                      <li>Contact</li>
+                    </a>
+                  </ul>
+                </div>
+                <div className="work-develop">
+                  <h2>Develop</h2>
+                </div>
+                <div className="work-develop-text">
+                  <p>
+                    We &lt;bring it all to life&gt; with some{" "}
+                    <span>coding magic</span>, making sure everything{" "}
+                    <strong>functions</strong> just the way it should.
+                  </p>
+                </div>
+                <div className="develop-temp">
+                  <p>
+                    <strong>SCROLL</strong>
+                  </p>
+                </div>
+                <div className="img-asset-four"></div>
+                <div className="develop-extra">
+                  <div className="develop-home">
+                    <h3>{currentTime}</h3>
+                  </div>
+                  <div className="develop-next">
+                    <img src={AtharaxLogo} alt="Our company logo"></img>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div ref={testContainer}>
+              <div className="sticky-five">
+                <div className="img-init-five"></div>
+                <div className="mini-nav-five">
+                  <h3>
+                    <a
+                      href="#home"
+                      onClick={() => window.location.reload()}
+                      className="hover-target"
+                    >
+                      Atharax<span>Company</span>
+                    </a>
+                  </h3>
+                  <ul>
+                    <a href="#about" className="hover-target">
+                      <li>About</li>
+                    </a>
+                    <a href="#workflow" className="hover-target">
+                      <li>Workflow</li>
+                    </a>
+                    <a href="#contact" className="hover-target">
+                      <li>Contact</li>
+                    </a>
+                  </ul>
+                </div>
+                <div className="work-test">
+                  <h2>Testing</h2>
+                </div>
+                <div className="work-test-text">
+                  <p>
+                    Finally, we <span>test everything</span>—thoroughly checking
+                    every detail to ensure it's{" "}
+                    <strong>fully functional</strong>, including usability.
+                  </p>
+                </div>
+                <div className="test-temp">
+                  <p>
+                    <strong>SCROLL</strong>
+                  </p>
+                </div>
+                <div className="img-asset-five"></div>
+                <div className="test-extra">
+                  <div className="test-home">
+                    <h3>{currentTime}</h3>
+                  </div>
+                  <div className="test-next">
+                    <img src={AtharaxLogo} alt="Our company logo"></img>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+
+        <footer>
+          <div className="contact" id="contact" ref={footerContainer}>
+            <div className="sticky-footer">
+              <p className="footer-p">Ready to Start?</p>
+              <p className="atharax-big">ATHARAX</p>
+              <div className="socials-div">
+                <a
+                  href="https://www.instagram.com/atharax.co/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover-target"
+                >
+                  Instagram
+                </a>
+                <a
+                  href="mailto:atharax.co@gmail.com"
+                  target="_blank"
+                  className="hover-target"
+                  rel="noreferrer"
+                >
+                  E-mail
+                </a>
+                <a
+                  href="https://www.linkedin.com/company/atharax"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover-target"
+                >
+                  Linkedin
+                </a>
+                <a href="#home" className="hover-target">
+                  <img src={AtharaxLogo} alt="Atharax Logo"></img>
+                </a>
+              </div>
+            </div>
+          </div>
+        </footer>
       </div>
-    </>
+      <CursorFollower />
+    </div>
   );
 }
 
