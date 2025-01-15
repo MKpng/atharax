@@ -246,6 +246,7 @@ function Mobile() {
         { scale: 0.85 },
         {
           scale: 1,
+          duration: 1,
           immediateRender: false, // Ensures it waits for the animation to start
         }
       )
@@ -260,13 +261,13 @@ function Mobile() {
           { visibility: "hidden", opacity: 0 },
           { visibility: "visible", opacity: 1 }
         )
-        .addPause(1.5)
-        .fromTo(elementsToFade, { opacity: 1 }, { opacity: 0 })
+        .fromTo(elementsToFade, { opacity: 1 }, { opacity: 0, delay: 1 })
         .fromTo(
           imgInit,
           { scale: 1 },
           {
             scale: 0.85,
+            duration: 1,
             immediateRender: false, // Ensures it waits for the animation to start
           }
         )
@@ -299,6 +300,7 @@ function Mobile() {
         { scale: 0.85 },
         {
           scale: 1,
+          duration: 1,
           immediateRender: false, // Ensures it waits for the animation to start
         }
       )
@@ -313,13 +315,13 @@ function Mobile() {
           { visibility: "hidden", opacity: 0 },
           { visibility: "visible", opacity: 1 }
         )
-        .addPause(1.5)
-        .fromTo(elementsToFade, { opacity: 1 }, { opacity: 0 })
+        .fromTo(elementsToFade, { opacity: 1 }, { opacity: 0, delay: 1 })
         .fromTo(
           imgInit,
           { scale: 1 },
           {
             scale: 0.85,
+            duration: 1,
             immediateRender: false, // Ensures it waits for the animation to start
           }
         )
@@ -352,6 +354,7 @@ function Mobile() {
         { scale: 0.85 },
         {
           scale: 1,
+          duration: 1,
           immediateRender: false, // Ensures it waits for the animation to start
         }
       )
@@ -366,13 +369,13 @@ function Mobile() {
           { visibility: "hidden", opacity: 0 },
           { visibility: "visible", opacity: 1 }
         )
-        .addPause(1.5)
-        .fromTo(elementsToFade, { opacity: 1 }, { opacity: 0 })
+        .fromTo(elementsToFade, { opacity: 1 }, { opacity: 0, delay: 1 })
         .fromTo(
           imgInit,
           { scale: 1 },
           {
             scale: 0.85,
+            duration: 1,
             immediateRender: false, // Ensures it waits for the animation to start
           }
         )
@@ -405,6 +408,7 @@ function Mobile() {
         { scale: 0.85 },
         {
           scale: 1,
+          duration: 1,
           immediateRender: false, // Ensures it waits for the animation to start
         }
       )
@@ -419,13 +423,13 @@ function Mobile() {
           { visibility: "hidden", opacity: 0 },
           { visibility: "visible", opacity: 1 }
         )
-        .addPause(1.5)
-        .fromTo(elementsToFade, { opacity: 1 }, { opacity: 0 })
+        .fromTo(elementsToFade, { opacity: 1 }, { opacity: 0, delay: 1 })
         .fromTo(
           imgInit,
           { scale: 1 },
           {
             scale: 0.85,
+            duration: 1,
             immediateRender: false, // Ensures it waits for the animation to start
           }
         )
@@ -458,6 +462,7 @@ function Mobile() {
         { scale: 0.85 },
         {
           scale: 1,
+          duration: 1,
           immediateRender: false, // Ensures it waits for the animation to start
         }
       )
@@ -472,13 +477,13 @@ function Mobile() {
           { visibility: "hidden", opacity: 0 },
           { visibility: "visible", opacity: 1 }
         )
-        .addPause(1.5)
-        .fromTo(elementsToFade, { opacity: 1 }, { opacity: 0 })
+        .fromTo(elementsToFade, { opacity: 1 }, { opacity: 0, delay: 1 })
         .fromTo(
           imgInit,
           { scale: 1 },
           {
             scale: 0.85,
+            duration: 1,
             immediateRender: false, // Ensures it waits for the animation to start
           }
         )
