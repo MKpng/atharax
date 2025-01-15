@@ -5,7 +5,7 @@ import Instagram from "../images/instagram.svg";
 import Gmail from "../images/google.svg";
 import Linkedin from "../images/linkedin.svg";
 import Menu from "../images/Mobile/menu_icon.svg";
-import Arrow from "../images/Mobile/down-arrow_3599782.svg";
+import Arrow from "../images/Mobile/chevron-double-down_7482911.svg";
 
 import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
 import { gsap } from "gsap";
@@ -78,50 +78,37 @@ function Mobile() {
           defaults: { duration: 2, ease: "none" },
         });
 
-        t1.to(".preloader1", { yPercent: -100, delay: 1, duration: 1.5 }, 0)
-          .to(".preloader2", { yPercent: -100, delay: 1.2, duration: 1.5 }, 0)
-          .to(".preloader3", { yPercent: -100, delay: 1.1, duration: 1.5 }, 0)
-          .to(".preloader4", { yPercent: -100, delay: 0.6, duration: 1.5 }, 0)
-          .to(".preloader5", { yPercent: -100, delay: 1, duration: 1.5 }, 0)
-          .to(
-            ".preloader1-down",
-            { yPercent: 101, delay: 1.2, duration: 1.5 },
-            0
-          )
-          .to(
-            ".preloader2-down",
-            { yPercent: 101, delay: 0.7, duration: 1.5 },
-            0
-          )
-          .to(".preloader3-down", { yPercent: 101, delay: 1, duration: 1.5 }, 0)
-          .to(
-            ".preloader4-down",
-            { yPercent: 101, delay: 0.6, duration: 1.5 },
-            0
-          )
-          .to(
-            ".preloader5-down",
-            { yPercent: 101, delay: 0.8, duration: 1.5 },
-            0
-          )
-          .fromTo(".nav", { opacity: 0 }, { opacity: 1 })
-          .fromTo(".asian-cyb", { scale: 1.5 }, { scale: 1, duration: 4 }, 0)
+        t1.to(".preloader1", { yPercent: -100, delay: 1, duration: .8 }, 0)
+          .to(".preloader2", { yPercent: -100, delay: 1.2, duration: .8 }, 0)
+          .to(".preloader3", { yPercent: -100, delay: 1.1, duration: .8 }, 0)
+          .to(".preloader4", { yPercent: -100, delay: 0.6, duration: .8 }, 0)
+          .to(".preloader5", { yPercent: -100, delay: 1, duration: .8 }, 0)
+          .to(".preloader1-down",{ yPercent: 101, delay: 1.2, duration: .8 }, 0)
+          .to(".preloader2-down",{ yPercent: 101, delay: 0.7, duration: .8 }, 0)
+          .to(".preloader3-down", { yPercent: 101, delay: 1, duration: .8 }, 0)
+          .to(".preloader4-down",{ yPercent: 101, delay: 0.6, duration: .8 }, 0)
+          .to(".preloader5-down",{ yPercent: 101, delay: 0.8, duration: .8, onComplete: () => {
+            document.body.style.overflow = "";
+            document.body.style.position = "";
+            if (smoother) smoother.paused(false);
+          } }, 0)
+          .fromTo(".nav", { opacity: 0 }, { opacity: 1, duration: .5 })
           .to(
             "#title-mobile",
             {
               scrambleText: {
                 text: "ATHARAX",
                 chars: "13579",
-                revealDelay: 0.5,
+                revealDelay: 0.3,
                 tweenLength: true,
               },
             },
-            "-=3"
+            "-=1"
           )
           .fromTo(
             ".arrow-down",
             { visibility: "hidden", opacity: 0 },
-            { visibility: "visible", opacity: 1, delay: .5 }
+            { visibility: "visible", opacity: 1, delay: .5 }, 0
           );
         gsap
           .timeline(

@@ -349,7 +349,7 @@
 
   .about-atharax-mobile {
     position: relative;
-    top: 15%;
+    top: 20%;
     width: 80%;
     height: 10%;
     color: hsl(273, 100%, 67%);
@@ -364,7 +364,7 @@
 
   .about-description-mobile {
     position: relative;
-    top: 17.5%;
+    top: 22.5%;
     width: 70%;
     height: 30vh;
     color: #f4f3f2;
@@ -381,14 +381,14 @@
     overflow: hidden;
     white-space: nowrap;
     position: absolute;
-    top: clamp(67.5%, 90vw, 80%);
+    top: clamp(72.5%, 50%, 85%);
   }
 
   .carousel-content-mobile {
     display: inline-block;
     font-family: "Robmax Stencil", sans-serif;
     font-size: clamp(3rem, 20vw, 6rem);
-    color: #e6e6fa;
+    color: #f4f3f2;
   }
 }
 
@@ -519,7 +519,7 @@ $assets: (
 .footer {
   position: relative;
   width: 100vw;
-  height: 150vh;
+  height: 150dvh;
   transition: background 0.5s ease-in-out;
   text-align: center;
 
@@ -529,7 +529,7 @@ $assets: (
     justify-content: center;
     align-items: center;
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
     background: transparent;
   }
 
@@ -546,7 +546,7 @@ $assets: (
   .atharax-big-mobile {
     position: absolute;
     width: 100vw;
-    top: 45%;
+    top: 35%;
     margin: 0;
     font-family: "Robmax Stencil", sans-serif;
     font-size: clamp(12vw, 17vw, 22vw);
@@ -568,7 +568,7 @@ $assets: (
     justify-content: space-between;
     align-items: center;
     width: 70vw;
-    top: 87.5%;
+    top: 82.5%;
     pointer-events: all;
     opacity: 0;
 
