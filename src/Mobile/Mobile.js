@@ -28,11 +28,6 @@ function Mobile() {
   const [isLoading, setIsLoading] = useState(true);
   const [counter, setCounter] = useState(0);
   const words = "TURNING YOUR IDEAS INTO REALITY ";
-
-  window.onbeforeunload = function () {
-    window.scrollTo(0, 0);
-  };
-
   const toggleMenu = () => {
     setIsToggled((prevState) => !prevState); // Toggle the state
   };
@@ -78,21 +73,42 @@ function Mobile() {
           defaults: { duration: 2, ease: "none" },
         });
 
-        t1.to(".preloader1", { yPercent: -100, delay: 1, duration: .8 }, 0)
-          .to(".preloader2", { yPercent: -100, delay: 1.2, duration: .8 }, 0)
-          .to(".preloader3", { yPercent: -100, delay: 1.1, duration: .8 }, 0)
-          .to(".preloader4", { yPercent: -100, delay: 0.6, duration: .8 }, 0)
-          .to(".preloader5", { yPercent: -100, delay: 1, duration: .8 }, 0)
-          .to(".preloader1-down",{ yPercent: 101, delay: 1.2, duration: .8 }, 0)
-          .to(".preloader2-down",{ yPercent: 101, delay: 0.7, duration: .8 }, 0)
-          .to(".preloader3-down", { yPercent: 101, delay: 1, duration: .8 }, 0)
-          .to(".preloader4-down",{ yPercent: 101, delay: 0.6, duration: .8 }, 0)
-          .to(".preloader5-down",{ yPercent: 101, delay: 0.8, duration: .8, onComplete: () => {
-            document.body.style.overflow = "";
-            document.body.style.position = "";
-            if (smoother) smoother.paused(false);
-          } }, 0)
-          .fromTo(".nav", { opacity: 0 }, { opacity: 1, duration: .5 })
+        t1.to(".preloader1", { yPercent: -100, delay: 1, duration: 0.8 }, 0)
+          .to(".preloader2", { yPercent: -100, delay: 1.2, duration: 0.8 }, 0)
+          .to(".preloader3", { yPercent: -100, delay: 1.1, duration: 0.8 }, 0)
+          .to(".preloader4", { yPercent: -100, delay: 0.6, duration: 0.8 }, 0)
+          .to(".preloader5", { yPercent: -100, delay: 1, duration: 0.8 }, 0)
+          .to(
+            ".preloader1-down",
+            { yPercent: 101, delay: 1.2, duration: 0.8 },
+            0
+          )
+          .to(
+            ".preloader2-down",
+            { yPercent: 101, delay: 0.7, duration: 0.8 },
+            0
+          )
+          .to(".preloader3-down", { yPercent: 101, delay: 1, duration: 0.8 }, 0)
+          .to(
+            ".preloader4-down",
+            { yPercent: 101, delay: 0.6, duration: 0.8 },
+            0
+          )
+          .to(
+            ".preloader5-down",
+            {
+              yPercent: 101,
+              delay: 0.8,
+              duration: 0.8,
+              onComplete: () => {
+                document.body.style.overflow = "";
+                document.body.style.position = "";
+                if (smoother) smoother.paused(false);
+              },
+            },
+            0
+          )
+          .fromTo(".nav", { opacity: 0 }, { opacity: 1, duration: 0.5 })
           .to(
             "#title-mobile",
             {
@@ -108,7 +124,8 @@ function Mobile() {
           .fromTo(
             ".arrow-down",
             { visibility: "hidden", opacity: 0 },
-            { visibility: "visible", opacity: 1, delay: .5 }, 0
+            { visibility: "visible", opacity: 1, delay: 0.5 },
+            0
           );
         gsap
           .timeline(
@@ -171,32 +188,44 @@ function Mobile() {
       speed: 0.5,
     });
 
-    gsap.utils.toArray("a").forEach(function (button, i) {
+    gsap.utils.toArray("a").forEach(function (button) {
       button.addEventListener("click", (e) => {
         const anchor = e.target.closest("a"); // Get the closest anchor element
         const href = anchor.getAttribute("href"); // Get the href value
 
         if (href && href.startsWith("#")) {
-          e.preventDefault(); // Prevent default action only for internal hash links
+          e.preventDefault(); // Prevent default browser action for hash links
           console.log(href);
           const targetElement = document.querySelector(href); // Get the target element
           if (targetElement) {
+            // Smooth scroll to the target element
             smootherMobile.scrollTo(targetElement, true, "top top");
+
+            // Properly construct the relative URL, ensuring no stacking
+            const relativePath = `${window.location.pathname
+              .split("/")
+              .slice(0, -1)
+              .join("/")}${href.replace("#", "/")}`;
+            window.history.pushState(null, "", relativePath);
           }
         }
       });
     });
 
     window.onload = () => {
-      let urlHash = window.location.href.split("#")[1];
-      if (urlHash) {
-        let scrollElem = document.querySelector("#" + urlHash);
-        console.log(scrollElem, urlHash);
-        if (scrollElem) {
-          smootherMobile.scrollTo(scrollElem, true, "top top");
-        }
+      // Check if the URL ends with a section path
+      const sectionPath = window.location.pathname.split("/").pop();
+      if (sectionPath && sectionPath !== "") {
+        const rootPath =
+          window.location.pathname.split("/").slice(0, -1).join("/") || "/";
+        window.history.replaceState(null, "", rootPath); // Update URL to the root
+      }
+      const sectionElement = document.querySelector(`#${sectionPath}`);
+      if (sectionElement) {
+        smootherMobile.scrollTo(sectionElement, true, "top top");
       }
     };
+
     return () => {};
   }, []);
 

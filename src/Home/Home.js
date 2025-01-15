@@ -27,10 +27,6 @@ function Home() {
   const [counter, setCounter] = useState(0);
   const words = "TURNING YOUR IDEAS INTO REALITY ";
 
-  window.onbeforeunload = function () {
-    window.scrollTo(0, 0);
-  };
-
   useLayoutEffect(() => {
     const target = 100;
     let countInterval = setInterval(() => {
@@ -99,30 +95,41 @@ function Home() {
       speed: 0.5,
     });
 
-    gsap.utils.toArray("a").forEach(function (button, i) {
+    gsap.utils.toArray("a").forEach(function (button) {
       button.addEventListener("click", (e) => {
         const anchor = e.target.closest("a"); // Get the closest anchor element
         const href = anchor.getAttribute("href"); // Get the href value
 
         if (href && href.startsWith("#")) {
-          e.preventDefault(); // Prevent default action only for internal hash links
+          e.preventDefault(); // Prevent default browser action for hash links
           console.log(href);
           const targetElement = document.querySelector(href); // Get the target element
           if (targetElement) {
+            // Smooth scroll to the target element
             smoother.scrollTo(targetElement, true, "top top");
+
+            // Properly construct the relative URL, ensuring no stacking
+            const relativePath = `${window.location.pathname
+              .split("/")
+              .slice(0, -1)
+              .join("/")}${href.replace("#", "/")}`;
+            window.history.pushState(null, "", relativePath);
           }
         }
       });
     });
 
     window.onload = () => {
-      let urlHash = window.location.href.split("#")[1];
-      if (urlHash) {
-        let scrollElem = document.querySelector("#" + urlHash);
-        console.log(scrollElem, urlHash);
-        if (scrollElem) {
-          smoother.scrollTo(scrollElem, true, "top top");
-        }
+      // Check if the URL ends with a section path
+      const sectionPath = window.location.pathname.split("/").pop();
+      if (sectionPath && sectionPath !== "") {
+        const rootPath =
+          window.location.pathname.split("/").slice(0, -1).join("/") || "/";
+        window.history.replaceState(null, "", rootPath); // Update URL to the root
+      }
+      const sectionElement = document.querySelector(`#${sectionPath}`);
+      if (sectionElement) {
+        smoother.scrollTo(sectionElement, true, "top top");
       }
     };
 
@@ -182,7 +189,12 @@ function Home() {
           )
           .to(
             ".preloader6-down",
-            { yPercent: 100, delay: 1.3, duration: 1.5 },
+            { yPercent: 100, delay: 1.3, duration: 1.5, onComplete: () => {
+              setIsLoading(false);
+              document.body.style.overflow = ""; // Restore scrolling
+              document.body.style.position = ""; // Reset position
+              if (smoother) smoother.paused(false);
+            }, },
             0
           )
           .to(
@@ -201,7 +213,7 @@ function Home() {
             { yPercent: 100, delay: 0.87, duration: 1.5 },
             0
           )
-          .fromTo(".asian-cyb", { scale: 1.5 }, { scale: 1, duration: 4 }, 0)
+          .fromTo(".asian-cyb", { scale: 1.5 }, { scale: 1, duration: 1.5 })
           .to(
             "#title",
             {
@@ -664,10 +676,7 @@ function Home() {
                 <div className="img-init"></div>
                 <div className="mini-nav">
                   <h3>
-                    <a
-                      href="#home"
-                      className="hover-target"
-                    >
+                    <a href="#home" className="hover-target">
                       AtharaxCompany
                     </a>
                   </h3>
@@ -716,10 +725,7 @@ function Home() {
                 <div className="img-init-two"></div>
                 <div className="mini-nav-two">
                   <h3>
-                    <a
-                      href="#home"
-                      className="hover-target"
-                    >
+                    <a href="#home" className="hover-target">
                       AtharaxCompany
                     </a>
                   </h3>
@@ -767,10 +773,7 @@ function Home() {
                 <div className="img-init-three"></div>
                 <div className="mini-nav-three">
                   <h3>
-                    <a
-                      href="#home"
-                      className="hover-target"
-                    >
+                    <a href="#home" className="hover-target">
                       AtharaxCompany
                     </a>
                   </h3>
@@ -818,10 +821,7 @@ function Home() {
                 <div className="img-init-four"></div>
                 <div className="mini-nav-four">
                   <h3>
-                    <a
-                      href="#home"
-                      className="hover-target"
-                    >
+                    <a href="#home" className="hover-target">
                       AtharaxCompany
                     </a>
                   </h3>
@@ -869,10 +869,7 @@ function Home() {
                 <div className="img-init-five"></div>
                 <div className="mini-nav-five">
                   <h3>
-                    <a
-                      href="#home"
-                      className="hover-target"
-                    >
+                    <a href="#home" className="hover-target">
                       AtharaxCompany
                     </a>
                   </h3>
